@@ -5,6 +5,8 @@
  */
 package com.beck.beck_app;
 
+import com.beck.beck_app.Communication;
+import com.beck.beck_app.Communication;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Patryk
  */
 @Stateless
-public class TrackFacade extends AbstractFacade<Track> {
+public class CommunicationFacade extends AbstractFacade<Communication> {
     @PersistenceContext(unitName = "com.beck_beck_app_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -23,8 +25,8 @@ public class TrackFacade extends AbstractFacade<Track> {
         return em;
     }
 
-    public TrackFacade() {
-        super(Track.class);
+    public CommunicationFacade() {
+        super(Communication.class);
     }
     
 }

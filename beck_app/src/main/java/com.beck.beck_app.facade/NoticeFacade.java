@@ -5,6 +5,7 @@
  */
 package com.beck.beck_app;
 
+import com.beck.beck_app.Notice;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Patryk
  */
 @Stateless
-public class InfoFacade extends AbstractFacade<Info> {
+public class NoticeFacade extends AbstractFacade<Notice> {
     @PersistenceContext(unitName = "com.beck_beck_app_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -23,8 +24,8 @@ public class InfoFacade extends AbstractFacade<Info> {
         return em;
     }
 
-    public InfoFacade() {
-        super(Info.class);
+    public NoticeFacade() {
+        super(Notice.class);
     }
     
 }

@@ -6,15 +6,15 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-03-28T15:50:50")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-03-28T16:21:12")
 @StaticMetamodel(Address.class)
 public class Address_ { 
 
-    public static volatile SingularAttribute<Address, Integer> id;
-    public static volatile SingularAttribute<Address, String> suburb;
-    public static volatile SingularAttribute<Address, String> street;
+    public static volatile SingularAttribute<Address, String> country;
     public static volatile ListAttribute<Address, User> userList;
     public static volatile SingularAttribute<Address, String> city;
-    public static volatile SingularAttribute<Address, String> country;
+    public static volatile SingularAttribute<Address, String> street;
+    public static volatile SingularAttribute<Address, String> suburb;
+    public static volatile SingularAttribute<Address, Integer> id;
 
 }

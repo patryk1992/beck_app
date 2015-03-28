@@ -5,6 +5,7 @@
  */
 package com.beck.beck_app;
 
+import com.beck.beck_app.User;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Patryk
  */
 @Stateless
-public class PointFacade extends AbstractFacade<Point> {
+public class UserFacade extends AbstractFacade<User> {
     @PersistenceContext(unitName = "com.beck_beck_app_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -23,8 +24,8 @@ public class PointFacade extends AbstractFacade<Point> {
         return em;
     }
 
-    public PointFacade() {
-        super(Point.class);
+    public UserFacade() {
+        super(User.class);
     }
     
 }

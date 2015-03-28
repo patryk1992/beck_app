@@ -5,6 +5,8 @@
  */
 package com.beck.beck_app;
 
+import com.beck.beck_app.Address;
+import com.beck.beck_app.Address;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Patryk
  */
 @Stateless
-public class GroupEventsFacade extends AbstractFacade<GroupEvents> {
+public class AddressFacade extends AbstractFacade<Address> {
     @PersistenceContext(unitName = "com.beck_beck_app_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -23,8 +25,8 @@ public class GroupEventsFacade extends AbstractFacade<GroupEvents> {
         return em;
     }
 
-    public GroupEventsFacade() {
-        super(GroupEvents.class);
+    public AddressFacade() {
+        super(Address.class);
     }
     
 }
