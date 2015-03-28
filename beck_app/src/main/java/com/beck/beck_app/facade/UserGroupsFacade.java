@@ -5,8 +5,7 @@
  */
 package com.beck.beck_app.facade;
 
-import com.beck.beck_app.UserGroups;
-import com.beck.beck_app.UserGroups;
+import com.beck.beck_app.model.UserGroups;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

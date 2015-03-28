@@ -5,8 +5,7 @@
  */
 package com.beck.beck_app.facade;
 
-import com.beck.beck_app.Notice;
-import com.beck.beck_app.Notice;
+import com.beck.beck_app.model.Notice;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

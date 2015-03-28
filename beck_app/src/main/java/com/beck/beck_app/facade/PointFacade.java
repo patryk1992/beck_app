@@ -5,8 +5,7 @@
  */
 package com.beck.beck_app.facade;
 
-import com.beck.beck_app.Point;
-import com.beck.beck_app.Point;
+import com.beck.beck_app.model.Point;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

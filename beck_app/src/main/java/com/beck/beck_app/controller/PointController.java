@@ -1,5 +1,7 @@
 package com.beck.beck_app.controller;
 
+import com.beck.beck_app.facade.PointFacade;
+import com.beck.beck_app.model.Point;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 

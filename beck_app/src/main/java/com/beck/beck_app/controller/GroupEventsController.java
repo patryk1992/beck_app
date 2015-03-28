@@ -1,5 +1,7 @@
 package com.beck.beck_app.controller;
 
+import com.beck.beck_app.facade.GroupEventsFacade;
+import com.beck.beck_app.model.GroupEvents;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 
