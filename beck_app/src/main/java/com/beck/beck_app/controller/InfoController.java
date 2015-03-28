@@ -1,4 +1,4 @@
-package com.beck.beck_app;
+package com.beck.beck_app.controller;
 
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
@@ -22,7 +22,7 @@ import javax.faces.convert.FacesConverter;
 public class InfoController implements Serializable {
 
     @EJB
-    private com.beck.beck_app.InfoFacade ejbFacade;
+    private com.beck.beck_app.facade.InfoFacade ejbFacade;
     private List<Info> items = null;
     private Info selected;
 

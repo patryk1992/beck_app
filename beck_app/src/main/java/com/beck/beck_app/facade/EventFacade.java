@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.beck.beck_app;
+package com.beck.beck_app.facade;
 
-import com.beck.beck_app.Point;
+import com.beck.beck_app.Event;
+import com.beck.beck_app.Event;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Patryk
  */
 @Stateless
-public class PointFacade extends AbstractFacade<Point> {
+public class EventFacade extends AbstractFacade<Event> {
     @PersistenceContext(unitName = "com.beck_beck_app_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -24,8 +25,8 @@ public class PointFacade extends AbstractFacade<Point> {
         return em;
     }
 
-    public PointFacade() {
-        super(Point.class);
+    public EventFacade() {
+        super(Event.class);
     }
     
 }

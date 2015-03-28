@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.beck.beck_app;
+package com.beck.beck_app.model;
 
 import java.io.Serializable;
 import java.util.List;

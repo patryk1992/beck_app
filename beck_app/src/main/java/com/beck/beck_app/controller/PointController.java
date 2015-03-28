@@ -1,4 +1,4 @@
-package com.beck.beck_app;
+package com.beck.beck_app.controller;
 
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
@@ -22,7 +22,7 @@ import javax.faces.convert.FacesConverter;
 public class PointController implements Serializable {
 
     @EJB
-    private com.beck.beck_app.PointFacade ejbFacade;
+    private com.beck.beck_app.facade.PointFacade ejbFacade;
     private List<Point> items = null;
     private Point selected;
 

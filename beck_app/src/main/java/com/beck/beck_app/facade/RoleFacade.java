@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.beck.beck_app;
+package com.beck.beck_app.facade;
 
+import com.beck.beck_app.Role;
 import com.beck.beck_app.Role;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

@@ -1,4 +1,4 @@
-package com.beck.beck_app;
+package com.beck.beck_app.controller;
 
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
@@ -22,7 +22,7 @@ import javax.faces.convert.FacesConverter;
 public class UserController implements Serializable {
 
     @EJB
-    private com.beck.beck_app.UserFacade ejbFacade;
+    private com.beck.beck_app.facade.UserFacade ejbFacade;
     private List<User> items = null;
     private User selected;
 

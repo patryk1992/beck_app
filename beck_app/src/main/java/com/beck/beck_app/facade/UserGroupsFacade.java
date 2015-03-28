@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.beck.beck_app;
+package com.beck.beck_app.facade;
 
-import com.beck.beck_app.Notice;
+import com.beck.beck_app.UserGroups;
+import com.beck.beck_app.UserGroups;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Patryk
  */
 @Stateless
-public class NoticeFacade extends AbstractFacade<Notice> {
+public class UserGroupsFacade extends AbstractFacade<UserGroups> {
     @PersistenceContext(unitName = "com.beck_beck_app_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -24,8 +25,8 @@ public class NoticeFacade extends AbstractFacade<Notice> {
         return em;
     }
 
-    public NoticeFacade() {
-        super(Notice.class);
+    public UserGroupsFacade() {
+        super(UserGroups.class);
     }
     
 }

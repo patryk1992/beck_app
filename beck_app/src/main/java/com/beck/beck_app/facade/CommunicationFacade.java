@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.beck.beck_app;
+package com.beck.beck_app.facade;
 
-import com.beck.beck_app.GroupEvents;
+import com.beck.beck_app.Communication;
+import com.beck.beck_app.Communication;
+import com.beck.beck_app.Communication;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +17,7 @@ import javax.persistence.PersistenceContext;
  * @author Patryk
  */
 @Stateless
-public class GroupEventsFacade extends AbstractFacade<GroupEvents> {
+public class CommunicationFacade extends AbstractFacade<Communication> {
     @PersistenceContext(unitName = "com.beck_beck_app_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -24,8 +26,8 @@ public class GroupEventsFacade extends AbstractFacade<GroupEvents> {
         return em;
     }
 
-    public GroupEventsFacade() {
-        super(GroupEvents.class);
+    public CommunicationFacade() {
+        super(Communication.class);
     }
     
 }

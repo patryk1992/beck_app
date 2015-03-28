@@ -1,4 +1,4 @@
-package com.beck.beck_app;
+package com.beck.beck_app.controller;
 
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
@@ -22,7 +22,7 @@ import javax.faces.convert.FacesConverter;
 public class RoleController implements Serializable {
 
     @EJB
-    private com.beck.beck_app.RoleFacade ejbFacade;
+    private com.beck.beck_app.facade.RoleFacade ejbFacade;
     private List<Role> items = null;
     private Role selected;
 
