@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InfoViewDlg" widgetVar="InfoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInfoTitle}">
+            <h:form id="InfoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{infoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInfoLabel_id}"/>
+                        <h:outputText value="#{infoController.selected.id}" title="#{bundle.ViewInfoTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewInfoLabel_infoDesc}"/>
+                        <h:outputText value="#{infoController.selected.infoDesc}" title="#{bundle.ViewInfoTitle_infoDesc}"/>
+                        <h:outputText value="#{bundle.ViewInfoLabel_infoName}"/>
+                        <h:outputText value="#{infoController.selected.infoName}" title="#{bundle.ViewInfoTitle_infoName}"/>
+                        <h:outputText value="#{bundle.ViewInfoLabel_type}"/>
+                        <h:outputText value="#{infoController.selected.type}" title="#{bundle.ViewInfoTitle_type}"/>
+                        <h:outputText value="#{bundle.ViewInfoLabel_startDate}"/>
+                        <h:outputText value="#{infoController.selected.startDate}" title="#{bundle.ViewInfoTitle_startDate}"/>
+                        <h:outputText value="#{bundle.ViewInfoLabel_endDate}"/>
+                        <h:outputText value="#{infoController.selected.endDate}" title="#{bundle.ViewInfoTitle_endDate}"/>
+                        <h:outputText value="#{bundle.ViewInfoLabel_addInfo}"/>
+                        <h:outputText value="#{infoController.selected.addInfo}" title="#{bundle.ViewInfoTitle_addInfo}"/>
+                        <h:outputText value="#{bundle.ViewInfoLabel_eventId}"/>
+                        <h:outputText value="#{infoController.selected.eventId}" title="#{bundle.ViewInfoTitle_eventId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="InfoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

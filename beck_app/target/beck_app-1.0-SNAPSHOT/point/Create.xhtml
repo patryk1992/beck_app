@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PointCreateDlg" widgetVar="PointCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePointTitle}">
+            <h:form id="PointCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pointController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePointLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{pointController.selected.id}" title="#{bundle.CreatePointTitle_id}" required="true" requiredMessage="#{bundle.CreatePointRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreatePointLabel_trackName}" for="trackName" />
+                        <p:inputText id="trackName" value="#{pointController.selected.trackName}" title="#{bundle.CreatePointTitle_trackName}" />
+                        <p:outputLabel value="#{bundle.CreatePointLabel_longitude}" for="longitude" />
+                        <p:inputText id="longitude" value="#{pointController.selected.longitude}" title="#{bundle.CreatePointTitle_longitude}" />
+                        <p:outputLabel value="#{bundle.CreatePointLabel_latitude}" for="latitude" />
+                        <p:inputText id="latitude" value="#{pointController.selected.latitude}" title="#{bundle.CreatePointTitle_latitude}" />
+                        <p:outputLabel value="#{bundle.CreatePointLabel_orderNr}" for="orderNr" />
+                        <p:inputText id="orderNr" value="#{pointController.selected.orderNr}" title="#{bundle.CreatePointTitle_orderNr}" />
+                        <p:outputLabel value="#{bundle.CreatePointLabel_trackId}" for="trackId" />
+                        <p:selectOneMenu id="trackId" value="#{pointController.selected.trackId}" required="true" requiredMessage="#{bundle.EditPointRequiredMessage_trackId}">
+                            <f:selectItems value="#{trackController.itemsAvailableSelectOne}"
+                                           var="trackIdItem"
+                                           itemValue="#{trackIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pointController.create}" value="#{bundle.Save}" update="display,:PointListForm:datalist,:growl" oncomplete="handleSubmit(args,'PointCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PointCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InfoEditDlg" widgetVar="InfoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditInfoTitle}">
+            <h:form id="InfoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{infoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditInfoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{infoController.selected.id}" title="#{bundle.EditInfoTitle_id}" required="true" requiredMessage="#{bundle.EditInfoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditInfoLabel_infoDesc}" for="infoDesc" />
+                        <p:inputText id="infoDesc" value="#{infoController.selected.infoDesc}" title="#{bundle.EditInfoTitle_infoDesc}" />
+                        <p:outputLabel value="#{bundle.EditInfoLabel_infoName}" for="infoName" />
+                        <p:inputText id="infoName" value="#{infoController.selected.infoName}" title="#{bundle.EditInfoTitle_infoName}" />
+                        <p:outputLabel value="#{bundle.EditInfoLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{infoController.selected.type}" title="#{bundle.EditInfoTitle_type}" />
+                        <p:outputLabel value="#{bundle.EditInfoLabel_startDate}" for="startDate" />
+                        <p:inputText id="startDate" value="#{infoController.selected.startDate}" title="#{bundle.EditInfoTitle_startDate}" />
+                        <p:outputLabel value="#{bundle.EditInfoLabel_endDate}" for="endDate" />
+                        <p:inputText id="endDate" value="#{infoController.selected.endDate}" title="#{bundle.EditInfoTitle_endDate}" />
+                        <p:outputLabel value="#{bundle.EditInfoLabel_addInfo}" for="addInfo" />
+                        <p:inputText id="addInfo" value="#{infoController.selected.addInfo}" title="#{bundle.EditInfoTitle_addInfo}" />
+                        <p:outputLabel value="#{bundle.EditInfoLabel_eventId}" for="eventId" />
+                        <p:selectOneMenu id="eventId" value="#{infoController.selected.eventId}" required="true" requiredMessage="#{bundle.EditInfoRequiredMessage_eventId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{eventController.itemsAvailableSelectOne}"
+                                           var="eventIdItem"
+                                           itemValue="#{eventIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{infoController.update}" value="#{bundle.Save}" update="display,:InfoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InfoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InfoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
