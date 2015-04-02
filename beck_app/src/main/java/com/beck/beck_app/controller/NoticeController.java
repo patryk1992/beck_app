@@ -19,7 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("noticeControllersk")
+@Named("noticeController")
 @SessionScoped
 public class NoticeController implements Serializable {
 
