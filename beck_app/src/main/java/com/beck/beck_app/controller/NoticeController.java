@@ -6,6 +6,7 @@ import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -120,7 +121,19 @@ public class NoticeController implements Serializable {
     public List<Notice> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-
+    public List<String> completeText(String query) {
+        List<Notice> allNotice =  getFacade().findAll();
+        List<String> filteredNotice = new ArrayList<String>();
+         
+        for (int i = 0; i < allNotice.size(); i++) {
+            Notice notice = allNotice.get(i);
+            if(notice.getTitle().toLowerCase().startsWith(query)) {
+                filteredNotice.add(notice.getTitle());
+            }
+        }
+         
+        return filteredNotice;
+    }
     @FacesConverter(forClass = Notice.class)
     public static class NoticeControllerConverter implements Converter {
 
