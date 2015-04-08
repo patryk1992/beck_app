@@ -16,9 +16,7 @@
         <ui:define name="body">
             <h:form id="NoticeListForm">
                 <p:panel header="#{bundle.ListNoticeTitle}">        
-                   
-                
-        <p:dialog id="NoticeCreateDlgSingle" widgetVar="NoticeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateNoticeTitle}">
+
             <h:form id="NoticeCreateFormSingle">
                 <h:panelGroup id="display">
                         <p:outputLabel value="#{bundle.CreateNoticeLabel_id}" for="id" />
@@ -29,7 +27,6 @@
                         <p:inputText id="title" value="#{noticeController.selected.title}" title="#{bundle.CreateNoticeTitle_title}" />                              
                 </h:panelGroup>
             </h:form>
-        </p:dialog>
 
                        
                   
