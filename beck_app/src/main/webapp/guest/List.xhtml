@@ -44,7 +44,7 @@
                         </p:column>
                         <f:facet name="footer">
                             
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":NoticeViewForm" oncomplete="PF('NoticeViewDialog').show()" disabled="#{empty noticeController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" action="#{noticeController.processListNotice}"  value="#{bundle.View}" disabled="#{empty noticeController.selected}"/>
                             
                           
                         </f:facet>

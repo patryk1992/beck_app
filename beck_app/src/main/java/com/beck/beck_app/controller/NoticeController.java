@@ -134,6 +134,9 @@ public class NoticeController implements Serializable {
          
         return filteredNotice;
     }
+    public String processListNotice(){
+		return "success";
+    }
     @FacesConverter(forClass = Notice.class)
     public static class NoticeControllerConverter implements Converter {
 
