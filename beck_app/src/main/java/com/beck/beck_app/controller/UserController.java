@@ -14,10 +14,14 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import org.primefaces.context.RequestContext;
 
 @Named("userController")
 @SessionScoped
@@ -49,6 +53,51 @@ public class UserController implements Serializable {
         return ejbFacade;
     }
 
+    
+    public String login()
+    { 
+//        //String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex("asd");
+      
+    User usr =  getFacade().findByNameAndPassword(selected.getUsername(), selected.getPassword());
+    if(usr==null)
+    {
+      FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Błąd logowania", "Niepoprawny login lub hasło");
+       RequestContext.getCurrentInstance().showMessageInDialog(message); 
+       FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+       return "/login/error";
+    }
+    else
+    { HttpServletRequest request = (HttpServletRequest)  FacesContext.getCurrentInstance().getExternalContext().getRequest();
+          try {
+              request.login(usr.getUsername(), usr.getPassword());
+          } catch (ServletException ex) {
+              Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        if(request.isUserInRole("admin")) return "/admin_views/main";
+        else if (request.isUserInRole("user")) return "/user_views/main";
+        else return "/login/error2";
+    }
+    }
+          
+    public String logout() {
+    String result="/index?faces-redirect=true";
+     
+    FacesContext context = FacesContext.getCurrentInstance();
+    HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
+     
+    try {
+      request.logout();
+    } catch (ServletException e) {
+                   Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, "nie udalo sie wylogowac");
+
+      result = "/login/error2?faces-redirect=true";
+    }
+     
+    return result;
+  }
+    
+    
+    
     public User prepareCreate() {
         selected = new User();
         initializeEmbeddableKey();

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -29,6 +30,11 @@ public class CommunicationController implements Serializable {
     private Communication selected;
 
     public CommunicationController() {
+    }
+    
+    @PostConstruct
+    public void init() {
+    selected = new Communication();
     }
 
     public Communication getSelected() {
@@ -74,6 +80,12 @@ public class CommunicationController implements Serializable {
         }
     }
 
+        public List<Communication> msgUser(Integer userId)
+    {
+    return getFacade().findToUserId(userId);
+    
+    }
+    
     public List<Communication> getItems() {
         if (items == null) {
             items = getFacade().findAll();

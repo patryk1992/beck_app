@@ -18,11 +18,7 @@
             <p:password id="password" value="#{userController.selected.password}" required="true" label="password" />
             
             <f:facet name="footer">
-                <p:commandButton type="submit" value="Login"  action="#{userController.login}" ajax="false" >
-                    <f:actionListener binding="#{nauczycielController.setProps(userController.selected.username, userController.selected.password)}" />
-                    <f:actionListener binding="#{uczenController.setProps(userController.selected.username, userController.selected.password)}" />
-        
-                  </p:commandButton>    
+                <p:commandButton type="submit" value="Login"  action="#{userController.login}" ajax="false" />
             </f:facet> 
         </h:panelGrid> 
         </h:form>

@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Communication.findAll", query = "SELECT c FROM Communication c"),
     @NamedQuery(name = "Communication.findById", query = "SELECT c FROM Communication c WHERE c.id = :id"),
     @NamedQuery(name = "Communication.findByMessage", query = "SELECT c FROM Communication c WHERE c.message = :message"),
+    @NamedQuery(name = "Communication.findByUserTo", query ="SELECT c FROM Communication c where c.userIdTo = :userIdTo"),
     @NamedQuery(name = "Communication.findByTitle", query = "SELECT c FROM Communication c WHERE c.title = :title")})
 public class Communication implements Serializable {
     private static final long serialVersionUID = 1L;
