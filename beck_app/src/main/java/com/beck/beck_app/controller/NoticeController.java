@@ -28,7 +28,10 @@ public class NoticeController implements Serializable {
     private com.beck.beck_app.facade.NoticeFacade ejbFacade;
     private List<Notice> items = null;
     private Notice selected;
-
+    private List<Notice> allNotice;
+    private List<String> filteredNotice;
+    private List<Notice> filteredItems;
+    
     public NoticeController() {
     }
 
@@ -122,19 +125,22 @@ public class NoticeController implements Serializable {
         return getFacade().findAll();
     }
     public List<String> completeText(String query) {
-        List<Notice> allNotice =  getFacade().findAll();
-        List<String> filteredNotice = new ArrayList<String>();
+        allNotice =  getFacade().findAll();
+        filteredNotice = new ArrayList<String>();
+        filteredItems = new ArrayList<Notice>();
          
         for (int i = 0; i < allNotice.size(); i++) {
             Notice notice = allNotice.get(i);
-            if(notice.getTitle().toLowerCase().startsWith(query)) {
+            if(notice.getTitle().toLowerCase().contains(query.toLowerCase())) {
                 filteredNotice.add(notice.getTitle());
+                filteredItems.add(notice);
             }
         }
-         
+        items=filteredItems;
         return filteredNotice;
     }
     public String processListNotice(){
+        
 		return "success";
     }
     @FacesConverter(forClass = Notice.class)
