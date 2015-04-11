@@ -158,6 +158,7 @@ public class NoticeController implements Serializable {
 
         java.lang.Integer getKey(String value) {
             java.lang.Integer key;
+            
             key = Integer.valueOf(value);
             return key;
         }

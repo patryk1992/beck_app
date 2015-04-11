@@ -17,8 +17,14 @@
             <h:form id="NoticeListForm">
                 <p:panel header="#{bundle.ListNoticeTitle}">
                     <p:outputLabel value="Force Selection:" for="acForce" />
-                    <p:autoComplete id="acForce" forceSelection="true" value="#{noticeController.selected}" completeMethod="#{noticeController.completeText}" >
-                     <p:ajax update=":NoticeListForm:datalist" /> </p:autoComplete>
+                    <p:autoComplete id="acForce" forceSelection="true" value="#{noticeController.items}" completeMethod="#{noticeController.completeText}"  >
+                        <!--<p:ajax update=":NoticeListForm:datalist" />--> 
+                      <f:ajax render="datalist"/> 
+                        <!--<p:ajax event="itemSelect" listener="{noticeController.completeText}" update="NoticeListForm"></p:ajax>-->
+                    </p:autoComplete>
+                   <p:commandButton value="Refresh">
+                         <f:ajax render="datalist"/> 
+                   </p:commandButton>
                     <p:dataTable id="datalist" value="#{noticeController.items}" var="item"
                                  selectionMode="single" selection="#{noticeController.selected}"
                                  paginator="true"
