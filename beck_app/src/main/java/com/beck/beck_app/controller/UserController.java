@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -33,6 +34,11 @@ public class UserController implements Serializable {
     private User selected;
 
     public UserController() {
+    }
+    
+        @PostConstruct
+    public void init() {
+    selected = new User();
     }
 
     public User getSelected() {

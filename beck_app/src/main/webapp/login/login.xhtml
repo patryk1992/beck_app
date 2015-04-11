@@ -18,7 +18,7 @@
             <p:password id="password" value="#{userController.selected.password}" required="true" label="password" />
             
             <f:facet name="footer">
-                <p:commandButton type="submit" value="Login"  action="#{userController.login}" ajax="false" />
+                <p:commandButton type="submit" value="Login"  action="#{userController.login()}" ajax="false" />
             </f:facet> 
         </h:panelGrid> 
         </h:form>
