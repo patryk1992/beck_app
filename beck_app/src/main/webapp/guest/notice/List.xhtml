@@ -16,15 +16,15 @@
         <ui:define name="body">
             <h:form id="NoticeListForm">
                 <p:panel header="#{bundle.ListNoticeTitle}">
-                    <p:outputLabel value="Force Selection:" for="acForce" />
+                    <!--<p:outputLabel value="Force Selection:" for="acForce" />-->
                     <p:autoComplete id="acForce" forceSelection="true" value="#{noticeController.items}" completeMethod="#{noticeController.completeText}"  >
                         <!--<p:ajax update=":NoticeListForm:datalist" />--> 
                       <f:ajax render="datalist"/> 
                         <!--<p:ajax event="itemSelect" listener="{noticeController.completeText}" update="NoticeListForm"></p:ajax>-->
                     </p:autoComplete>
-                   <p:commandButton value="Refresh">
+<!--                   <p:commandButton value="Refresh">
                          <f:ajax render="datalist"/> 
-                   </p:commandButton>
+                   </p:commandButton>-->
                     <p:dataTable id="datalist" value="#{noticeController.items}" var="item"
                                  selectionMode="single" selection="#{noticeController.selected}"
                                  paginator="true"
@@ -46,7 +46,7 @@
                         </p:column>
                         <f:facet name="footer">
                             
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" action="#{noticeController.processListNotice}"  value="#{bundle.View}" disabled="#{empty noticeController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" type="submit" action="#{noticeController.processListNotice}"  value="#{bundle.View}" disabled="#{empty noticeController.selected}"/>
                             
                           
                         </f:facet>
@@ -54,9 +54,8 @@
                 </p:panel>
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
+           
+            <!--<ui:include src="ListNotice.xhtml"/>-->
         </ui:define>
     </ui:composition>
 

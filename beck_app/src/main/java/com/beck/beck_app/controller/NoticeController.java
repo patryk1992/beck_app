@@ -141,7 +141,7 @@ public class NoticeController implements Serializable {
     }
     public String processListNotice(){
         
-		return "success";
+		return "/guest/notice/ListNotice.xhtml";
     }
     @FacesConverter(forClass = Notice.class)
     public static class NoticeControllerConverter implements Converter {
