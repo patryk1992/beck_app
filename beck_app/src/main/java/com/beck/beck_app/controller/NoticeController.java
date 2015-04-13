@@ -84,7 +84,9 @@ public class NoticeController implements Serializable {
         }
         return items;
     }
-
+ public void setItems( List<Notice> items) {
+        this.items=items;
+    }
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
