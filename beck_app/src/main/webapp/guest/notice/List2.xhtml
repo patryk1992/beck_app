@@ -19,29 +19,24 @@
                    
                     <p:dataTable id="datalist" value="#{noticeController.items}" var="item"
                                  selectionMode="single" selection="#{noticeController.selected}"
-                                 paginator="true"
+                                
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                
                                  widgetVar="carsTable"
-                 emptyMessage="No cars found with given criteria" filteredValue="#{noticeController.items}">
+                 emptyMessage="Nie znaleziono wyników spełniających podane kryteria" filteredValue="#{noticeController.items}">
                                  
                          
-                        <p:column filterBy="#{item.title}" headerText="title" footerText="contains" filterMatchMode="contains">
-            <h:outputText value="#{item.title}" />
+                        <p:column filterBy="#{item.title}" headerText="Search" footerText="contains" filterMatchMode="contains">
+           <h:outputText value="#{item.title}" />
         </p:column>
                         <p:ajax event="rowSelect"   update=" viewButton  "/>
                         <p:ajax event="rowUnselect" update=" viewButton "/>
 
                      
                        
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListNoticeTitle_title}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.title}"/>
-                        </p:column>
+                    
                         <f:facet name="footer">
                             
                             <p:commandButton id="viewButton"   icon="ui-icon-search" type="submit" action="#{noticeController.processListNotice}"  value="#{bundle.View}" disabled="#{empty noticeController.selected}"/>

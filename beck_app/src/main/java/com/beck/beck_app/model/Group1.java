@@ -47,6 +47,9 @@ public class Group1 implements Serializable {
     @Size(max = 45)
     @Column(name = "group_name")
     private String groupName;
+    @Size(max = 45)
+    @Column(name = "visibility")
+    private String visibility;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
     private List<GroupEvents> groupEventsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
@@ -124,6 +127,20 @@ public class Group1 implements Serializable {
     @Override
     public String toString() {
         return "com.beck.beck_app.Group1[ idgroup=" + idgroup + " ]";
+    }
+
+    /**
+     * @return the visibility
+     */
+    public String getVisibility() {
+        return visibility;
+    }
+
+    /**
+     * @param visibility the visibility to set
+     */
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
     }
     
 }
