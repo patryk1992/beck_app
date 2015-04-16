@@ -18,6 +18,7 @@
                         <p:inputText id="groupDesc" value="#{group1Controller.selected.groupDesc}" title="#{bundle.CreateGroup1Title_groupDesc}" />                      
                     </p:panelGrid>
                     <p:commandButton actionListener="#{group1Controller.create}" value="#{bundle.Save}" update="display,:Group1ListForm:datalist,:growl" oncomplete="handleSubmit(args,'Group1CreateDialog');">
+                        <f:actionListener binding="#{group1Controller.setProps(group1Controller.selected.groupName)}" /> 
                         <f:actionListener binding="#{userGroupsController.selected.setUserId(userController.selected)}" />   
                         <f:actionListener binding="#{userGroupsController.selected.setGroupId(group1Controller.selected)}"/>
                         <f:actionListener binding="#{userGroupsController.selected.setStatus('owner')}"/>

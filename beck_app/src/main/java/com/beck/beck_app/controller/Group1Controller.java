@@ -120,7 +120,19 @@ public class Group1Controller implements Serializable {
     public List<Group1> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-
+     public void setProps(String name)
+    {
+        Group1 u =null;
+        try {
+            u = getFacade().findByGroupName(name);
+        }
+        catch(Exception e)
+        { 
+            Logger.getLogger(this.getClass().getName()).log(Level.WARNING, null, e);
+        }
+         if(u!=null) setSelected(u);
+        
+    }
     @FacesConverter(forClass = Group1.class)
     public static class Group1ControllerConverter implements Converter {
 

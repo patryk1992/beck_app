@@ -100,11 +100,11 @@ public class UserController implements Serializable {
     }
 
     
-        public void setProps(String name, String pass)
+    public void setProps(String name, String pass)
     {
         User u =null;
         try {
-         u = getFacade().findByNameAndPassword(name, pass);
+            u = getFacade().findByNameAndPassword(name, pass);
         }
         catch(Exception e)
         { 

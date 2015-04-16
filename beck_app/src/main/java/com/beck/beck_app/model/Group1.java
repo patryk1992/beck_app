@@ -45,7 +45,7 @@ public class Group1 implements Serializable {
     @Column(name = "group_desc")
     private String groupDesc;
     @Size(max = 45)
-    @Column(name = "group_name")
+    @Column(name = "group_name",unique=true, nullable=false)
     private String groupName;
     @Size(max = 45)
     @Column(name = "visibility")
