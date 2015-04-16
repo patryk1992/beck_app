@@ -62,8 +62,8 @@ public class UserController implements Serializable {
     
     public String login()
     { 
-//        //String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex("asd");
-      
+    //    String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex("asd");
+     
     User usr =  getFacade().findByNameAndPassword(selected.getUsername(), selected.getPassword());
     if(usr==null)
     {
@@ -81,9 +81,39 @@ public class UserController implements Serializable {
           }
         if(request.isUserInRole("admin")) return "/admin_views/main";
         else if (request.isUserInRole("user")) return "/user_views/main";
-        else return "/login/error2";
+        else { 
+        try {
+            request.logout();
+           
+        } catch (ServletException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+         return "/login/error2";
+        }
     }
+    
+    
+    public String register()
+    {
+         return "/login/login.xhtml";
     }
+
+    
+        public void setProps(String name, String pass)
+    {
+        User u =null;
+        try {
+         u = getFacade().findByNameAndPassword(name, pass);
+        }
+        catch(Exception e)
+        { 
+            Logger.getLogger(this.getClass().getName()).log(Level.WARNING, null, e);
+        }
+         if(u!=null) setSelected(u);
+        
+    }
+ 
           
     public String logout() {
     String result="/index?faces-redirect=true";
