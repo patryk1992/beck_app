@@ -47,10 +47,9 @@ public class Group1 implements Serializable {
     @Size(max = 45)
     @Column(name = "group_name")
     private String groupName;
-   @Size(max = 45)
+    @Size(max = 45)
     @Column(name = "visibility")
     private String visibility;
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
     private List<GroupEvents> groupEventsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
