@@ -9,6 +9,7 @@ import com.beck.beck_app.model.User;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
@@ -18,8 +19,7 @@ import org.apache.log4j.Logger;
  */
 @Stateless
 public class UserFacade extends AbstractFacade<User> {
-    final static Logger logger = Logger.getLogger(UserFacade.class);
-    
+  
     @PersistenceContext(unitName = "com.beck_beck_app_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -42,7 +42,7 @@ public class UserFacade extends AbstractFacade<User> {
       }
      catch(Exception e)
      {
-         logger.warn("blad  podczas proby logowania");
+         return null;
      }
      return selectedUsr;
     }

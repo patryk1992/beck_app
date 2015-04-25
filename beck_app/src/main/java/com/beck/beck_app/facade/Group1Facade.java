@@ -5,7 +5,7 @@
  */
 package com.beck.beck_app.facade;
 
-import static com.beck.beck_app.facade.UserFacade.logger;
+
 import com.beck.beck_app.model.Group1;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -38,7 +38,7 @@ public class Group1Facade extends AbstractFacade<Group1> {
       }
      catch(Exception e)
      {
-         logger.warn("blad  podczas proby logowania");
+        e.printStackTrace();
      }
      return selectedGroup1;
     }

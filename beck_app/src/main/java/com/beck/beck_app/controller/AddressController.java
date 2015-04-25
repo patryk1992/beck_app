@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -29,6 +30,10 @@ public class AddressController implements Serializable {
     private Address selected;
 
     public AddressController() {
+    }
+    @PostConstruct
+    public void init() {
+    selected = new Address();
     }
 
     public Address getSelected() {
@@ -81,6 +86,11 @@ public class AddressController implements Serializable {
         return items;
     }
 
+    public Address getIdByVaulesFromDb (String country, String city, String street, String suburb)
+    {
+      return  getFacade().findIdByVaules(country, city, street, suburb);
+    }
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
