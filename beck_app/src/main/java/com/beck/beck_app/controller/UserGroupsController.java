@@ -1,12 +1,15 @@
 package com.beck.beck_app.controller;
 
+import com.beck.beck_app.facade.UserFacade;
 import com.beck.beck_app.facade.UserGroupsFacade;
+import com.beck.beck_app.model.Group1;
 import com.beck.beck_app.model.User;
 import com.beck.beck_app.model.UserGroups;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,28 +19,57 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.TransferEvent;
+import org.primefaces.model.DualListModel;
 
 @Named("userGroupsController")
 @SessionScoped
 public class UserGroupsController implements Serializable {
 
     @EJB
+    private com.beck.beck_app.facade.UserFacade ejbFacade2;
+    @EJB
     private com.beck.beck_app.facade.UserGroupsFacade ejbFacade;
+    
     private List<UserGroups> items = null;
     private UserGroups selected;
-
-    public UserGroupsController() {
+    private DualListModel<String> cities;
+    private DualListModel<User> users;
+    List<User> usersSource;
+    List<User> usersTarget;
+    
+    public UserGroupsController()
+    {
     }
 
             @PostConstruct
     public void init() {
         selected = new UserGroups();
+//        List<String> citiesSource = new ArrayList<String>();
+//        List<String> citiesTarget = new ArrayList<String>();
+        
+        usersSource =getFacade2().findAll();
+        usersTarget = new ArrayList<User>();
+         
+//        citiesSource.add("San Francisco");
+//        citiesSource.add("London");
+//        citiesSource.add("Paris");
+//        citiesSource.add("Istanbul");
+//        citiesSource.add("Berlin");
+//        citiesSource.add("Barcelona");
+//        citiesSource.add("Rome");
+//         
+//        setCities(new DualListModel<String>(citiesSource, citiesTarget));
+        setUsers(new DualListModel<User>(usersSource, usersTarget));
     }
-
+  
+    
     public UserGroups getSelected() {
         return selected;
     }
@@ -68,6 +100,22 @@ public class UserGroupsController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
+    public void create2(User user,Group1 group1) {
+        selected.setUserId(user);
+        selected.setGroupId(group1);
+        selected.setStatus("owner");
+        getFacade().create(selected);
+        //picklist
+//        List<User> tmplit=users.getTarget();
+//        int y=tmplit.get(0).getId();
+//        for(User u : tmplit ){
+//          UserGroups uG=new UserGroups();
+//          uG.setUserId(u);
+//          uG.setGroupId(group1);
+//          getFacade().create(uG);          
+//        }
+      
+    }
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UserGroupsUpdated"));
@@ -87,7 +135,7 @@ public class UserGroupsController implements Serializable {
         }
         return items;
     }
-
+   
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -114,6 +162,7 @@ public class UserGroupsController implements Serializable {
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
+       
     }
 
     public UserGroups getUserGroups(java.lang.Integer id) {
@@ -127,6 +176,42 @@ public class UserGroupsController implements Serializable {
     public List<UserGroups> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+
+    /**
+     * @return the cities
+     */
+    public DualListModel<String> getCities() {
+        return cities;
+    }
+
+    /**
+     * @param cities the cities to set
+     */
+    public void setCities(DualListModel<String> cities) {
+        this.cities = cities;
+    }
+
+    /**
+     * @return the ejbFacade2
+     */
+      private UserFacade getFacade2() {
+        return ejbFacade2;
+    }
+
+    /**
+     * @return the users
+     */
+    public DualListModel<User> getUsers() {
+        return users;
+    }
+
+    /**
+     * @param users the users to set
+     */
+    public void setUsers(DualListModel<User> users) {
+        this.users = users;
+    }
+
 
     @FacesConverter(forClass = UserGroups.class)
     public static class UserGroupsControllerConverter implements Converter {

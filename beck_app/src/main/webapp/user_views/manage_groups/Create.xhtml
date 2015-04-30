@@ -10,6 +10,7 @@
 
         <p:dialog id="Group1CreateDlg" widgetVar="Group1CreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateGroup1Title}">
             <h:form id="Group1CreateForm">
+                <p:growl id="msg" showDetail="true" escape="false" />
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{group1Controller.selected != null}">
                         <p:outputLabel value="#{bundle.CreateGroup1Label_groupName}" for="groupName" />
@@ -17,12 +18,15 @@
                         <p:outputLabel value="#{bundle.CreateGroup1Label_groupDesc}" for="groupDesc" />
                         <p:inputText id="groupDesc" value="#{group1Controller.selected.groupDesc}" title="#{bundle.CreateGroup1Title_groupDesc}" />                      
                     </p:panelGrid>
+                    <p:pickList id="pickList" value="#{userGroupsController.users}" var="users" itemLabel="#{users.username}" itemValue="#{userGroupsController.users}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+                    showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
+                        <f:facet name="sourceCaption">Available</f:facet>
+                        <f:facet name="targetCaption">Starting</f:facet> 
+                       
+                     </p:pickList>
                     <p:commandButton actionListener="#{group1Controller.create}" value="#{bundle.Save}" update="display,:Group1ListForm:datalist,:growl" oncomplete="handleSubmit(args,'Group1CreateDialog');">
-                        <f:actionListener binding="#{group1Controller.setProps(group1Controller.selected.groupName)}" /> 
-                        <f:actionListener binding="#{userGroupsController.selected.setUserId(userController.selected)}" />   
-                        <f:actionListener binding="#{userGroupsController.selected.setGroupId(group1Controller.selected)}"/>
-                        <f:actionListener binding="#{userGroupsController.selected.setStatus('owner')}"/>
-                        <f:actionListener binding="#{userGroupsController.create()}"/>
+                        <f:actionListener binding="#{group1Controller.setProps(group1Controller.selected.groupName)}" />                       
+                        <f:actionListener binding="#{userGroupsController.create2(userController.selected,group1Controller.selected)}"/>
                     </p:commandButton>   
                     <p:commandButton value="#{bundle.Cancel}" onclick="Group1CreateDialog.hide()"/>
                 </h:panelGroup>

@@ -10,15 +10,20 @@
 
         <p:dialog id="Group1EditDlg" widgetVar="Group1EditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditGroup1Title}">
             <h:form id="Group1EditForm">
+                <p:growl id="msg" showDetail="true" escape="false" />
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{group1Controller.selected != null}">
-                        <p:outputLabel value="#{bundle.EditGroup1Label_idgroup}" for="idgroup" />
-                        <p:inputText id="idgroup" value="#{group1Controller.selected.idgroup}" title="#{bundle.EditGroup1Title_idgroup}" required="true" requiredMessage="#{bundle.EditGroup1RequiredMessage_idgroup}"/>
+                    <p:panelGrid columns="2" rendered="#{group1Controller.selected != null}">                       
                         <p:outputLabel value="#{bundle.EditGroup1Label_groupDesc}" for="groupDesc" />
                         <p:inputText id="groupDesc" value="#{group1Controller.selected.groupDesc}" title="#{bundle.EditGroup1Title_groupDesc}" />
                         <p:outputLabel value="#{bundle.EditGroup1Label_groupName}" for="groupName" />
                         <p:inputText id="groupName" value="#{group1Controller.selected.groupName}" title="#{bundle.EditGroup1Title_groupName}" />
                     </p:panelGrid>
+                    <p:pickList id="pickList" value="#{userGroupsController.users}" var="users" itemLabel="#{users.username}" itemValue="#{users}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+                    showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
+                        <f:facet name="sourceCaption">Available</f:facet>
+                        <f:facet name="targetCaption">Starting</f:facet> 
+                        <p:ajax event="transfer" listener="#{pickListView.onTransfer}" update="msg" />
+                     </p:pickList>
                     <p:commandButton actionListener="#{group1Controller.update}" value="#{bundle.Save}" update="display,:Group1ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Group1EditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="Group1EditDialog.hide()"/>
                 </h:panelGroup>
