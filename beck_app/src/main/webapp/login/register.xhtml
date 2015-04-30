@@ -23,19 +23,19 @@
                         <p:inputText id="username" value="#{userController.selected.username}" title="#{bundle.CreateUserTitle_username}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_username}"/>
                        
                         <p:outputLabel value="#{bundle.CreateAddressLabel_city}" for="city" />
-                        <p:inputText id="city" value="#{addressController.selected.city}" title="#{bundle.CreateAddressTitle_city}" />
+                        <p:inputText id="city" binding="#{input_city}" value="#{addressController.selected.city}" title="#{bundle.CreateAddressTitle_city}" />
                         <p:outputLabel value="#{bundle.CreateAddressLabel_country}" for="country" />
-                        <p:inputText id="country" value="#{addressController.selected.country}" title="#{bundle.CreateAddressTitle_country}" />
+                        <p:inputText id="country" binding="#{input_country}" value="#{addressController.selected.country}" title="#{bundle.CreateAddressTitle_country}" />
                         <p:outputLabel value="#{bundle.CreateAddressLabel_street}" for="street" />
-                        <p:inputText id="street" value="#{addressController.selected.street}" title="#{bundle.CreateAddressTitle_street}" />
+                        <p:inputText id="street" binding="#{input_street}" value="#{addressController.selected.street}" title="#{bundle.CreateAddressTitle_street}" />
                         <p:outputLabel value="#{bundle.CreateAddressLabel_suburb}" for="suburb" />
-                        <p:inputText id="suburb" value="#{addressController.selected.suburb}" title="#{bundle.CreateAddressTitle_suburb}" />
+                        <p:inputText id="suburb" binding="#{input_suburb}" value="#{addressController.selected.suburb}" title="#{bundle.CreateAddressTitle_suburb}" />
         <f:facet name="footer">
              <p:commandButton id="registerButton"   icon="ui-icon-pencil" value="Zarejestruj"   disabled="#{empty userController.selected}">
                     <f:actionListener binding="#{addressController.create()}" />
-                    <f:actionListener binding="#{userController.selected.setAddressId(addressController.getIdByVaulesFromDb(addressController.selected.country,addressControler.selected.city, addressController.selected.street, adressControler.selected.suburb))}" />
+                    <f:actionListener binding="#{userController.selected.setAddressId(addressController.getIdByVaulesFromDb(input_country.value,input_city.value, input_street.value, input_suburb.value))}" />
                     <f:actionListener binding="#{userController.create()}" />
-                   
+                   <f:actionListener binding="#{userController.register()}" />
                 </p:commandButton>
             </f:facet> 
         </h:panelGrid> 

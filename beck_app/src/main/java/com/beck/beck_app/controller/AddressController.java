@@ -86,8 +86,7 @@ public class AddressController implements Serializable {
         return items;
     }
 
-    public Address getIdByVaulesFromDb (String country, String city, String street, String suburb)
-    {
+    public Address getIdByVaulesFromDb (String country, String city, String street, String suburb) {
       return  getFacade().findIdByVaules(country, city, street, suburb);
     }
     

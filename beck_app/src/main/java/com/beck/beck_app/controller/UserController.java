@@ -1,11 +1,14 @@
 package com.beck.beck_app.controller;
 
 import com.beck.beck_app.facade.UserFacade;
+import com.beck.beck_app.model.Role;
 import com.beck.beck_app.model.User;
+import com.beck.beck_app.model.UserGroups;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -30,6 +33,11 @@ public class UserController implements Serializable {
 
     @EJB
     private com.beck.beck_app.facade.UserFacade ejbFacade;
+    
+    @EJB
+    private com.beck.beck_app.facade.RoleFacade ejbFacadeRole;
+    
+    
     private List<User> items = null;
     private User selected;
 
@@ -79,7 +87,7 @@ public class UserController implements Serializable {
           } catch (ServletException ex) {
               Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
           }
-        if(request.isUserInRole("admin")) return "/admin_views/main";
+        if(request.isUserInRole("admin")) return "/admin_views/info/List";
         else if (request.isUserInRole("user")) return "/user_views/main";
         else { 
         try {
@@ -94,9 +102,24 @@ public class UserController implements Serializable {
     }
     
     
-    public String register()
+    public void register()
     {
-         return "/login/login.xhtml";
+        try {
+        List<Role> usrPermissions  = new ArrayList<>();
+        Role basicPermission = new Role();
+        basicPermission = getEjbFacadeRole().find(1);
+        usrPermissions.add(basicPermission);
+        
+        if(selected!=null) {
+        User usr =  getFacade().findByNameAndPassword(selected.getUsername(), selected.getPassword());    
+        usr.setRoleList(usrPermissions);
+        getFacade().edit(usr);
+        }
+        }
+        catch (Exception e)
+        {
+             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     
@@ -205,6 +228,22 @@ public class UserController implements Serializable {
     public List<User> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
+
+    /**
+     * @return the ejbFacadeRole
+     */
+    public com.beck.beck_app.facade.RoleFacade getEjbFacadeRole() {
+        return ejbFacadeRole;
+    }
+
+    /**
+     * @param ejbFacadeRole the ejbFacadeRole to set
+     */
+    public void setEjbFacadeRole(com.beck.beck_app.facade.RoleFacade ejbFacadeRole) {
+        this.ejbFacadeRole = ejbFacadeRole;
+    }
+
+
 
     @FacesConverter(forClass = User.class)
     public static class UserControllerConverter implements Converter {
