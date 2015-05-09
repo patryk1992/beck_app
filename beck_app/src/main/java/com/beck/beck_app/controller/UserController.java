@@ -245,7 +245,7 @@ public class UserController implements Serializable {
 
 
 
-    @FacesConverter(forClass = User.class)
+    @FacesConverter(forClass = User.class,value="categoryLevelConverter")
     public static class UserControllerConverter implements Converter {
 
         @Override

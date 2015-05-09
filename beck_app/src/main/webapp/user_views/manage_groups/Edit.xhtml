@@ -18,13 +18,16 @@
                         <p:outputLabel value="#{bundle.EditGroup1Label_groupName}" for="groupName" />
                         <p:inputText id="groupName" value="#{group1Controller.selected.groupName}" title="#{bundle.EditGroup1Title_groupName}" />
                     </p:panelGrid>
-                    <p:pickList id="pickList" value="#{userGroupsController.users}" var="users" itemLabel="#{users.username}" itemValue="#{users}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+                     <p:pickList id="pickList" value="#{userGroupsController.users}" var="users" itemLabel="#{users.username}" itemValue="#{users}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
                     showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
-                        <f:facet name="sourceCaption">Available</f:facet>
-                        <f:facet name="targetCaption">Starting</f:facet> 
-                        <p:ajax event="transfer" listener="#{pickListView.onTransfer}" update="msg" />
+                        <f:facet name="sourceCaption">Dostępni</f:facet>
+                        <f:facet name="targetCaption">Dodani</f:facet>                       
+                      <f:converter converterId="com.beck.beck_app.UserConverter" />
                      </p:pickList>
-                    <p:commandButton actionListener="#{group1Controller.update}" value="#{bundle.Save}" update="display,:Group1ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Group1EditDialog');"/>
+                    <p:commandButton actionListener="#{group1Controller.update}" value="#{bundle.Save}" update="display,:Group1ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Group1EditDialog');">
+                        <f:actionListener binding="#{group1Controller.setProps(group1Controller.selected.groupName)}" />                       
+                        <f:actionListener binding="#{userGroupsController.create2(userController.selected,group1Controller.selected)}"/>
+                    </p:commandButton> 
                     <p:commandButton value="#{bundle.Cancel}" onclick="Group1EditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

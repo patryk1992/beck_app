@@ -7,6 +7,7 @@ import com.beck.beck_app.model.User;
 import com.beck.beck_app.model.UserGroups;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
+import com.beck.beck_app.util.UserConverter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -106,16 +107,17 @@ public class UserGroupsController implements Serializable {
         selected.setStatus("owner");
         getFacade().create(selected);
         //picklist
-//        List<User> tmplit=users.getTarget();
-//        int y=tmplit.get(0).getId();
-//        for(User u : tmplit ){
-//          UserGroups uG=new UserGroups();
-//          uG.setUserId(u);
-//          uG.setGroupId(group1);
-//          getFacade().create(uG);          
-//        }
+        List<User> tmplit=users.getTarget();
+      //String s=  (new UserConverter()).getAsString(null, null, tmplit);
+        for(User u : tmplit ){
+          UserGroups uG=new UserGroups();
+          uG.setUserId(u);
+          uG.setGroupId(group1);
+          getFacade().create(uG);          
+        }
       
     }
+    
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UserGroupsUpdated"));
