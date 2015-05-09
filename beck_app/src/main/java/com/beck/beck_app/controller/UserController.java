@@ -8,6 +8,7 @@ import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -84,12 +85,14 @@ public class UserController implements Serializable {
     { HttpServletRequest request = (HttpServletRequest)  FacesContext.getCurrentInstance().getExternalContext().getRequest();
           try {
               request.login(usr.getUsername(), usr.getPassword());
+             
           } catch (ServletException ex) {
               Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-          }
+          } 
         if(request.isUserInRole("admin")) return "/admin_views/info/List";
         else if (request.isUserInRole("user")) return "/user_views/main";
         else { 
+            
         try {
             request.logout();
            
@@ -138,21 +141,20 @@ public class UserController implements Serializable {
     }
  
           
-    public String logout() {
-    String result="/index?faces-redirect=true";
-     
+    public void logout() {
+ 
     FacesContext context = FacesContext.getCurrentInstance();
     HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
      
     try {
       request.logout();
+      
+      
     } catch (ServletException e) {
-                   Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, "nie udalo sie wylogowac");
-
-      result = "/login/error2?faces-redirect=true";
+                   Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, "nie udalo sie wylogowac");  
     }
      
-    return result;
+  
   }
     
     
