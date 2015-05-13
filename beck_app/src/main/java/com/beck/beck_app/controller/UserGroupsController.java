@@ -49,25 +49,15 @@ public class UserGroupsController implements Serializable {
     {
     }
 
-            @PostConstruct
+    @PostConstruct
     public void init() {
         selected = new UserGroups();
-//        List<String> citiesSource = new ArrayList<String>();
-//        List<String> citiesTarget = new ArrayList<String>();
-        
         usersSource =getFacade2().findAll();
         usersTarget = new ArrayList<User>();
-         
-//        citiesSource.add("San Francisco");
-//        citiesSource.add("London");
-//        citiesSource.add("Paris");
-//        citiesSource.add("Istanbul");
-//        citiesSource.add("Berlin");
-//        citiesSource.add("Barcelona");
-//        citiesSource.add("Rome");
-//         
-//        setCities(new DualListModel<String>(citiesSource, citiesTarget));
         setUsers(new DualListModel<User>(usersSource, usersTarget));
+        
+        //dopisz facade do grupy tak zeby stworzyc tam liste filtrowana
+      
     }
   
     
@@ -102,6 +92,7 @@ public class UserGroupsController implements Serializable {
         }
     }
     public void create2(User user,Group1 group1) {
+        
         selected.setUserId(user);
         selected.setGroupId(group1);
         selected.setStatus("owner");
@@ -174,6 +165,7 @@ public class UserGroupsController implements Serializable {
     public List<UserGroups> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
+    
 
     public List<UserGroups> getItemsAvailableSelectOne() {
         return getFacade().findAll();
@@ -213,7 +205,30 @@ public class UserGroupsController implements Serializable {
     public void setUsers(DualListModel<User> users) {
         this.users = users;
     }
-
+     public void setParametrsPickList(User user,Group1 group1) {
+         List <UserGroups> targetUserGroups=ejbFacade.findByIdGroup(group1);
+         List <User> targetUserListByGroupId= new ArrayList<User>();
+         for(UserGroups usrGr:targetUserGroups){
+             User tmpUser=usrGr.getUserId();
+             targetUserListByGroupId.add(tmpUser);
+         }
+        users.setTarget(targetUserListByGroupId);
+        users.getSource().removeAll(targetUserListByGroupId);
+       
+    }
+    public List<Group1> getGroupsCratedByUser(User user) {
+        List <UserGroups> targetUserGroups=ejbFacade.findByIdUser(user);
+         List <Group1> targetUserListByGroupId= new ArrayList<Group1>();
+         for(UserGroups usrGr:targetUserGroups){
+             Group1 tmpGroup=usrGr.getGroupId();
+             if(usrGr.getStatus().contains("owner") && targetUserListByGroupId.indexOf(tmpGroup)==-1){
+                 
+                targetUserListByGroupId.add(tmpGroup);
+             }
+         }
+        
+        return targetUserListByGroupId;
+    }
 
     @FacesConverter(forClass = UserGroups.class)
     public static class UserGroupsControllerConverter implements Converter {

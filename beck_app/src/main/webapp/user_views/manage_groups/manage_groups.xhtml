@@ -22,7 +22,7 @@ and open the template in the editor.
             <h:form id="Group1ListForm">
                 <p:panel header="#{bundle.ListGroup1Title}">
                      
-                    <p:dataTable id="datalist" value="#{group1Controller.items}" var="item"
+                    <p:dataTable id="datalist" value="#{userGroupsController.getGroupsCratedByUser(userController.selected)}" var="item"
                                  selectionMode="single" selection="#{group1Controller.selected}"
                                  paginator="true"
                                  rowKey="#{item.idgroup}"
@@ -50,7 +50,9 @@ and open the template in the editor.
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{group1Controller.prepareCreate}" update=":Group1CreateForm" oncomplete="PF('Group1CreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":Group1ViewForm" oncomplete="PF('Group1ViewDialog').show()" disabled="#{empty group1Controller.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":Group1EditForm" oncomplete="PF('Group1EditDialog').show()" disabled="#{empty group1Controller.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":Group1EditForm" oncomplete="PF('Group1EditDialog').show()" disabled="#{empty group1Controller.selected}">
+                                <f:actionListener binding="#{userGroupsController.setParametrsPickList(userController.selected,group1Controller.selected)}"/>  
+                            </p:commandButton> 
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{group1Controller.destroy}" update=":growl,datalist" disabled="#{empty group1Controller.selected}"/>
                         </f:facet>
                     </p:dataTable>
