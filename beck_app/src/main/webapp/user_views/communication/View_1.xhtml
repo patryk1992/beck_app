@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CommunicationViewDlg_1" widgetVar="CommunicationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCommunicationTitle}">
+            <h:form id="CommunicationViewForm_1">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{communicationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCommunicationLabel_id}"/>
+                        <h:outputText value="#{communicationController.selected.id}" title="#{bundle.ViewCommunicationTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCommunicationLabel_message}"/>
+                        <h:outputText value="#{communicationController.selected.message}" title="#{bundle.ViewCommunicationTitle_message}"/>
+                        <h:outputText value="#{bundle.ViewCommunicationLabel_title}"/>
+                        <h:outputText value="#{communicationController.selected.title}" title="#{bundle.ViewCommunicationTitle_title}"/>
+                        <h:outputText value="#{bundle.ViewCommunicationLabel_userIdFrom}"/>
+                        <h:outputText value="#{communicationController.selected.userIdFrom}" title="#{bundle.ViewCommunicationTitle_userIdFrom}"/>
+                        <h:outputText value="#{bundle.ViewCommunicationLabel_userIdTo}"/>
+                        <h:outputText value="#{communicationController.selected.userIdTo}" title="#{bundle.ViewCommunicationTitle_userIdTo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CommunicationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
