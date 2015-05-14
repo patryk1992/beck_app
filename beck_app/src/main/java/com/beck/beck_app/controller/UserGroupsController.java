@@ -212,8 +212,10 @@ public class UserGroupsController implements Serializable {
              User tmpUser=usrGr.getUserId();
              targetUserListByGroupId.add(tmpUser);
          }
-        users.setTarget(targetUserListByGroupId);
-        users.getSource().removeAll(targetUserListByGroupId);
+        users.setTarget(targetUserListByGroupId);       
+        List <User> sourceUserListByGroupId=ejbFacade2.findAll();
+        sourceUserListByGroupId.removeAll(targetUserListByGroupId);
+        users.setSource(sourceUserListByGroupId);
        
     }
     public List<Group1> getGroupsCratedByUser(User user) {
@@ -221,7 +223,7 @@ public class UserGroupsController implements Serializable {
          List <Group1> targetUserListByGroupId= new ArrayList<Group1>();
          for(UserGroups usrGr:targetUserGroups){
              Group1 tmpGroup=usrGr.getGroupId();
-             if(usrGr.getStatus().contains("owner") && targetUserListByGroupId.indexOf(tmpGroup)==-1){
+             if(usrGr.getStatus()!= null && usrGr.getStatus().contains("owner") && targetUserListByGroupId.indexOf(tmpGroup)==-1){
                  
                 targetUserListByGroupId.add(tmpGroup);
              }

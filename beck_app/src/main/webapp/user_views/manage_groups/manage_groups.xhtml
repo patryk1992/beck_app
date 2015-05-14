@@ -48,7 +48,9 @@ and open the template in the editor.
                         </p:column>
                        
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{group1Controller.prepareCreate}" update=":Group1CreateForm" oncomplete="PF('Group1CreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{group1Controller.prepareCreate}" update=":Group1CreateForm" oncomplete="PF('Group1CreateDialog').show()">
+                             <f:actionListener binding="#{userGroupsController.setParametrsPickList(userController.selected,group1Controller.selected)}"/> 
+                            </p:commandButton> 
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":Group1ViewForm" oncomplete="PF('Group1ViewDialog').show()" disabled="#{empty group1Controller.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":Group1EditForm" oncomplete="PF('Group1EditDialog').show()" disabled="#{empty group1Controller.selected}">
                                 <f:actionListener binding="#{userGroupsController.setParametrsPickList(userController.selected,group1Controller.selected)}"/>  
