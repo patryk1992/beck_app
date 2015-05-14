@@ -8,8 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="CommunicationCreateDlg" widgetVar="CommunicationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCommunicationTitle}">
-            <h:form id="CommunicationCreateForm">
+        <p:dialog id="CommunicationCreateDlg_1" widgetVar="CommunicationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCommunicationTitle}">
+            <h:form id="CommunicationCreateForm_1">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{communicationController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateCommunicationLabel_id}" for="id" />
@@ -31,7 +31,7 @@
                                            itemValue="#{userIdToItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{communicationController.create}" value="#{bundle.Save}" update="display,:tabViews:CommunicationListFormDo:datalist2,:growl" oncomplete="handleSubmit(args,'CommunicationCreateDialog');"/>
+                    <p:commandButton actionListener="#{communicationController.create}" value="#{bundle.Save}" update="display,:tabViews:CommunicationListFormOd:datalist3,:growl" oncomplete="handleSubmit(args,'CommunicationCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CommunicationCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
