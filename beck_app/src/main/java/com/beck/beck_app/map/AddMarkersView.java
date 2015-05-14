@@ -82,6 +82,7 @@ public class AddMarkersView implements Serializable {
         
     }
     
+    //TODO dodac reszte pol z tabelko point 
     public void saveMap() {
     for ( Marker m : markersList)
     {
