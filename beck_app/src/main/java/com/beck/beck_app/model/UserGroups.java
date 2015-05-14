@@ -30,7 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "UserGroups.findAll", query = "SELECT u FROM UserGroups u"),
     @NamedQuery(name = "UserGroups.findById", query = "SELECT u FROM UserGroups u WHERE u.id = :id"),
-    @NamedQuery(name = "UserGroups.findByStatus", query = "SELECT u FROM UserGroups u WHERE u.status = :status")})
+    @NamedQuery(name = "UserGroups.findByStatus", query = "SELECT u FROM UserGroups u WHERE u.status = :status"),
+    @NamedQuery(name = "UserGroups.findByGroupId", query = "SELECT u FROM UserGroups u WHERE u.groupId = :groupId"),
+    @NamedQuery(name = "UserGroups.findByUserId", query = "SELECT u FROM UserGroups u WHERE u.userId = :userId")})
 public class UserGroups implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
