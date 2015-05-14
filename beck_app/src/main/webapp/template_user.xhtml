@@ -19,13 +19,7 @@
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">       
                 <h:form id="menuForm">
-                    <h:panelGrid columns="2" cellpadding="0"> 
-                    <p:themeSwitcher value="#{themeService.chosen}" id="advanced" style="width:165px" effect="fade" >
-                        <f:selectItem itemLabel="Choose Theme" itemValue="" />
-                        <f:selectItems value="#{themeService.themes}" />
-                    </p:themeSwitcher>
-
-                         
+                    <h:panelGrid columns="2" cellpadding="0">                              
                         <p:menubar>        
                             <p:menuitem value="#{bundle.Home}" outcome="/user_views/main.xhtml" />
                             <p:menuitem value="Grupy" outcome="/user_views/manage_groups/manage_groups.xhtml" />
@@ -35,6 +29,10 @@
                             <p:menuitem value="Poczta" outcome="/user_views/communication/List.xhtml" />
                             <p:menuitem value="Wyloguj" action="#{userController.logout}" />
                         </p:menubar>
+                          <p:themeSwitcher value="#{themeService.chosen}" id="advanced" style="width:165px" effect="fade" >
+                        <f:selectItem itemLabel="Choose Theme" itemValue="" />
+                        <f:selectItems value="#{themeService.themes}" />
+                    </p:themeSwitcher>
                     </h:panelGrid>
                 </h:form>
             </p:layoutUnit>
