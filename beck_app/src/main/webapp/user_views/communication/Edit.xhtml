@@ -33,7 +33,7 @@
                                            itemValue="#{userIdToItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{communicationController.update}" value="#{bundle.Save}" update="display,:CommunicationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CommunicationEditDialog');"/>
+                    <p:commandButton actionListener="#{communicationController.update}" value="#{bundle.Save}" update="display,:CommunicationListForm:datalist2,:growl" oncomplete="handleSubmit(args, 'CommunicationEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CommunicationEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
