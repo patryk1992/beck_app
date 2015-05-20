@@ -37,7 +37,6 @@ public class Notice implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 255)
     @Column(name = "message")
     private String message;
     @Size(max = 45)
