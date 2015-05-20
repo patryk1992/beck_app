@@ -2,6 +2,9 @@ package com.beck.beck_app.controller;
 
 import com.beck.beck_app.facade.CommunicationFacade;
 import com.beck.beck_app.model.Communication;
+import com.beck.beck_app.model.Group1;
+import com.beck.beck_app.model.User;
+import com.beck.beck_app.model.UserGroups;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 
@@ -67,7 +70,13 @@ public class CommunicationController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    public void send(User user) {
+        selected.setUserIdFrom(user);    
+        selected.setVisibleFrom(0);
+        selected.setVisibleTo(0);
+        create();
+ 
+    }
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CommunicationUpdated"));
     }

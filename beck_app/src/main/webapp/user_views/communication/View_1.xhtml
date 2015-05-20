@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="CommunicationViewDlg_1" widgetVar="CommunicationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCommunicationTitle}">
+        <p:dialog id="CommunicationViewDlg_1" widgetVar="CommunicationViewDialog1" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCommunicationTitle}">
             <h:form id="CommunicationViewForm_1">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{communicationController.selected != null}">
@@ -23,7 +23,7 @@
                         <h:outputText value="#{bundle.ViewCommunicationLabel_userIdTo}"/>
                         <h:outputText value="#{communicationController.selected.userIdTo}" title="#{bundle.ViewCommunicationTitle_userIdTo}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="CommunicationViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="CommunicationViewDialog1.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -8,26 +8,27 @@
 
     <ui:composition>
 
-        <p:dialog id="CommunicationCreateDlg_1" widgetVar="CommunicationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCommunicationTitle}">
+        <p:dialog id="CommunicationCreateDlg_1" widgetVar="CommunicationCreateDialog1" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCommunicationTitle}">
             <h:form id="CommunicationCreateForm_1">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{communicationController.selected != null}">
                        
-                        <p:inputText id="id" value="#{communicationController.selected.id}" title="#{bundle.CreateCommunicationTitle_id}" required="true" requiredMessage="#{bundle.CreateCommunicationRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateCommunicationLabel_title}" for="title" />
+                        <p:inputText id="title" value="#{communicationController.selected.title}" title="#{bundle.CreateCommunicationTitle_title}" />
                         <p:outputLabel value="#{bundle.CreateCommunicationLabel_message}" for="message" />
                         <p:inputText id="message" value="#{communicationController.selected.message}" title="#{bundle.CreateCommunicationTitle_message}" />
-                        <p:outputLabel value="#{bundle.CreateCommunicationLabel_title}" for="title" />
-                        <p:inputText id="title" value="#{communicationController.selected.title}" title="#{bundle.CreateCommunicationTitle_title}" />              
-                        
                         <p:outputLabel value="#{bundle.CreateCommunicationLabel_userIdTo}" for="userIdTo" />
                         <p:selectOneMenu id="userIdTo" value="#{communicationController.selected.userIdTo}" required="true" requiredMessage="#{bundle.EditCommunicationRequiredMessage_userIdTo}">
+                             <f:converter converterId="com.beck.beck_app.UserConverter" />
                             <f:selectItems value="#{userController.itemsAvailableSelectOne}"
                                            var="userIdToItem"
-                                           itemValue="#{userIdToItem}"/>
+                                           itemValue="#{userIdToItem}" itemLabel="#{userIdToItem.username}" />
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{communicationController.create}" value="#{bundle.Save}" update="display,:tabViews:CommunicationListFormDo:datalist3,:growl" oncomplete="handleSubmit(args,'CommunicationCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CommunicationCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{communicationController.send(userController.selected)}" value="#{bundle.Save}" update="display,:tabViews:CommunicationListFormDo:datalist3,:growl" oncomplete="handleSubmit(args,'CommunicationCreateDialog1');">
+                         
+                    </p:commandButton>  
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CommunicationCreateDialog1.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

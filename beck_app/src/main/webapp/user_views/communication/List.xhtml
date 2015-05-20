@@ -18,7 +18,7 @@
             <p:panel  header="#{bundle.ListCommunicationTitle}">
                 
                     <p:tabView id="tabViews" >
-
+                        <p:ajax event="tabChange"  update=":tabViews:CommunicationListFormDo:datalist3,:tabViews:CommunicationListFormOd:datalist2"/>                            
                         <p:tab title="Wiadomości odebrane">
                             <h:form id="CommunicationListFormOd">
                             <p:dataTable id="datalist2" value="#{communicationController.getItems()}" var="item"
@@ -48,13 +48,13 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListCommunicationTitle_userIdFrom}"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.userIdFrom}"/>
+                                    <h:outputText value="#{item.userIdFrom.username}"/>
                                 </p:column>
                                 <p:column rendered="false">
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListCommunicationTitle_userIdTo}"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.userIdTo}"/>
+                                    <h:outputText value="#{item.userIdTo.username}" />
                                 </p:column>
                                 <f:facet name="footer">                                   
                                     <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CommunicationViewForm" oncomplete="PF('CommunicationViewDialog').show()" disabled="#{empty communicationController.selected}"/>
@@ -99,10 +99,10 @@
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListCommunicationTitle_userIdTo}"/>
                                         </f:facet>
-                                        <h:outputText value="#{item.userIdTo}"/>
+                                        <h:outputText value="#{item.userIdTo.username}"/>
                                     </p:column>
                                     <f:facet name="footer">
-                                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{communicationController.prepareCreate}" update=":CommunicationCreateForm_1" oncomplete="PF('CommunicationCreateDialog').show()"/>
+                                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{communicationController.prepareCreate}" update=":CommunicationCreateForm_1" oncomplete="PF('CommunicationCreateDialog1').show()"/>
                                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CommunicationViewForm_1" oncomplete="PF('CommunicationViewDialog_1').show()" disabled="#{empty communicationController.selected}"/>
                                         <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CommunicationEditForm_1" oncomplete="PF('CommunicationEditDialog_1').show()" disabled="#{empty communicationController.selected}"/>
                                        
