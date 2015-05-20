@@ -20,7 +20,7 @@
                     <p:tabView id="tabViews" >
 
                         <p:tab title="Wiadomości odebrane">
-                            <h:form id="CommunicationListFormDo">
+                            <h:form id="CommunicationListFormOd">
                             <p:dataTable id="datalist2" value="#{communicationController.getItems()}" var="item"
                                          selectionMode="single" selection="#{communicationController.selected}"
                                          paginator="true"
@@ -38,19 +38,19 @@
                                     </f:facet>
                                     <h:outputText value="#{item.title}"/>
                                 </p:column>
-                                <p:column>
+                                <p:column rendered="false">
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListCommunicationTitle_message}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.message}"/>
                                 </p:column>                        
-                                <p:column rendered="false">
+                                <p:column >
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListCommunicationTitle_userIdFrom}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.userIdFrom}"/>
                                 </p:column>
-                                <p:column>
+                                <p:column rendered="false">
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListCommunicationTitle_userIdTo}"/>
                                     </f:facet>
@@ -66,7 +66,7 @@
                             </h:form>
                         </p:tab>
                         <p:tab title="Wiadomości wysłane">   
-                            <h:form id="CommunicationListFormOd">
+                            <h:form id="CommunicationListFormDo">
                                 <p:dataTable id="datalist3" value="#{communicationController.items}" var="item"
                                              selectionMode="single" selection="#{communicationController.selected}"
                                              paginator="true"
@@ -84,8 +84,8 @@
                                         </f:facet>
                                         <h:outputText value="#{item.title}"/>
                                     </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
+                                    <p:column rendered="false">
+                                        <f:facet name="header" >
                                             <h:outputText value="#{bundle.ListCommunicationTitle_message}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.message}"/>
