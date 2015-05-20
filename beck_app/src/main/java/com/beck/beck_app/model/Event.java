@@ -6,6 +6,7 @@
 package com.beck.beck_app.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -36,6 +37,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Event.findByEventName", query = "SELECT e FROM Event e WHERE e.eventName = :eventName"),
     @NamedQuery(name = "Event.findByStatus", query = "SELECT e FROM Event e WHERE e.status = :status")})
 public class Event implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventId")
+    private Collection<ImagesEvent> imagesEventCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventId")
+    private Collection<ImagesNotice> imagesNoticeCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -147,6 +152,24 @@ public class Event implements Serializable {
     @Override
     public String toString() {
         return "com.beck.beck_app.Event[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<ImagesEvent> getImagesEventCollection() {
+        return imagesEventCollection;
+    }
+
+    public void setImagesEventCollection(Collection<ImagesEvent> imagesEventCollection) {
+        this.imagesEventCollection = imagesEventCollection;
+    }
+
+    @XmlTransient
+    public Collection<ImagesNotice> getImagesNoticeCollection() {
+        return imagesNoticeCollection;
+    }
+
+    public void setImagesNoticeCollection(Collection<ImagesNotice> imagesNoticeCollection) {
+        this.imagesNoticeCollection = imagesNoticeCollection;
     }
     
 }

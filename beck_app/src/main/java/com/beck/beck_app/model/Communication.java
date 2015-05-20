@@ -34,6 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Communication.findByUserTo", query ="SELECT c FROM Communication c where c.userIdTo = :userIdTo"),
     @NamedQuery(name = "Communication.findByTitle", query = "SELECT c FROM Communication c WHERE c.title = :title")})
 public class Communication implements Serializable {
+    @Column(name = "visible_to")
+    private Integer visibleTo;
+    @Column(name = "visible_from")
+    private Integer visibleFrom;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -123,6 +127,22 @@ public class Communication implements Serializable {
     @Override
     public String toString() {
         return "com.beck.beck_app.Communication[ id=" + id + " ]";
+    }
+
+    public Integer getVisibleTo() {
+        return visibleTo;
+    }
+
+    public void setVisibleTo(Integer visibleTo) {
+        this.visibleTo = visibleTo;
+    }
+
+    public Integer getVisibleFrom() {
+        return visibleFrom;
+    }
+
+    public void setVisibleFrom(Integer visibleFrom) {
+        this.visibleFrom = visibleFrom;
     }
     
 }
