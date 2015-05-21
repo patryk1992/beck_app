@@ -6,6 +6,7 @@
 package com.beck.beck_app.facade;
 
 import com.beck.beck_app.model.Communication;
+import com.beck.beck_app.model.User;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,11 +31,15 @@ public class CommunicationFacade extends AbstractFacade<Communication> {
         super(Communication.class);
     }
     
-     public List<Communication> findToUserId(Integer userId) {
+    public List<Communication> findToUserId(User userId) {
         Query cq = getEntityManager().createNamedQuery("Communication.findByUserTo");
         cq.setParameter("userIdTo", userId);
         return cq.getResultList();
     }
-    
+     public List<Communication> findFromUserId(User userId) {
+        Query cq = getEntityManager().createNamedQuery("Communication.findByUserFrom");
+        cq.setParameter("userIdFrom", userId);
+        return cq.getResultList();
+    }
     
 }
