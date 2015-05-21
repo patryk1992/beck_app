@@ -16,7 +16,7 @@
                         <p:outputLabel value="#{bundle.CreateCommunicationLabel_title}" for="title" />
                         <p:inputText id="title" value="#{communicationController.selected.title}" title="#{bundle.CreateCommunicationTitle_title}" />
                         <p:outputLabel value="#{bundle.CreateCommunicationLabel_message}" for="message" />
-                        <p:inputText id="message" value="#{communicationController.selected.message}" title="#{bundle.CreateCommunicationTitle_message}" />
+                        <p:inputTextarea id="message" value="#{communicationController.selected.message}" title="#{bundle.CreateCommunicationTitle_message}" />
                         <p:outputLabel value="#{bundle.CreateCommunicationLabel_userIdTo}" for="userIdTo" />
                         <p:selectOneMenu id="userIdTo" value="#{communicationController.selected.userIdTo}" required="true" requiredMessage="#{bundle.EditCommunicationRequiredMessage_userIdTo}">
                              <f:converter converterId="com.beck.beck_app.UserConverter" />

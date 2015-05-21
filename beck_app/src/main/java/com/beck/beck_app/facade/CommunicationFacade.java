@@ -34,11 +34,13 @@ public class CommunicationFacade extends AbstractFacade<Communication> {
     public List<Communication> findToUserId(User userId) {
         Query cq = getEntityManager().createNamedQuery("Communication.findByUserTo");
         cq.setParameter("userIdTo", userId);
+         cq.setParameter("visibleFrom", 1);
         return cq.getResultList();
     }
      public List<Communication> findFromUserId(User userId) {
         Query cq = getEntityManager().createNamedQuery("Communication.findByUserFrom");
         cq.setParameter("userIdFrom", userId);
+         cq.setParameter("visibleTo", 1);
         return cq.getResultList();
     }
     

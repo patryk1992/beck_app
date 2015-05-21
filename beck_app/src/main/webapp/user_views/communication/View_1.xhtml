@@ -12,16 +12,14 @@
             <h:form id="CommunicationViewForm_1">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{communicationController.selected != null}">
-                        <h:outputText value="#{bundle.ViewCommunicationLabel_id}"/>
-                        <h:outputText value="#{communicationController.selected.id}" title="#{bundle.ViewCommunicationTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewCommunicationLabel_message}"/>
-                        <h:outputText value="#{communicationController.selected.message}" title="#{bundle.ViewCommunicationTitle_message}"/>
                         <h:outputText value="#{bundle.ViewCommunicationLabel_title}"/>
                         <h:outputText value="#{communicationController.selected.title}" title="#{bundle.ViewCommunicationTitle_title}"/>
+                        <h:outputText value="#{bundle.ViewCommunicationLabel_message}"/>
+                        <h:outputText value="#{communicationController.selected.message}" title="#{bundle.ViewCommunicationTitle_message}"/>                      
                         <h:outputText value="#{bundle.ViewCommunicationLabel_userIdFrom}"/>
-                        <h:outputText value="#{communicationController.selected.userIdFrom}" title="#{bundle.ViewCommunicationTitle_userIdFrom}"/>
+                        <h:outputText value="#{communicationController.selected.userIdFrom.username}" title="#{bundle.ViewCommunicationTitle_userIdFrom}"/>
                         <h:outputText value="#{bundle.ViewCommunicationLabel_userIdTo}"/>
-                        <h:outputText value="#{communicationController.selected.userIdTo}" title="#{bundle.ViewCommunicationTitle_userIdTo}"/>
+                        <h:outputText value="#{communicationController.selected.userIdTo.username}" title="#{bundle.ViewCommunicationTitle_userIdTo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CommunicationViewDialog1.hide()"/>
                 </h:panelGroup>

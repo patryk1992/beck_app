@@ -57,7 +57,7 @@
                                 </p:column>
                                 <f:facet name="footer">                                   
                                     <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CommunicationViewForm" oncomplete="PF('CommunicationViewDialog').show()" disabled="#{empty communicationController.selected}"/>
-                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CommunicationEditForm" oncomplete="PF('CommunicationEditDialog').show()" disabled="#{empty communicationController.selected}"/>
+                                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Delete}" actionListener="#{communicationController.setVisibleSelectedFromFalseAfterDelete}"  update=":tabViews:CommunicationListFormOd:datalist2,:growl"  disabled="#{empty communicationController.selected}"/>
                                     
                                 </f:facet>
                             </p:dataTable>
@@ -103,7 +103,7 @@
                                     <f:facet name="footer">
                                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{communicationController.prepareCreate}" update=":CommunicationCreateForm_1" oncomplete="PF('CommunicationCreateDialog1').show()"/>
                                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CommunicationViewForm_1" oncomplete="PF('CommunicationViewDialog1').show()" disabled="#{empty communicationController.selected}"/>
-                                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CommunicationEditForm_1" oncomplete="PF('CommunicationEditDialog1').show()" disabled="#{empty communicationController.selected}"/>
+                                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Delete}" actionListener="#{communicationController.setVisibleSelectedToFalseAfterDelete}"  update=":tabViews:CommunicationListFormDo:datalist3,:growl"  disabled="#{empty communicationController.selected}"/>
                                        
                                     </f:facet>
                                 </p:dataTable>

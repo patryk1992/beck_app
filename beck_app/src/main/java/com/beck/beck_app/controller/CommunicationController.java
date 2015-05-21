@@ -9,6 +9,7 @@ import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -75,10 +76,19 @@ public class CommunicationController implements Serializable {
     }
     public void send(User user) {
         selected.setUserIdFrom(user);    
-        selected.setVisibleFrom(0);
-        selected.setVisibleTo(0);
+        selected.setVisibleFrom(1);
+        selected.setVisibleTo(1);
         create();
         getItemsFrom(user);
+        getItemsDo(user);
+    }
+     public void setVisibleSelectedFromFalseAfterDelete() {
+        selected.setVisibleFrom(0);
+        update();       
+    }
+     public void setVisibleSelectedToFalseAfterDelete() {     
+        selected.setVisibleTo(0);
+        update();
     }
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CommunicationUpdated"));
@@ -93,15 +103,15 @@ public class CommunicationController implements Serializable {
     }
 
     public List<Communication> getItemsDo(User user) {
-        if (itemsDo == null) {
-            itemsDo = getFacade().findToUserId(user);
-        }
+        
+        itemsDo = getFacade().findToUserId(user);
+       
         return itemsDo;
     }
     public List<Communication> getItemsFrom(User user) {
-        if (itemsOd == null) {
-            itemsOd = getFacade().findFromUserId(user);
-        }
+        
+        itemsOd = getFacade().findFromUserId(user);
+       
         return itemsOd;
     }
     public List<Communication> getItems() {
