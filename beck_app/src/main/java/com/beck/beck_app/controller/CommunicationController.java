@@ -30,6 +30,8 @@ public class CommunicationController implements Serializable {
     @EJB
     private com.beck.beck_app.facade.CommunicationFacade ejbFacade;
     private List<Communication> items = null;
+    private List<Communication> itemsDo = null;
+    private List<Communication> itemsOd = null;
     private Communication selected;
 
     public CommunicationController() {
@@ -38,6 +40,7 @@ public class CommunicationController implements Serializable {
     @PostConstruct
     public void init() {
     selected = new Communication();
+     
     }
 
     public Communication getSelected() {
@@ -75,7 +78,7 @@ public class CommunicationController implements Serializable {
         selected.setVisibleFrom(0);
         selected.setVisibleTo(0);
         create();
- 
+        getItemsFrom(user);
     }
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CommunicationUpdated"));
@@ -89,12 +92,18 @@ public class CommunicationController implements Serializable {
         }
     }
 
-        public List<Communication> msgUser(Integer userId)
-    {
-    return getFacade().findToUserId(userId);
-    
+    public List<Communication> getItemsDo(User user) {
+        if (itemsDo == null) {
+            itemsDo = getFacade().findToUserId(user);
+        }
+        return itemsDo;
     }
-    
+    public List<Communication> getItemsFrom(User user) {
+        if (itemsOd == null) {
+            itemsOd = getFacade().findFromUserId(user);
+        }
+        return itemsOd;
+    }
     public List<Communication> getItems() {
         if (items == null) {
             items = getFacade().findAll();
