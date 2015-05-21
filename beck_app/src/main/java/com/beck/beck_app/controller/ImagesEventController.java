@@ -1,8 +1,8 @@
 package com.beck.beck_app.controller;
 
 import com.beck.beck_app.model.ImagesEvent;
-import com.beck.beck_app.controller.util.JsfUtil;
-import com.beck.beck_app.controller.util.JsfUtil.PersistAction;
+import com.beck.beck_app.util.JsfUtil;
+import com.beck.beck_app.util.JsfUtil.PersistAction;
 import com.beck.beck_app.facade.ImagesEventFacade;
 
 import java.io.Serializable;

@@ -1,9 +1,9 @@
 package com.beck.beck_app.controller;
 
-import com.beck.beck_app.facade.EventFacade;
 import com.beck.beck_app.model.Event;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
+import com.beck.beck_app.facade.EventFacade;
 
 import java.io.Serializable;
 import java.util.List;

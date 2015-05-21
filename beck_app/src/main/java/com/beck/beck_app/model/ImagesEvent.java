@@ -5,7 +5,7 @@
  */
 package com.beck.beck_app.model;
 
-import com.beck.beck_app.model.Event;
+
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,9 +33,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ImagesEvent.findAll", query = "SELECT i FROM ImagesEvent i"),
     @NamedQuery(name = "ImagesEvent.findByIdImages", query = "SELECT i FROM ImagesEvent i WHERE i.idImages = :idImages"),
-    @NamedQuery(name = "ImagesEvent.findByImageDesc", query = "SELECT i FROM ImagesEvent i WHERE i.imageDesc = :imageDesc"),
-    @NamedQuery(name = "ImagesEvent.findByImagePath", query = "SELECT i FROM ImagesEvent i WHERE i.imagePath = :imagePath")})
+    @NamedQuery(name = "ImagesEvent.findByImageDesc", query = "SELECT i FROM ImagesEvent i WHERE i.imageDesc = :imageDesc")})
 public class ImagesEvent implements Serializable {
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Column(name = "images")
+    private byte[] images;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,11 +51,6 @@ public class ImagesEvent implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "image_desc")
     private String imageDesc;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 70)
-    @Column(name = "image_path")
-    private String imagePath;
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Event eventId;
@@ -65,7 +65,6 @@ public class ImagesEvent implements Serializable {
     public ImagesEvent(Integer idImages, String imageDesc, String imagePath) {
         this.idImages = idImages;
         this.imageDesc = imageDesc;
-        this.imagePath = imagePath;
     }
 
     public Integer getIdImages() {
@@ -82,14 +81,6 @@ public class ImagesEvent implements Serializable {
 
     public void setImageDesc(String imageDesc) {
         this.imageDesc = imageDesc;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
     }
 
     public Event getEventId() {
@@ -123,6 +114,14 @@ public class ImagesEvent implements Serializable {
     @Override
     public String toString() {
         return "com.beck.beck_app.controller.ImagesEvent[ idImages=" + idImages + " ]";
+    }
+
+    public byte[] getImages() {
+        return images;
+    }
+
+    public void setImages(byte[] images) {
+        this.images = images;
     }
     
 }

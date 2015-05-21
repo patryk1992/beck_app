@@ -16,14 +16,14 @@
                         <p:inputText id="idimagesNotice" value="#{imagesNoticeController.selected.idimagesNotice}" title="#{bundle.CreateImagesNoticeTitle_idimagesNotice}" required="true" requiredMessage="#{bundle.CreateImagesNoticeRequiredMessage_idimagesNotice}"/>
                         <p:outputLabel value="#{bundle.CreateImagesNoticeLabel_imagesDesc}" for="imagesDesc" />
                         <p:inputText id="imagesDesc" value="#{imagesNoticeController.selected.imagesDesc}" title="#{bundle.CreateImagesNoticeTitle_imagesDesc}" required="true" requiredMessage="#{bundle.CreateImagesNoticeRequiredMessage_imagesDesc}"/>
-                        <p:outputLabel value="#{bundle.CreateImagesNoticeLabel_imagesPath}" for="imagesPath" />
-                        <p:inputText id="imagesPath" value="#{imagesNoticeController.selected.imagesPath}" title="#{bundle.CreateImagesNoticeTitle_imagesPath}" required="true" requiredMessage="#{bundle.CreateImagesNoticeRequiredMessage_imagesPath}"/>
                         <p:outputLabel value="#{bundle.CreateImagesNoticeLabel_eventId}" for="eventId" />
                         <p:selectOneMenu id="eventId" value="#{imagesNoticeController.selected.eventId}" required="true" requiredMessage="#{bundle.EditImagesNoticeRequiredMessage_eventId}">
                             <f:selectItems value="#{eventController.itemsAvailableSelectOne}"
                                            var="eventIdItem"
                                            itemValue="#{eventIdItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateImagesNoticeLabel_images}" for="images" />
+                        <p:inputTextarea rows="4" cols="30" id="images" value="#{imagesNoticeController.selected.images}" title="#{bundle.CreateImagesNoticeTitle_images}" required="true" requiredMessage="#{bundle.CreateImagesNoticeRequiredMessage_images}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{imagesNoticeController.create}" value="#{bundle.Save}" update="display,:ImagesNoticeListForm:datalist,:growl" oncomplete="handleSubmit(args,'ImagesNoticeCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ImagesNoticeCreateDialog.hide()"/>

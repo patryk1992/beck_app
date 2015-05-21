@@ -16,8 +16,6 @@
                         <p:inputText id="idImages" value="#{imagesEventController.selected.idImages}" title="#{bundle.EditImagesEventTitle_idImages}" required="true" requiredMessage="#{bundle.EditImagesEventRequiredMessage_idImages}"/>
                         <p:outputLabel value="#{bundle.EditImagesEventLabel_imageDesc}" for="imageDesc" />
                         <p:inputText id="imageDesc" value="#{imagesEventController.selected.imageDesc}" title="#{bundle.EditImagesEventTitle_imageDesc}" required="true" requiredMessage="#{bundle.EditImagesEventRequiredMessage_imageDesc}"/>
-                        <p:outputLabel value="#{bundle.EditImagesEventLabel_imagePath}" for="imagePath" />
-                        <p:inputText id="imagePath" value="#{imagesEventController.selected.imagePath}" title="#{bundle.EditImagesEventTitle_imagePath}" required="true" requiredMessage="#{bundle.EditImagesEventRequiredMessage_imagePath}"/>
                         <p:outputLabel value="#{bundle.EditImagesEventLabel_eventId}" for="eventId" />
                         <p:selectOneMenu id="eventId" value="#{imagesEventController.selected.eventId}" required="true" requiredMessage="#{bundle.EditImagesEventRequiredMessage_eventId}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -25,6 +23,8 @@
                                            var="eventIdItem"
                                            itemValue="#{eventIdItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditImagesEventLabel_images}" for="images" />
+                        <p:inputTextarea rows="4" cols="30" id="images" value="#{imagesEventController.selected.images}" title="#{bundle.EditImagesEventTitle_images}" required="true" requiredMessage="#{bundle.EditImagesEventRequiredMessage_images}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{imagesEventController.update}" value="#{bundle.Save}" update="display,:ImagesEventListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ImagesEventEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ImagesEventEditDialog.hide()"/>

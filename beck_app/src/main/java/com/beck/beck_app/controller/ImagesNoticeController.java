@@ -1,8 +1,8 @@
 package com.beck.beck_app.controller;
 
 import com.beck.beck_app.model.ImagesNotice;
-import com.beck.beck_app.controller.util.JsfUtil;
-import com.beck.beck_app.controller.util.JsfUtil.PersistAction;
+import com.beck.beck_app.util.JsfUtil;
+import com.beck.beck_app.util.JsfUtil.PersistAction;
 import com.beck.beck_app.facade.ImagesNoticeFacade;
 
 import java.io.Serializable;
@@ -19,12 +19,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+
 @Named("imagesNoticeController")
 @SessionScoped
 public class ImagesNoticeController implements Serializable {
 
-    @EJB
-    private com.beck.beck_app.facade.ImagesNoticeFacade ejbFacade;
+
+    @EJB private com.beck.beck_app.facade.ImagesNoticeFacade ejbFacade;
     private List<ImagesNotice> items = null;
     private ImagesNotice selected;
 
@@ -121,7 +122,7 @@ public class ImagesNoticeController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = ImagesNotice.class)
+    @FacesConverter(forClass=ImagesNotice.class)
     public static class ImagesNoticeControllerConverter implements Converter {
 
         @Override
@@ -129,7 +130,7 @@ public class ImagesNoticeController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ImagesNoticeController controller = (ImagesNoticeController) facesContext.getApplication().getELResolver().
+            ImagesNoticeController controller = (ImagesNoticeController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "imagesNoticeController");
             return controller.getImagesNotice(getKey(value));
         }
