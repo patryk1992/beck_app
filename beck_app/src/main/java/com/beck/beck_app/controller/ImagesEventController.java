@@ -4,6 +4,7 @@ import com.beck.beck_app.model.ImagesEvent;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 import com.beck.beck_app.facade.ImagesEventFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,10 +15,12 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.FileUploadEvent;
 
 @Named("imagesEventController")
 @SessionScoped
@@ -55,6 +58,11 @@ public class ImagesEventController implements Serializable {
         return selected;
     }
 
+     public void upload(FileUploadEvent event) {  
+        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+ 
+    }  
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ImagesEventCreated"));
         if (!JsfUtil.isValidationFailed()) {

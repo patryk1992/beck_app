@@ -16,9 +16,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -52,6 +54,9 @@ public class ImagesNotice implements Serializable {
     @ManyToOne(optional = false)
     private Event eventId;
 
+    @Transient
+    private StreamedContent content;
+    
     public ImagesNotice() {
     }
 
@@ -120,6 +125,20 @@ public class ImagesNotice implements Serializable {
 
     public void setImages(byte[] images) {
         this.images = images;
+    }
+
+    /**
+     * @return the content
+     */
+    public StreamedContent getContent() {
+        return content;
+    }
+
+    /**
+     * @param content the content to set
+     */
+    public void setContent(StreamedContent content) {
+        this.content = content;
     }
     
 }
