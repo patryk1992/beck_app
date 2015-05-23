@@ -25,7 +25,7 @@ import org.primefaces.model.map.Marker;
  */
 @Named("addMarkersViewController")
 @SessionScoped
-public class AddMarkersView implements Serializable {
+public class AddMarkersViewController implements Serializable {
      
     private MapModel emptyModel;
       
@@ -84,17 +84,25 @@ public class AddMarkersView implements Serializable {
     
     //TODO dodac reszte pol z tabelko point 
     public void saveMap() {
-    for ( Marker m : markersList)
-    {
-    LatLng cords = m.getLatlng();
-    Point newPoint = new Point();
-    newPoint.setLatitude(cords.getLat());
-    newPoint.setLongitude(cords.getLng());
-    getEjbFacade().create(newPoint);
-    }
+        for ( Marker m : markersList)
+        {
+        LatLng cords = m.getLatlng();
+        Point newPoint = new Point();
+        newPoint.setLatitude(cords.getLat());
+        newPoint.setLongitude(cords.getLng());
+        getEjbFacade().create(newPoint);
+        }
     
     }
-
+    public String processCoordinates(String coordinates) {
+        int i1 = coordinates.indexOf(',');
+        int i2 = coordinates.lastIndexOf(':');
+        String lat = coordinates.substring(4, i1);
+        String lng = coordinates.substring(i2 + 1, coordinates.length());
+       return lat + "," + lng;
+    }
+      
+    
     /**
      * @return the markersList
      */

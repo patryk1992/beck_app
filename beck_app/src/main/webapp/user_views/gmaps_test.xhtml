@@ -16,7 +16,15 @@ and open the template in the editor.
           type="text/javascript"></script>
     <script type="text/javascript">
     var currentMarker = null;
- 
+    var listMarkers = [];
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    var request;
+    function init() {        
+      
+
+       
+    }
     function handlePointClick(event) {
         if(currentMarker === null) {
             document.getElementById('lat').value = event.latLng.lat();
@@ -35,6 +43,7 @@ and open the template in the editor.
     function markerAddComplete() {
         var title = document.getElementById('title');
         currentMarker.setTitle(title.value);
+        listMarkers.push(currentMarker);
         title.value = "";
  
         currentMarker = null;
@@ -48,13 +57,52 @@ and open the template in the editor.
  
         return false;
     }
+    function calcRoute() {
+          var start = new google.maps.LatLng(41.850033, -87.6500523);
+        var mapOptions = {
+          zoom: 6,
+          center: start
+        };
+         map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        directionsDisplay.setMap(map);
+                var waypts = [];  
+                for(var marker in listMarkers){
+                    var element=listMarkers[marker].position;
+                if(marker &gt; 0 &amp;&amp; marker &lt; (listMarkers.length-1)){                
+                    waypts.push({
+                        location:""+element.A+","+element.F,
+                        stopover:true});
+                    }
+                }
+              
+
+                request = {
+                    origin: ""+listMarkers[0].position.A+","+listMarkers[0].position.F,
+                    destination: ""+listMarkers[listMarkers.length-1].position.A+","+listMarkers[listMarkers.length-1].position.F,
+                    waypoints: waypts,                  
+                    travelMode: google.maps.TravelMode.WALKING
+                };
+
+                directionsService.route(request, function(response, status)
+                {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+//                        alert('ok');
+                    }
+                    else {
+                        alert('failed');
+                    }
+                }
+                );
+    }
+      google.maps.event.addDomListener(window, 'load', init);
 </script>
     
 </h:head>
 <h:body>
     <f:view contentType="text/html">
         <h1>Google Map</h1>
-        <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID" style="width:600px;height:400px" model="#{addMarkersViewController.emptyModel}" onPointClick="handlePointClick(event);" widgetVar="map" />
+        <p:gmap center="41.381542, 2.122893" zoom="15"  style="width:600px;height:400px" model="#{addMarkersViewController.emptyModel}" onPointClick="handlePointClick(event);" widgetVar="map" id="map"  type="ROADMAP"/>
     <p:growl id="messages" showDetail="true" />
     <p:dialog widgetVar="dlg" showEffect="fade">
     <h:form prependId="false">
@@ -71,8 +119,11 @@ and open the template in the editor.
         <h:inputHidden id="lat" value="#{addMarkersViewController.lat}" />
         <h:inputHidden id="lng" value="#{addMarkersViewController.lng}" />
     </h:form>
+        
 </p:dialog>
-    
+    <h:form id="form_5">       
+        <p:commandButton onclick="calcRoute();" value="make a path"/>        
+    </h:form>
     </f:view>
 </h:body>
        
