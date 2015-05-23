@@ -22,10 +22,11 @@
                                            var="eventIdItem"
                                            itemValue="#{eventIdItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateImagesNoticeLabel_images}" for="images" />
-                        <p:inputTextarea rows="4" cols="30" id="images" value="#{imagesNoticeController.selected.images}" title="#{bundle.CreateImagesNoticeTitle_images}" required="true" requiredMessage="#{bundle.CreateImagesNoticeRequiredMessage_images}"/>
+                        <p:outputLabel value="#{Obraz}" for="images" />                 
+                 <p:fileUpload value="#{imagesNoticeController.selected.images}"  mode="simple"></p:fileUpload>                 
                     </p:panelGrid>
                     <p:commandButton actionListener="#{imagesNoticeController.create}" value="#{bundle.Save}" update="display,:ImagesNoticeListForm:datalist,:growl" oncomplete="handleSubmit(args,'ImagesNoticeCreateDialog');"/>
+                              
                     <p:commandButton value="#{bundle.Cancel}" onclick="ImagesNoticeCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

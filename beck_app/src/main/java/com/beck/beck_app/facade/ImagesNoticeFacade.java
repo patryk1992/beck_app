@@ -9,6 +9,8 @@ import com.beck.beck_app.model.ImagesNotice;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -26,6 +28,16 @@ public class ImagesNoticeFacade extends AbstractFacade<ImagesNotice> {
 
     public ImagesNoticeFacade() {
         super(ImagesNotice.class);
+    }
+    
+    
+        
+    public ImagesNotice findInt(java.lang.String id) {
+        Integer idP = Integer.valueOf(id);
+        Query cq = getEntityManager().createNamedQuery("ImagesNotice.findByIdimagesNotice");
+        cq.setParameter("idimagesNotice", idP);
+        ImagesNotice res = (ImagesNotice) cq.getSingleResult(); 
+        return res;
     }
     
 }

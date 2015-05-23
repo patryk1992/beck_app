@@ -145,10 +145,10 @@ public class UserController implements Serializable {
  
     FacesContext context = FacesContext.getCurrentInstance();
     HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
-     
     try {
       request.logout();
-      
+      FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+      selected=null;
       
     } catch (ServletException e) {
                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, "nie udalo sie wylogowac");  

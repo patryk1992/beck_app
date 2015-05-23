@@ -16,8 +16,9 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-       <p:galleria value="#{imagesEventController.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
-                  <p:graphicImage name="demo/images/nature/#{image}" alt="Image Description for #{image}" title="#{image}"/>
-        </p:galleria>
+        <h:form enctype="multipart/form-data">
+     <p:fileUpload fileUploadListener="#{imagesEventController.upload}" />
+
+       </h:form>
     </body>
 </html>

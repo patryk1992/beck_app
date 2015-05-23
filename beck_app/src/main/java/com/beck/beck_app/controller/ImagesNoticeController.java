@@ -4,12 +4,15 @@ import com.beck.beck_app.model.ImagesNotice;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 import com.beck.beck_app.facade.ImagesNoticeFacade;
+import java.io.IOException;
+
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -18,6 +21,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 
 @Named("imagesNoticeController")
@@ -28,7 +34,31 @@ public class ImagesNoticeController implements Serializable {
     @EJB private com.beck.beck_app.facade.ImagesNoticeFacade ejbFacade;
     private List<ImagesNotice> items = null;
     private ImagesNotice selected;
+    private UploadedFile uploadedFile;
+    int t;
 
+    public void fileUploadListener(FileUploadEvent event){
+        uploadedFile = event.getFile();
+    }
+    
+    @PostConstruct
+    public void init() {
+    selected = new ImagesNotice();
+    }
+     
+     
+     public void insert() throws IOException{
+        if(uploadedFile!=null){
+          byte[] bytes;
+          bytes = IOUtils.toByteArray( uploadedFile.getInputstream() );
+          selected.setImages(bytes);
+        }
+        else{
+            t=1;
+            //System.out.println("The file object is null.");
+        }
+    }
+    
     public ImagesNoticeController() {
     }
 
@@ -75,10 +105,17 @@ public class ImagesNoticeController implements Serializable {
         }
     }
 
-    public List<ImagesNotice> getItems() {
+    public List<ImagesNotice> getItems() throws IOException {
         if (items == null) {
             items = getFacade().findAll();
         }
+       
+        for (ImagesNotice item : items) {
+             
+          //  item.setContent(getImage(item));
+        
+        }
+        
         return items;
     }
 
@@ -109,6 +146,7 @@ public class ImagesNoticeController implements Serializable {
             }
         }
     }
+
 
     public ImagesNotice getImagesNotice(java.lang.Integer id) {
         return getFacade().find(id);
