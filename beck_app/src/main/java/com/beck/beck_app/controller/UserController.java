@@ -108,15 +108,24 @@ public class UserController implements Serializable {
     public void register()
     {
         try {
-        List<Role> usrPermissions  = new ArrayList<>();
+        List <Role> usrPermissions = new ArrayList<Role>();
         Role basicPermission = new Role();
         basicPermission = getEjbFacadeRole().find(1);
         usrPermissions.add(basicPermission);
+      
+     
         
         if(selected!=null) {
         User usr =  getFacade().findByNameAndPassword(selected.getUsername(), selected.getPassword());    
         usr.setRoleList(usrPermissions);
+          
+        List <User> t =  new ArrayList<User>();
+        t = basicPermission.getUserList();
+        t.add(usr);
+        basicPermission.setUserList(t);
+        
         getFacade().edit(usr);
+        getEjbFacadeRole().edit(basicPermission);
         }
         }
         catch (Exception e)
@@ -166,6 +175,8 @@ public class UserController implements Serializable {
     }
 
     public void create() {
+  
+        
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UserCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
