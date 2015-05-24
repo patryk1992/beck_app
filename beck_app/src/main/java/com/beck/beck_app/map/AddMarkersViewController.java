@@ -81,7 +81,7 @@ public class AddMarkersViewController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Added", "Lat:" + lat + ", Lng:" + lng));
         
     }
-    
+     
     //TODO dodac reszte pol z tabelko point 
     public void saveMap() {
         for ( Marker m : markersList)

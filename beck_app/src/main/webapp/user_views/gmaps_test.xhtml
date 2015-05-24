@@ -21,8 +21,15 @@ and open the template in the editor.
     var directionsDisplay = new google.maps.DirectionsRenderer();
     var request;
     function init() {        
-      
-
+       var mapOptions = {
+          center: new google.maps.LatLng(41.381542, 2.122893),
+          zoom: 15            
+        };
+         map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        directionsDisplay.setMap(map);
+         google.maps.event.addListener(map, 'click', function(e) {
+                handlePointClick2(e.latLng, map);
+            });
        
     }
     function handlePointClick(event) {
@@ -32,22 +39,31 @@ and open the template in the editor.
  
             currentMarker = new google.maps.Marker({
                 position:new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+            }); 
+           markerAddComplete();
+        }   
+    }
+      function handlePointClick2(position, map) {
+        if(currentMarker === null) {
+
+            currentMarker = new google.maps.Marker({               
+                position:position,
+                map:map
             });
- 
-            PF('map').addOverlay(currentMarker);
- 
-            PF('dlg').show();
+            markerAddComplete();
+          
         }   
     }
  
     function markerAddComplete() {
-        var title = document.getElementById('title');
-        currentMarker.setTitle(title.value);
+        var title = document.getElementById('title');       
         listMarkers.push(currentMarker);
-        title.value = "";
- 
+       
         currentMarker = null;
-        PF('dlg').hide();
+        if(listMarkers.length>1){
+            calcRoute();
+        }
+        remoteCommandFunctionName();
     }
  
     function cancel() {
@@ -57,24 +73,23 @@ and open the template in the editor.
  
         return false;
     }
-    function calcRoute() {
-          var start = new google.maps.LatLng(41.850033, -87.6500523);
-        var mapOptions = {
-          zoom: 6,
-          center: start
-        };
-         map = new google.maps.Map(document.getElementById("map"), mapOptions);
-        directionsDisplay.setMap(map);
+    function removeMarker() {
+        listMarkers.pop();
+        calcRoute();
+    }
+    function calcRoute() {       
+               
                 var waypts = [];  
                 for(var marker in listMarkers){
+                    listMarkers[marker].setVisible(false);
                     var element=listMarkers[marker].position;
-                if(marker &gt; 0 &amp;&amp; marker &lt; (listMarkers.length-1)){                
+                    if(marker &gt; 0 &amp;&amp; marker &lt; (listMarkers.length-1)){                
                     waypts.push({
                         location:""+element.A+","+element.F,
                         stopover:true});
                     }
                 }
-              
+             
 
                 request = {
                     origin: ""+listMarkers[0].position.A+","+listMarkers[0].position.F,
@@ -82,18 +97,21 @@ and open the template in the editor.
                     waypoints: waypts,                  
                     travelMode: google.maps.TravelMode.WALKING
                 };
-
+               
                 directionsService.route(request, function(response, status)
                 {
                     if (status === google.maps.DirectionsStatus.OK) {
                         directionsDisplay.setDirections(response);
 //                        alert('ok');
+
                     }
                     else {
                         alert('failed');
                     }
                 }
                 );
+               
+
     }
       google.maps.event.addDomListener(window, 'load', init);
 </script>
@@ -102,7 +120,7 @@ and open the template in the editor.
 <h:body>
     <f:view contentType="text/html">
         <h1>Google Map</h1>
-        <p:gmap center="41.381542, 2.122893" zoom="15"  style="width:600px;height:400px" model="#{addMarkersViewController.emptyModel}" onPointClick="handlePointClick(event);" widgetVar="map" id="map"  type="ROADMAP"/>
+        <p:gmap center="41.381542, 2.122893" zoom="15"  style="width:600px;height:400px" model="#{addMarkersViewController.emptyModel}" onPointClick="handlePointClick(event);"  widgetVar="map" id="map"  type="ROADMAP"/>
     <p:growl id="messages" showDetail="true" />
     <p:dialog widgetVar="dlg" showEffect="fade">
     <h:form prependId="false">
@@ -122,7 +140,9 @@ and open the template in the editor.
         
 </p:dialog>
     <h:form id="form_5">       
-        <p:commandButton onclick="calcRoute();" value="make a path"/>        
+        <p:commandButton actionListener="#{addMarkersViewController.saveMap(listMarkers)}"  value="Save path"/> 
+        <p:remoteCommand name="remoteCommandFunctionName"      actionListener="#{addMarkersViewController.addMarker}"/>
+         <p:commandButton onclick="removeMarker();" value="Remove"/>  
     </h:form>
     </f:view>
 </h:body>
