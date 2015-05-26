@@ -46,11 +46,15 @@
                             <h:outputText value="#{item.eventId}"/>
                         </p:column>
                         <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListImagesEventTitle_images}"/>
+                            <f:facet name="header">  
+                                    <h:outputText value="Obraz:"/>
                             </f:facet>
-                            <h:outputText value="#{item.images}"/>
+                            <p:graphicImage value="#{imageControllerE.image}" >
+                                <f:param name="id_img" value="#{item.idImages}" />
+                            </p:graphicImage>
                         </p:column>
+                        
+                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{imagesEventController.prepareCreate}" update=":ImagesEventCreateForm" oncomplete="PF('ImagesEventCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ImagesEventViewForm" oncomplete="PF('ImagesEventViewDialog').show()" disabled="#{empty imagesEventController.selected}"/>
@@ -61,7 +65,7 @@
                 </p:panel>
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
+            <ui:include src="Create_1.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>

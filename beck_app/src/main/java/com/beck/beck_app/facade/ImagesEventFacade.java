@@ -9,6 +9,7 @@ import com.beck.beck_app.model.ImagesEvent;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +27,15 @@ public class ImagesEventFacade extends AbstractFacade<ImagesEvent> {
 
     public ImagesEventFacade() {
         super(ImagesEvent.class);
+    }
+    
+    
+       public ImagesEvent findInt(java.lang.String id) {
+        Integer idP = Integer.valueOf(id);
+        Query cq = getEntityManager().createNamedQuery("ImagesEvent.findByIdImages");
+        cq.setParameter("idImages", idP);
+        ImagesEvent res = (ImagesEvent) cq.getSingleResult(); 
+        return res;
     }
     
 }

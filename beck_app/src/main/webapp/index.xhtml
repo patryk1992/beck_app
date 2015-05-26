@@ -2,16 +2,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="/template_guest.xhtml">
 
         <ui:define name="title"> 
-            Witamy w BECK!!!
+            Witamy w BECK!
         </ui:define>
 
         <ui:define name="body"> 
-            tutaj bd artykuł
+           <font face="verdana" size="18">Ostatnio dodane:</font> 
+             <br></br>
+              <br></br>
+               <h:outputText  value="${noticeController.getNotice(1).title}" />
+               <br></br>
+               <p align="center">
+               <h:outputText  value="${noticeController.getNotice(1).message}" />
+               </p>
+               <br></br>
+              
+                    <p:graphicImage value="#{imageControllerE.image}" >
+                        <f:param name="id_img" value="${imagesEventController.getImagesEvent(1).idImages}" />
+                     </p:graphicImage>
         </ui:define>
 
     </ui:composition>

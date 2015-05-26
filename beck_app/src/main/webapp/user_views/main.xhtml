@@ -14,8 +14,20 @@
         </ui:define>
 
         <ui:define name="body">
-  
-            <div>tutaj bd artykuly</div>
+
+            <font face="verdana" size="18">Ostatnio dodane:</font> 
+            <br></br>
+            <br></br>
+            <h:outputText  value="${noticeController.getNotice(1).title}" />
+            <br></br>
+            <p align="center">
+                <h:outputText  value="${noticeController.getNotice(1).message}" />
+            </p>
+            <br></br>
+
+            <p:graphicImage value="#{imageControllerE.image}" >
+                <f:param name="id_img" value="${imagesEventController.getImagesEvent(1).idImages}" />
+            </p:graphicImage>
 
         </ui:define>
     </ui:composition>

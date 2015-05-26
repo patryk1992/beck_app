@@ -15,17 +15,19 @@
 
         <ui:define name="body">
             <h:form id="NoticeListForm">
-                
-                <p:editor id="editor" widgetVar="editorWidget" value="#{noticeController.selected.message}" width="600" />
+                <p:outputLabel value="Tytuł: " />
+                <p:inputText binding="#{title}"/>
+                <p:editor id="editor" widgetVar="editorWidget" value="#{noticeController.selected.message}" width="800" height="400" />
 
                 <h:panelGrid columns="2" style="margin-top: 10px">
-                    <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" icon="ui-icon-disk" />
-
-                    <p:commandButton value="Clear" type="button" onclick="PF('editorWidget').clear();" icon="ui-icon-close" />
+                    <p:commandButton value="Zapisz artykuł"  actionListener="#{noticeController.selected.setTitle(title.value)}"  update="display" oncomplete="PF('dlg').show()" icon="ui-icon-disk" >
+                        <f:actionListener binding="#{noticeController.create()}" />
+                    </p:commandButton>
+                    <p:commandButton value="Wyczyść" type="button" onclick="PF('editorWidget').clear();" icon="ui-icon-close" />
                 </h:panelGrid>
 
-                <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
-                    <h:outputText id="display" value="#{noticeController.selected.message}" escape="false" />
+                <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">           
+                    <h:outputText id="display" value="Artykuł został zapisany" escape="false" />
                 </p:dialog>
             </h:form>
 
