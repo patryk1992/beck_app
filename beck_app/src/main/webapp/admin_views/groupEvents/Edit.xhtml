@@ -29,7 +29,7 @@
                                            itemValue="#{eventIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{groupEventsController.update}" value="#{bundle.Save}" update="display,:GroupEventsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'GroupEventsEditDialog');"/>
+                    <p:commandButton actionListener="#{groupEventsController.update}" value="#{bundle.Save}" onclick="GroupEventsEditDialog.hide()" update="display,:GroupEventsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'GroupEventsEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="GroupEventsEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

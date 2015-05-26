@@ -34,7 +34,7 @@
                                            itemValue="#{eventIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{infoController.update}" value="#{bundle.Save}" update="display,:InfoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InfoEditDialog');"/>
+                    <p:commandButton actionListener="#{infoController.update}" value="#{bundle.Save}" onclick="InfoEditDialog.hide()" update="display,:InfoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InfoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="InfoEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

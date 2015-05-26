@@ -33,7 +33,7 @@
                                            itemValue="#{eventIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{infoController.create}" value="#{bundle.Save}" update="display,:InfoListForm:datalist,:growl" oncomplete="handleSubmit(args,'InfoCreateDialog');"/>
+                    <p:commandButton actionListener="#{infoController.create}" value="#{bundle.Save}" onclick="InfoCreateDialog.hide()" update="display,:InfoListForm:datalist,:growl" oncomplete="handleSubmit(args,'InfoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="InfoCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

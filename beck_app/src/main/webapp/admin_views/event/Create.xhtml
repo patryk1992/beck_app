@@ -21,7 +21,7 @@
                         <p:outputLabel value="#{bundle.CreateEventLabel_status}" for="status" />
                         <p:inputText id="status" value="#{eventController.selected.status}" title="#{bundle.CreateEventTitle_status}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{eventController.create}" value="#{bundle.Save}" update="display,:EventListForm:datalist,:growl" oncomplete="handleSubmit(args,'EventCreateDialog');"/>
+                    <p:commandButton actionListener="#{eventController.create}" value="#{bundle.Save}" onclick="EventCreateDialog.hide()" update="display,:EventListForm:datalist,:growl" oncomplete="handleSubmit(args,'EventCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EventCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateRoleLabel_rolename}" for="rolename" />
                         <p:inputText id="rolename" value="#{roleController.selected.rolename}" title="#{bundle.CreateRoleTitle_rolename}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{roleController.create}" value="#{bundle.Save}" update="display,:RoleListForm:datalist,:growl" oncomplete="handleSubmit(args,'RoleCreateDialog');"/>
+                    <p:commandButton actionListener="#{roleController.create}" value="#{bundle.Save}" onclick="RoleCreateDialog.hide()" update="display,:RoleListForm:datalist,:growl" oncomplete="handleSubmit(args,'RoleCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RoleCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
