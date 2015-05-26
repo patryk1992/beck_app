@@ -8,29 +8,21 @@
 
     <ui:composition>
 
-        <p:dialog id="GroupEventsEditDlg" widgetVar="GroupEventsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditGroupEventsTitle}">
-            <h:form id="GroupEventsEditForm">
+        <p:dialog id="EventEditDlg" widgetVar="EventEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEventTitle}">
+            <h:form id="EventEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{groupEventsController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditGroupEventsLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{groupEventsController.selected.id}" title="#{bundle.EditGroupEventsTitle_id}" required="true" requiredMessage="#{bundle.EditGroupEventsRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditGroupEventsLabel_groupId}" for="groupId" />
-                        <p:selectOneMenu id="groupId" value="#{groupEventsController.selected.groupId}" required="true" requiredMessage="#{bundle.EditGroupEventsRequiredMessage_groupId}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{group1Controller.itemsAvailableSelectOne}"
-                                           var="groupIdItem"
-                                           itemValue="#{groupIdItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditGroupEventsLabel_eventId}" for="eventId" />
-                        <p:selectOneMenu id="eventId" value="#{groupEventsController.selected.eventId}" required="true" requiredMessage="#{bundle.EditGroupEventsRequiredMessage_eventId}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{eventController.itemsAvailableSelectOne}"
-                                           var="eventIdItem"
-                                           itemValue="#{eventIdItem}"/>
-                        </p:selectOneMenu>
+                    <p:panelGrid columns="2" rendered="#{eventController.selected != null}">                  
+                        <p:outputLabel value="#{bundle.EditEventLabel_eventName}" for="eventName" />
+                        <p:inputText id="eventName" value="#{eventController.selected.eventName}" title="#{bundle.EditEventTitle_eventName}" />                       
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{groupEventsController.update}" value="#{bundle.Save}" update="display,:GroupEventsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'GroupEventsEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="GroupEventsEditDialog.hide()"/>
+                     <p:pickList id="pickList" value="#{userGroupsController.users}" var="users" itemLabel="#{users.username}" itemValue="#{users}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+                    showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
+                        <f:facet name="sourceCaption">Dostępni</f:facet>
+                        <f:facet name="targetCaption">Dodani</f:facet>                       
+                      <f:converter converterId="com.beck.beck_app.UserConverter" />
+                     </p:pickList>
+                    <p:commandButton actionListener="#{eventController.update}" value="#{bundle.Save}" update="display,:EventListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EventEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EventEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

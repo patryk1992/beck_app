@@ -4,12 +4,20 @@ import com.beck.beck_app.model.Event;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 import com.beck.beck_app.facade.EventFacade;
+import com.beck.beck_app.facade.Group1Facade;
+import com.beck.beck_app.facade.GroupEventsFacade;
+import com.beck.beck_app.model.Group1;
+import com.beck.beck_app.model.GroupEvents;
+import com.beck.beck_app.model.User;
+import com.beck.beck_app.model.UserGroups;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -18,16 +26,52 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.model.DualListModel;
 
 @Named("eventController")
 @SessionScoped
 public class EventController implements Serializable {
+    
+    @EJB
+    private com.beck.beck_app.facade.GroupEventsFacade ejbFacadeGroupEvents;
+
 
     @EJB
-    private com.beck.beck_app.facade.EventFacade ejbFacade;
+    private com.beck.beck_app.facade.Group1Facade ejbFacadeGroup1;
+
+    @EJB
+    private com.beck.beck_app.facade.EventFacade ejbFacadeEvent;
     private List<Event> items = null;
     private Event selected;
-
+   
+    private DualListModel<Group1> groups;
+    List<Group1> groupsSource;
+    List<Group1> groupsTarget;
+    @PostConstruct
+    public void init() {
+        
+        groupsSource =getEjbFacade2().findAll();
+        groupsTarget = new ArrayList<Group1>();
+        setGroups(new DualListModel<Group1>(groupsSource, groupsTarget));        
+       
+      
+    }
+     public void saveGroups(User user,Group1 group1) {
+        
+        
+        //picklist
+        List<Group1> tmplit=groups.getTarget();        
+        
+        for(Group1 g : tmplit ){
+          GroupEvents gE=new GroupEvents();
+          gE.setEventId(selected);
+          gE.setGroupId(g);
+          getEjbFacadeGroupEvents().create(gE);          
+        }
+      
+    }
+    
+  
     public EventController() {
     }
 
@@ -44,11 +88,48 @@ public class EventController implements Serializable {
 
     protected void initializeEmbeddableKey() {
     }
-
-    private EventFacade getFacade() {
-        return ejbFacade;
+    public Group1Facade getEjbFacade2() {
+        return ejbFacadeGroup1;
     }
 
+    public void setEjbFacade2(Group1Facade ejbFacade2) {
+        this.ejbFacadeGroup1 = ejbFacade2;
+    }
+        public GroupEventsFacade getEjbFacadeGroupEvents() {
+        return ejbFacadeGroupEvents;
+    }
+
+    public void setEjbFacadeGroupEvents(GroupEventsFacade ejbFacadeGroupEvents) {
+        this.ejbFacadeGroupEvents = ejbFacadeGroupEvents;
+    }
+    
+    private EventFacade getFacade() {
+        return ejbFacadeEvent;
+    }
+      
+    public DualListModel<Group1> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(DualListModel<Group1> groups) {
+        this.groups = groups;
+    }
+
+    public List<Group1> getGroupsSource() {
+        return groupsSource;
+    }
+
+    public void setGroupsSource(List<Group1> groupsSource) {
+        this.groupsSource = groupsSource;
+    }
+
+    public List<Group1> getGroupsTarget() {
+        return groupsTarget;
+    }
+
+    public void setGroupsTarget(List<Group1> groupsTarget) {
+        this.groupsTarget = groupsTarget;
+    }
     public Event prepareCreate() {
         selected = new Event();
         initializeEmbeddableKey();

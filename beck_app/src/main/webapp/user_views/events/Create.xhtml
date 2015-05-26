@@ -8,15 +8,25 @@
 
     <ui:composition>
 
-        <p:dialog id="GroupEventsCreateDlg" widgetVar="GroupEventsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateGroupEventsTitle}">
-            <h:form id="GroupEventsCreateForm">
+        <p:dialog id="EventCreateDlg" widgetVar="EventCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEventTitle}">
+            <h:form id="EventCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{eventController.selected != null}">                        
-                        <p:inputText id="eventDesc" value="#{eventController.selected.eventDesc}" title="#{bundle.CreateEventTitle_eventDesc}" />
-                        <p:outputLabel value="#{bundle.CreateEventLabel_eventName}" for="eventDesc" />
+                    <p:panelGrid columns="2" rendered="#{eventController.selected != null}">                     
+       
+                        <p:outputLabel value="#{bundle.CreateEventLabel_eventName}" for="eventName" />
+                        <p:inputText id="eventName" value="#{eventController.selected.eventName}" title="#{bundle.CreateEventTitle_eventName}" />
+                       
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{groupEventsController.create}" value="#{bundle.Save}" update="display,:GroupEventsListForm:datalist,:growl" oncomplete="handleSubmit(args,'GroupEventsCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="GroupEventsCreateDialog.hide()"/>
+                     <p:pickList id="pickList" value="#{eventController.groups}" var="groups" itemLabel="#{groups.groupName}" itemValue="#{groups}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+                    showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
+                        <f:facet name="sourceCaption">Dostępni</f:facet>
+                        <f:facet name="targetCaption">Dodani</f:facet>                       
+                      <f:converter converterId="com.beck.beck_app.Group1Converter" />
+                     </p:pickList>
+                    <p:commandButton actionListener="#{eventController.create}" value="#{bundle.Save}" update="display,:EventListForm:datalist,:growl" oncomplete="handleSubmit(args,'EventCreateDialog');"                     
+                        <f:actionListener binding="#{eventController.saveGroups(userController.selected,group1Controller.selected)}"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EventCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

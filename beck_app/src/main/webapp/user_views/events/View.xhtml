@@ -8,18 +8,18 @@
 
     <ui:composition>
 
-        <p:dialog id="GroupEventsViewDlg" widgetVar="GroupEventsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewGroupEventsTitle}">
-            <h:form id="GroupEventsViewForm">
+        <p:dialog id="EventViewDlg" widgetVar="EventViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventTitle}">
+            <h:form id="EventViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{groupEventsController.selected != null}">
-                        <h:outputText value="#{bundle.ViewGroupEventsLabel_id}"/>
-                        <h:outputText value="#{groupEventsController.selected.id}" title="#{bundle.ViewGroupEventsTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewGroupEventsLabel_groupId}"/>
-                        <h:outputText value="#{groupEventsController.selected.groupId}" title="#{bundle.ViewGroupEventsTitle_groupId}"/>
-                        <h:outputText value="#{bundle.ViewGroupEventsLabel_eventId}"/>
-                        <h:outputText value="#{groupEventsController.selected.eventId}" title="#{bundle.ViewGroupEventsTitle_eventId}"/>
+                    <p:panelGrid columns="2" rendered="#{eventController.selected != null}">                     
+                        <h:outputText value="#{bundle.ViewEventLabel_eventName}"/>
+                        <h:outputText value="#{eventController.selected.eventName}" title="#{bundle.ViewEventTitle_eventName}"/>
+                        <h:outputText value="#{bundle.ViewEventLabel_eventDesc}"/>
+                        <h:outputText value="#{eventController.selected.eventDesc}" title="#{bundle.ViewEventTitle_eventDesc}"/>
+                        <h:outputText value="#{bundle.ViewEventLabel_status}"/>
+                        <h:outputText value="#{eventController.selected.status}" title="#{bundle.ViewEventTitle_status}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="GroupEventsViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="EventViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

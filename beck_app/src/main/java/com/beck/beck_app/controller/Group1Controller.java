@@ -2,14 +2,18 @@ package com.beck.beck_app.controller;
 
 import com.beck.beck_app.facade.Group1Facade;
 import com.beck.beck_app.model.Group1;
+import com.beck.beck_app.model.User;
+import com.beck.beck_app.model.UserGroups;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -18,6 +22,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.model.DualListModel;
 
 @Named("group1Controller")
 @SessionScoped
@@ -27,7 +32,9 @@ public class Group1Controller implements Serializable {
     private com.beck.beck_app.facade.Group1Facade ejbFacade;
     private List<Group1> items = null;
     private Group1 selected;
-
+    
+     
+    
     public Group1Controller() {
     }
 
