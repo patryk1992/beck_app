@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.ejb.PostActivate;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -53,6 +55,12 @@ public class NoticeController implements Serializable {
         return ejbFacade;
     }
 
+    @PostConstruct
+     public void init() {
+    selected = new Notice();
+     
+    }
+    
     public Notice prepareCreate() {
         selected = new Notice();
         initializeEmbeddableKey();
@@ -143,7 +151,7 @@ public class NoticeController implements Serializable {
     }
     public String processListNotice(){
         
-		return "/guest/notice/ListNotice.xhtml";
+		return "/guest_views/notice/ListNotice";
     }
     @FacesConverter(forClass = Notice.class)
     public static class NoticeControllerConverter implements Converter {

@@ -18,38 +18,35 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="175" resizable="true" closable="true" collapsible="true">
-                  <p:graphicImage  value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/logo/logo.jpg" />  
+                    <p:graphicImage  value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/logo/logo.jpg" />  
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
-                   Autorzy: Robert Piotrowski i Patryk Bierła
+                    Autorzy: Robert Piotrowski i Patryk Bierła
                 </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="175" header="Menu" collapsible="true">
+                <p:layoutUnit position="west" size="185" header="Menu" collapsible="true">
                     <h:form id="menuForm">
                         <p:growl autoUpdate="true"/>
                         <p:menubar>                    
-
-                              
-                                                  <p:menuitem value="#{bundle.Home}" outcome="/user_views/main.xhtml" />
-                                                  <p:menuitem value="Grupy" outcome="/user_views/manage_groups/manage_groups.xhtml" />                                                  
-                                                  <p:submenu label="Wydarzenia" >
-                                                        <p:menuitem value="Moje wydarzenia" outcome="/user_views/events/List.xhtml" />
-                                                        <p:menuitem value="Wydarzenia znajomych" outcome="/user_views/events/List.xhtml" />
-                                                  </p:submenu>
-                                                  <p:menuitem value="Recenzje i artykuły" outcome="/user_views/reviews/List.xhtml" />
-                                                  <p:menuitem value="Dodaj nową recenzje" outcome="/user_views/reviews/AddNewReview.xhtml" />
-                                                  <p:menuitem value="Poczta" outcome="/user_views/communication/List.xhtml" />
-                                                  <p:menuitem value="Wyloguj" action="#{userController.logout}" />
-
+                            <p:menuitem value="Strona główna" outcome="/user_views/main.xhtml" />
+                            <p:menuitem value="Grupy" outcome="/user_views/manage_groups/manage_groups.xhtml" />                                                  
+                            <p:submenu label="Wydarzenia" >
+                                <p:menuitem value="Moje wydarzenia" outcome="/user_views/events/List.xhtml" />
+                                <p:menuitem value="Wydarzenia znajomych" outcome="/user_views/events/List.xhtml" />
+                            </p:submenu>
+                            <p:menuitem value="Recenzje i artykuły" outcome="/user_views/reviews/List.xhtml" />
+                            <p:menuitem value="Dodaj nową recenzje" outcome="/user_views/reviews/AddNewReview.xhtml" />
+                            <p:menuitem value="Poczta" outcome="/user_views/communication/List.xhtml" />
+                            <p:menuitem value="Wyloguj" action="#{userController.logout}" />
                         </p:menubar>   
-                     </h:form>
+                    </h:form>
                 </p:layoutUnit>
-                 <p:growl id="growl" life="3000" />
+                <p:growl id="growl" life="3000" />
                 <p:layoutUnit position="center">
-                    
+
                     <title><ui:insert name="title">Default Title</ui:insert></title>
-                     <ui:insert name="body"/>
+                    <ui:insert name="body"/>
                 </p:layoutUnit>
 
             </p:layout>

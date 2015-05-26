@@ -17,6 +17,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -119,6 +120,12 @@ public class ImagesNoticeController implements Serializable {
         return items;
     }
 
+         public void upload(FileUploadEvent event) {  
+        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+ 
+    }
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();

@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/template_guest.xhtml">
 
 
         <ui:define name="title">
@@ -14,21 +14,16 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="NoticeListForm">
+            <h:form id="NoticeListForm2">
                 <p:panel header="#{bundle.ListNoticeTitle}">        
 
-           
                 <h:panelGroup id="display">
-                        <p:outputLabel value="#{bundle.CreateNoticeLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{noticeController.selected.id}" title="#{bundle.CreateNoticeTitle_id}" required="true" requiredMessage="#{bundle.CreateNoticeRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateNoticeLabel_message}" for="message" />
                         <p:inputText id="message" value="#{noticeController.selected.message}" title="#{bundle.CreateNoticeTitle_message}" />
                         <p:outputLabel value="#{bundle.CreateNoticeLabel_title}" for="title" />
                         <p:inputText id="title" value="#{noticeController.selected.title}" title="#{bundle.CreateNoticeTitle_title}" />                              
                 </h:panelGroup>
-          
-              
-                  
+           
                 </p:panel>
             </h:form>
            

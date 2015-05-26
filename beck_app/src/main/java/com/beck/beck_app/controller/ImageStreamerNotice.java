@@ -22,9 +22,9 @@ import org.primefaces.model.StreamedContent;
  *
  * @author rober_000
  */
-@Named("imageController")
+@Named("imageControllerN")
 @ApplicationScoped
-public class ImageStreamer {
+public class ImageStreamerNotice {
 
      @EJB private com.beck.beck_app.facade.ImagesNoticeFacade ejbNotice;
 

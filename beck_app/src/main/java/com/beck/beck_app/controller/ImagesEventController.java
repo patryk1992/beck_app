@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -20,7 +21,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 @Named("imagesEventController")
 @SessionScoped
@@ -30,10 +33,35 @@ public class ImagesEventController implements Serializable {
     private com.beck.beck_app.facade.ImagesEventFacade ejbFacade;
     private List<ImagesEvent> items = null;
     private ImagesEvent selected;
-
+    private UploadedFile uploadedFile;
+    int t;
+    
+    
     public ImagesEventController() {
     }
 
+    
+    @PostConstruct
+    public void init() {
+    selected = new ImagesEvent();
+    }
+     
+       public void fileUploadListener(FileUploadEvent event){
+        uploadedFile = event.getFile();
+    }  
+    
+     public void insert() throws IOException{
+        if(uploadedFile!=null){
+          byte[] bytes;
+          bytes = IOUtils.toByteArray( uploadedFile.getInputstream() );
+          selected.setImages(bytes);
+        }
+        else{
+            int t = 1;
+            //System.out.println("The file object is null.");
+        }
+    }
+    
     public ImagesEvent getSelected() {
         return selected;
     }
