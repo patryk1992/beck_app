@@ -44,7 +44,6 @@ public class EventController implements Serializable {
     private List<Event> items = null;
     private List<Event> friendsEvents = null;
     private Event selected;
-   
     private DualListModel<Group1> groups;
     List<Group1> groupsSource;
     List<Group1> groupsTarget;
@@ -75,6 +74,8 @@ public class EventController implements Serializable {
         }
       
     }
+  
+     
      public void setProps(String name)
     {
         Event u =null;
@@ -258,6 +259,7 @@ public class EventController implements Serializable {
     public void setFriendsEvents(List<Event> friendsEvents) {
         this.friendsEvents = friendsEvents;
     }
+
 
     @FacesConverter(forClass = Event.class)
     public static class EventControllerConverter implements Converter {
