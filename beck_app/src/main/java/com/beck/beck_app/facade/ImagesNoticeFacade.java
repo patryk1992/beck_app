@@ -6,11 +6,11 @@
 package com.beck.beck_app.facade;
 
 import com.beck.beck_app.model.ImagesNotice;
+import com.beck.beck_app.model.Notice;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -30,6 +30,12 @@ public class ImagesNoticeFacade extends AbstractFacade<ImagesNotice> {
         super(ImagesNotice.class);
     }
     
+        public ImagesNotice findByEvent(Notice ev) {
+        Query cq = getEntityManager().createNamedQuery("ImagesNotice.findEvent");
+        cq.setParameter("eventId", ev);
+        ImagesNotice res = (ImagesNotice) cq.getSingleResult(); 
+        return res;
+    }
     
         
     public ImagesNotice findInt(java.lang.String id) {

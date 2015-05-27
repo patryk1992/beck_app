@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.ejb.PostActivate;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -30,6 +29,7 @@ public class NoticeController implements Serializable {
     private com.beck.beck_app.facade.NoticeFacade ejbFacade;
     private List<Notice> items = null;
     private Notice selected;
+    private Notice selectedSave;
     private List<Notice> allNotice;
     private List<String> filteredNotice;
     private List<Notice> filteredItems;
@@ -58,13 +58,25 @@ public class NoticeController implements Serializable {
     @PostConstruct
      public void init() {
     selected = new Notice();
-     
+     selectedSave = new Notice();
     }
     
+     public void getByTitle()
+     {
+     selectedSave =  getFacade().findByTitle(selected.getTitle());
+     
+    
+     }
+     
     public Notice prepareCreate() {
         selected = new Notice();
         initializeEmbeddableKey();
         return selected;
+    }
+    
+    public void setSelectedFromSelectedSave() {
+    selected=selectedSave;
+    
     }
 
     public void create() {
@@ -73,6 +85,7 @@ public class NoticeController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
+    
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("NoticeUpdated"));
@@ -152,6 +165,20 @@ public class NoticeController implements Serializable {
     public String processListNotice(){
         
 		return "/guest_views/notice/ListNotice";
+    }
+
+    /**
+     * @return the selToSave
+     */
+    public Notice getSelectedSave() {
+        return selectedSave;
+    }
+
+    /**
+     * @param selectedSave the selToSave to set
+     */
+    public void setSelectedSave(Notice selectedSave) {
+        this.selectedSave = selectedSave;
     }
     @FacesConverter(forClass = Notice.class)
     public static class NoticeControllerConverter implements Converter {

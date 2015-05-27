@@ -4,8 +4,8 @@ import com.beck.beck_app.model.ImagesNotice;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 import com.beck.beck_app.facade.ImagesNoticeFacade;
+import com.beck.beck_app.model.Notice;
 import java.io.IOException;
-
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,40 +26,37 @@ import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-
 @Named("imagesNoticeController")
 @SessionScoped
 public class ImagesNoticeController implements Serializable {
 
-
-    @EJB private com.beck.beck_app.facade.ImagesNoticeFacade ejbFacade;
+    @EJB
+    private com.beck.beck_app.facade.ImagesNoticeFacade ejbFacade;
     private List<ImagesNotice> items = null;
     private ImagesNotice selected;
     private UploadedFile uploadedFile;
     int t;
 
-    public void fileUploadListener(FileUploadEvent event){
+    public void fileUploadListener(FileUploadEvent event) {
         uploadedFile = event.getFile();
     }
-    
+
     @PostConstruct
     public void init() {
-    selected = new ImagesNotice();
+        selected = new ImagesNotice();
     }
-     
-     
-     public void insert() throws IOException{
-        if(uploadedFile!=null){
-          byte[] bytes;
-          bytes = IOUtils.toByteArray( uploadedFile.getInputstream() );
-          selected.setImages(bytes);
-        }
-        else{
-            t=1;
+
+    public void insert() throws IOException {
+        if (uploadedFile != null) {
+            byte[] bytes;
+            bytes = IOUtils.toByteArray(uploadedFile.getInputstream());
+            selected.setImages(bytes);
+        } else {
+            t = 1;
             //System.out.println("The file object is null.");
         }
     }
-    
+
     public ImagesNoticeController() {
     }
 
@@ -110,22 +107,21 @@ public class ImagesNoticeController implements Serializable {
         if (items == null) {
             items = getFacade().findAll();
         }
-       
-        for (ImagesNotice item : items) {
-             
-          //  item.setContent(getImage(item));
-        
-        }
-        
         return items;
     }
 
-         public void upload(FileUploadEvent event) {  
-        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");  
-        FacesContext.getCurrentInstance().addMessage(null, msg);
- 
+    public void getForNotice(Notice s) {
+
+       selected = getFacade().findByEvent(s);
     }
-    
+    // dokonczyc - zrobic selecta i wyswietlic img dla view
+
+    public void upload(FileUploadEvent event) {
+        FacesMessage msg = new FacesMessage("Success! ", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+    }
+
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -154,7 +150,6 @@ public class ImagesNoticeController implements Serializable {
         }
     }
 
-
     public ImagesNotice getImagesNotice(java.lang.Integer id) {
         return getFacade().find(id);
     }
@@ -167,7 +162,7 @@ public class ImagesNoticeController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass=ImagesNotice.class)
+    @FacesConverter(forClass = ImagesNotice.class)
     public static class ImagesNoticeControllerConverter implements Converter {
 
         @Override
@@ -175,7 +170,7 @@ public class ImagesNoticeController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ImagesNoticeController controller = (ImagesNoticeController)facesContext.getApplication().getELResolver().
+            ImagesNoticeController controller = (ImagesNoticeController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "imagesNoticeController");
             return controller.getImagesNotice(getKey(value));
         }

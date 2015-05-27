@@ -9,6 +9,7 @@ import com.beck.beck_app.model.Notice;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +27,21 @@ public class NoticeFacade extends AbstractFacade<Notice> {
 
     public NoticeFacade() {
         super(Notice.class);
+    }
+    
+    
+     public Notice findByTitle(String title) {
+     Query cq = getEntityManager().createNamedQuery("Notice.findByTitle"); 
+     cq.setParameter("title", title);
+     Notice s =  null;
+      try {
+     s = (Notice) cq.getSingleResult();
+      }
+     catch(Exception e)
+     {
+         return null;
+     }
+     return s;
     }
     
 }

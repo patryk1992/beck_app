@@ -43,8 +43,10 @@
 
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{noticeController.prepareCreate}" update=":NoticeCreateForm" oncomplete="PF('NoticeCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":NoticeViewForm" oncomplete="PF('NoticeViewDialog').show()" disabled="#{empty noticeController.selected}"/>
-                         </f:facet>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":NoticeViewForm" oncomplete="PF('NoticeViewDialog').show()" disabled="#{empty noticeController.selected}">
+                                  <f:actionListener binding="#{imagesNoticeController.getForNotice(noticeController.selected)}" />
+                            </p:commandButton>
+                        </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>

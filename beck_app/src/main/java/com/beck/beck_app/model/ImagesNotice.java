@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -32,17 +34,18 @@ import org.primefaces.model.StreamedContent;
 @NamedQueries({
     @NamedQuery(name = "ImagesNotice.findAll", query = "SELECT i FROM ImagesNotice i"),
     @NamedQuery(name = "ImagesNotice.findByIdimagesNotice", query = "SELECT i FROM ImagesNotice i WHERE i.idimagesNotice = :idimagesNotice"),
+    @NamedQuery(name = "ImagesNotice.findEvent", query = "SELECT i FROM ImagesNotice i WHERE i.eventId = :eventId"),
     @NamedQuery(name = "ImagesNotice.findByImagesDesc", query = "SELECT i FROM ImagesNotice i WHERE i.imagesDesc = :imagesDesc")})
 public class ImagesNotice implements Serializable {
     @Basic(optional = false)
-    @NotNull
     @Lob
+    @NotNull
     @Column(name = "images")
     private byte[] images;
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idimages_notice")
     private Integer idimagesNotice;
     @Basic(optional = false)
@@ -52,7 +55,7 @@ public class ImagesNotice implements Serializable {
     private String imagesDesc;
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Event eventId;
+    private Notice eventId;
 
     @Transient
     private StreamedContent content;
@@ -86,11 +89,11 @@ public class ImagesNotice implements Serializable {
         this.imagesDesc = imagesDesc;
     }
 
-    public Event getEventId() {
+    public Notice getEventId() {
         return eventId;
     }
 
-    public void setEventId(Event eventId) {
+    public void setEventId(Notice eventId) {
         this.eventId = eventId;
     }
 

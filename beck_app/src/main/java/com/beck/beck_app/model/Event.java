@@ -39,8 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Event implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventId")
     private Collection<ImagesEvent> imagesEventCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventId")
-    private Collection<ImagesNotice> imagesNoticeCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -163,13 +161,5 @@ public class Event implements Serializable {
         this.imagesEventCollection = imagesEventCollection;
     }
 
-    @XmlTransient
-    public Collection<ImagesNotice> getImagesNoticeCollection() {
-        return imagesNoticeCollection;
-    }
-
-    public void setImagesNoticeCollection(Collection<ImagesNotice> imagesNoticeCollection) {
-        this.imagesNoticeCollection = imagesNoticeCollection;
-    }
     
 }

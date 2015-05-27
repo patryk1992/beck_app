@@ -6,7 +6,9 @@
 package com.beck.beck_app.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,6 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Notice.findByMessage", query = "SELECT n FROM Notice n WHERE n.message = :message"),
     @NamedQuery(name = "Notice.findByTitle", query = "SELECT n FROM Notice n WHERE n.title = :title")})
 public class Notice implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventId")
+    private Collection<ImagesNotice> imagesNoticeCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -97,6 +102,20 @@ public class Notice implements Serializable {
     @Override
     public String toString() {
         return "com.beck.beck_app.Notice[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the imagesNoticeCollection
+     */
+    public Collection<ImagesNotice> getImagesNoticeCollection() {
+        return imagesNoticeCollection;
+    }
+
+    /**
+     * @param imagesNoticeCollection the imagesNoticeCollection to set
+     */
+    public void setImagesNoticeCollection(Collection<ImagesNotice> imagesNoticeCollection) {
+        this.imagesNoticeCollection = imagesNoticeCollection;
     }
     
 }

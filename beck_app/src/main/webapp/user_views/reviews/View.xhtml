@@ -12,13 +12,20 @@
             <h:form id="NoticeViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{noticeController.selected != null}">
-                        <h:outputText value="#{bundle.ViewNoticeLabel_id}"/>
-                        <h:outputText value="#{noticeController.selected.id}" title="#{bundle.ViewNoticeTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewNoticeLabel_message}"/>
-                        <h:outputText value="#{noticeController.selected.message}" title="#{bundle.ViewNoticeTitle_message}"/>
-                        <h:outputText value="#{bundle.ViewNoticeLabel_title}"/>
+
+                        <h:outputText value="Tytuł:"/>
                         <h:outputText value="#{noticeController.selected.title}" title="#{bundle.ViewNoticeTitle_title}"/>
+
+                        <h:outputText value="Treść"/>
+                        <h:outputText value="#{noticeController.selected.message}" title="#{bundle.ViewNoticeTitle_message}"/>
+
                     </p:panelGrid>
+
+                    <h:outputText value="Zdjecia:"/>
+                    <p:graphicImage value="#{imageControllerN.image}" >            
+                        <f:param name="id_img" value="#{imagesNoticeController.selected.idimagesNotice}" />
+                    </p:graphicImage>
+
                     <p:commandButton value="#{bundle.Close}" onclick="NoticeViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -6,7 +6,6 @@
 package com.beck.beck_app.controller;
 
 import com.beck.beck_app.model.ImagesEvent;
-import com.beck.beck_app.model.ImagesNotice;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import javax.ejb.EJB;
