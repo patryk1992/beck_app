@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package com.beck.beck_app.map;
+import com.beck.beck_app.model.Event;
 import com.beck.beck_app.model.Point;
+import com.beck.beck_app.model.Track;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +40,9 @@ public class AddMarkersViewController implements Serializable {
     private List<Marker> markersList;
     
     @EJB
-    private com.beck.beck_app.facade.PointFacade ejbFacade;
-    
+    private com.beck.beck_app.facade.PointFacade ejbFacadePoint;
+    @EJB
+    private com.beck.beck_app.facade.TrackFacade ejbFacadeTrack;
     @PostConstruct
     public void init() {
         emptyModel = new DefaultMapModel();
@@ -83,13 +86,18 @@ public class AddMarkersViewController implements Serializable {
     }
      
     //TODO dodac reszte pol z tabelko point 
-    public void saveMap() {
+    public void saveMap(Event event) {
+        Track track= new Track();
+        track.setEventId(event);
+        track.setTrackName("Track"+event.getEventName());
+        ejbFacadeTrack.create(track);
         for ( Marker m : markersList)
         {
         LatLng cords = m.getLatlng();
         Point newPoint = new Point();
         newPoint.setLatitude(cords.getLat());
         newPoint.setLongitude(cords.getLng());
+        newPoint.setTrackId(track);
         getEjbFacade().create(newPoint);
         }
     
@@ -121,13 +129,13 @@ public class AddMarkersViewController implements Serializable {
      * @return the ejbFacade
      */
     public com.beck.beck_app.facade.PointFacade getEjbFacade() {
-        return ejbFacade;
+        return ejbFacadePoint;
     }
 
     /**
      * @param ejbFacade the ejbFacade to set
      */
     public void setEjbFacade(com.beck.beck_app.facade.PointFacade ejbFacade) {
-        this.ejbFacade = ejbFacade;
+        this.ejbFacadePoint = ejbFacade;
     }
 }
