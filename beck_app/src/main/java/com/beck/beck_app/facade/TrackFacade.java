@@ -5,10 +5,16 @@
  */
 package com.beck.beck_app.facade;
 
+import com.beck.beck_app.model.Event;
+import com.beck.beck_app.model.Group1;
+import com.beck.beck_app.model.GroupEvents;
+import com.beck.beck_app.model.Point;
 import com.beck.beck_app.model.Track;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,5 +33,10 @@ public class TrackFacade extends AbstractFacade<Track> {
     public TrackFacade() {
         super(Track.class);
     }
-    
+   public List<Track> findByIdEvent(Event eventId) {
+     Query cq = getEntityManager().createNamedQuery("Track.findByEventId"); 
+     cq.setParameter("eventId", eventId);
+  
+     return cq.getResultList();
+    }
 }

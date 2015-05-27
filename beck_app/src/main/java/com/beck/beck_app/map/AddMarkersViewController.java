@@ -112,7 +112,20 @@ public class AddMarkersViewController implements Serializable {
         String lng = coordinates.substring(i2 + 1, coordinates.length());
        return lat + "," + lng;
     }
-      
+    public List<Marker> returnListMarkers(Event event) {
+       List <Track> listTrack=ejbFacadeTrack.findByIdEvent(event);
+       List <Point> listPoint=null;
+       List <Marker> listMarkers = new ArrayList <Marker>();
+       if(listTrack.size()>0){
+        listPoint=ejbFacadePoint.findByIdTrack(listTrack.get(0));
+       }
+        for ( Point m : listPoint){
+             Marker marker = new Marker(new LatLng(m.getLatitude(), m.getLongitude()), title);
+             listMarkers.add(marker);
+        }
+       return listMarkers;
+    } 
+    
     
     /**
      * @return the markersList

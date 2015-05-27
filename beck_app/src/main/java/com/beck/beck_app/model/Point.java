@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Point.findByTrackName", query = "SELECT p FROM Point p WHERE p.trackName = :trackName"),
     @NamedQuery(name = "Point.findByLongitude", query = "SELECT p FROM Point p WHERE p.longitude = :longitude"),
     @NamedQuery(name = "Point.findByLatitude", query = "SELECT p FROM Point p WHERE p.latitude = :latitude"),
-    @NamedQuery(name = "Point.findByOrderNr", query = "SELECT p FROM Point p WHERE p.orderNr = :orderNr")})
+    @NamedQuery(name = "Point.findByOrderNr", query = "SELECT p FROM Point p WHERE p.orderNr = :orderNr"),
+    @NamedQuery(name = "Point.findByTrackId", query = "SELECT p FROM Point p WHERE p.trackId = :trackId")})
 public class Point implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

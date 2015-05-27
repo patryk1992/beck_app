@@ -5,10 +5,15 @@
  */
 package com.beck.beck_app.facade;
 
+import com.beck.beck_app.model.Group1;
+import com.beck.beck_app.model.GroupEvents;
 import com.beck.beck_app.model.Point;
+import com.beck.beck_app.model.Track;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,5 +32,10 @@ public class PointFacade extends AbstractFacade<Point> {
     public PointFacade() {
         super(Point.class);
     }
-    
+    public List<Point> findByIdTrack(Track idTrack) {
+     Query cq = getEntityManager().createNamedQuery("Point.findByTrackId"); 
+     cq.setParameter("trackId", idTrack);
+  
+     return cq.getResultList();
+    }
 }

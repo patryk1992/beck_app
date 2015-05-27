@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Track.findAll", query = "SELECT t FROM Track t"),
     @NamedQuery(name = "Track.findById", query = "SELECT t FROM Track t WHERE t.id = :id"),
     @NamedQuery(name = "Track.findByTrackDesc", query = "SELECT t FROM Track t WHERE t.trackDesc = :trackDesc"),
-    @NamedQuery(name = "Track.findByTrackName", query = "SELECT t FROM Track t WHERE t.trackName = :trackName")})
+    @NamedQuery(name = "Track.findByTrackName", query = "SELECT t FROM Track t WHERE t.trackName = :trackName"),
+    @NamedQuery(name = "Track.findByEventId", query = "SELECT t FROM Track t WHERE t.eventId = :eventId")})
 public class Track implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

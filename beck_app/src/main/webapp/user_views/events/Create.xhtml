@@ -162,6 +162,42 @@
 
 
             }
+            function calcRoute(listMarkers) {
+
+                var waypts = [];
+                for (var marker in listMarkers) {
+                    listMarkers[marker].setVisible(false);
+                    var element = listMarkers[marker].position;
+                     if(marker &gt; 0 &amp;&amp; marker &lt; (listMarkers.length-1)){                
+                        waypts.push({
+                        location:""+element.A+","+element.F,
+                        stopover:true});
+                    }
+                }
+
+
+                request = {
+                    origin: "" + listMarkers[0].position.A + "," + listMarkers[0].position.F,
+                    destination: "" + listMarkers[listMarkers.length - 1].position.A + "," + listMarkers[listMarkers.length - 1].position.F,
+                    waypoints: waypts,
+                    travelMode: google.maps.TravelMode.WALKING
+                };
+
+                directionsService.route(request, function (response, status)
+                {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+    //                        alert('ok');
+
+                    }
+                    else {
+                        alert('failed');
+                    }
+                }
+                );
+
+
+            }
             google.maps.event.addDomListener(window, 'load', init);
         </script>
     </ui:composition>

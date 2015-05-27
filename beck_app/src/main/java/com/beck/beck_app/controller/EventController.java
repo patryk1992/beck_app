@@ -35,7 +35,6 @@ public class EventController implements Serializable {
     @EJB
     private com.beck.beck_app.facade.GroupEventsFacade ejbFacadeGroupEvents;
 
-
     @EJB
     private com.beck.beck_app.facade.Group1Facade ejbFacadeGroup1;
 

@@ -8,21 +8,45 @@
 
     <ui:composition>
 
-        <p:dialog id="EventViewDlg" widgetVar="EventViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventTitle}">
+        <p:dialog id="EventViewDlg" widgetVar="EventViewDialog" onShow="calcRoute(addMarkersViewController.returnListMarkers(eventController.selected))"  modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventTitle}">
             <h:form id="EventViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{eventController.selected != null}">                     
-                        <h:outputText value="#{bundle.ViewEventLabel_eventName}"/>
-                        <h:outputText value="#{eventController.selected.eventName}" title="#{bundle.ViewEventTitle_eventName}"/>
-                        <h:outputText value="#{bundle.ViewEventLabel_eventDesc}"/>
-                        <h:outputText value="#{eventController.selected.eventDesc}" title="#{bundle.ViewEventTitle_eventDesc}"/>
-                        <h:outputText value="#{bundle.ViewEventLabel_status}"/>
-                        <h:outputText value="#{eventController.selected.status}" title="#{bundle.ViewEventTitle_status}"/>
+
+                        <p:outputLabel value="#{bundle.CreateEventLabel_eventName}" for="eventName" />
+                        <h:outputText id="eventName" value="#{eventController.selected.eventName}" title="#{bundle.CreateEventTitle_eventName}" />
+
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="EventViewDialog.hide()"/>
+                    <p:pickList id="pickList" value="#{eventController.groups}" var="groups" itemLabel="#{groups.groupName}" itemValue="#{groups}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+                                showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" disabled="true">
+                        <f:facet name="sourceCaption">Dostępni</f:facet>
+                        <f:facet name="targetCaption">Dodani</f:facet>                       
+                        <f:converter converterId="com.beck.beck_app.Group1Converter" />
+                    </p:pickList>
+
+
+
+                  <p:gmap center="41.381542, 2.122893" zoom="15"  style="width:100%;height:400px" model="#{addMarkersViewController.emptyModel}" onPointClick="handlePointClick(event);"  widgetVar="map" id="map"  type="ROADMAP"/>
+    
+                  <p:dialog widgetVar="dlg" showEffect="fade"  >
+        <h:panelGrid columns="2">
+            <h:outputLabel for="title" value="Title:" />
+            <p:inputText id="title" value="#{addMarkersViewController.title}" /> 
+            <f:facet name="footer">
+                <p:commandButton value="Add" actionListener="#{addMarkersViewController.addMarker}"  oncomplete="markerAddComplete()" />
+                <p:commandButton value="Cancel" onclick="return cancel()" />
+            </f:facet>
+        </h:panelGrid> 
+        <h:inputHidden id="lat" value="#{addMarkersViewController.lat}" />
+        <h:inputHidden id="lng" value="#{addMarkersViewController.lng}" />        
+    </p:dialog >    
+        
+        <p:remoteCommand name="remoteCommandFunctionName"      actionListener="#{addMarkersViewController.addMarker}"/>                    
+                    <p:commandButton value="#{bundle.Close}" onclick="EventCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
-
+        
+      
     </ui:composition>
 </html>
