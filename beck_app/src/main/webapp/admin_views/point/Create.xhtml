@@ -29,7 +29,7 @@
                                            itemValue="#{trackIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{pointController.create}" value="#{bundle.Save}" update="display,:PointListForm:datalist,:growl" oncomplete="handleSubmit(args,'PointCreateDialog');"/>
+                    <p:commandButton actionListener="#{pointController.create}" value="#{bundle.Save}" onclick="PointCreateDialog.hide()" update="display,:PointListForm:datalist,:growl" oncomplete="handleSubmit(args,'PointCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PointCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

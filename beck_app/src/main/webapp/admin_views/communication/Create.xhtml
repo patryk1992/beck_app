@@ -31,7 +31,7 @@
                                            itemValue="#{userIdToItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{communicationController.create}" value="#{bundle.Save}" update="display,:CommunicationListForm:datalist,:growl" oncomplete="handleSubmit(args,'CommunicationCreateDialog');"/>
+                    <p:commandButton actionListener="#{communicationController.create}" value="#{bundle.Save}" onclick="CommunicationCreateDialog.hide()" update="display,:CommunicationListForm:datalist,:growl" oncomplete="handleSubmit(args,'CommunicationCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CommunicationCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

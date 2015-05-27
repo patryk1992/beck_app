@@ -33,10 +33,10 @@
                               fileUploadListener="#{imagesNoticeController.fileUploadListener}"/>
 
 
-                <p:commandButton id="btnSubmit"    actionListener="#{imagesNoticeController.insert()}" ajax="false" icon="ui-icon-check" value="Save"> 
+                <p:commandButton id="btnSubmit"    actionListener="#{imagesNoticeController.insert()}" onclick="ImagesNoticeCreateDialog.hide()" ajax="false" icon="ui-icon-check" value="Save"> 
                     <f:actionListener binding="#{imagesNoticeController.create()}" />
                 </p:commandButton>
-                
+                 <p:commandButton value="#{bundle.Cancel}" onclick="ImagesNoticeCreateDialog.hide()"/>
             </h:form>
         </p:dialog>
 

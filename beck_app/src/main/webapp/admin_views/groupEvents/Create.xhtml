@@ -27,7 +27,7 @@
                                            itemValue="#{eventIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{groupEventsController.create}" value="#{bundle.Save}" update="display,:GroupEventsListForm:datalist,:growl" oncomplete="handleSubmit(args,'GroupEventsCreateDialog');"/>
+                    <p:commandButton actionListener="#{groupEventsController.create}" value="#{bundle.Save}" onclick="GroupEventsCreateDialog.hide()" update="display,:GroupEventsListForm:datalist,:growl" oncomplete="handleSubmit(args,'GroupEventsCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="GroupEventsCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

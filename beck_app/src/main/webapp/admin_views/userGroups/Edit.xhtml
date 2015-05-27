@@ -31,7 +31,7 @@
                                            itemValue="#{groupIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{userGroupsController.update}" value="#{bundle.Save}" update="display,:UserGroupsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserGroupsEditDialog');"/>
+                    <p:commandButton actionListener="#{userGroupsController.update}" value="#{bundle.Save}" onclick="UserGroupsEditDialog.hide()" update="display,:UserGroupsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserGroupsEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UserGroupsEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

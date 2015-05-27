@@ -23,7 +23,7 @@
                         <p:outputLabel value="#{bundle.CreateAddressLabel_suburb}" for="suburb" />
                         <p:inputText id="suburb" value="#{addressController.selected.suburb}" title="#{bundle.CreateAddressTitle_suburb}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{addressController.create}" value="#{bundle.Save}" update="display,:AddressListForm:datalist,:growl" oncomplete="handleSubmit(args,'AddressCreateDialog');"/>
+                    <p:commandButton actionListener="#{addressController.create}" value="#{bundle.Save}" onclick="AddressCreateDialog.hide()" update="display,:AddressListForm:datalist,:growl" oncomplete="handleSubmit(args,'AddressCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AddressCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

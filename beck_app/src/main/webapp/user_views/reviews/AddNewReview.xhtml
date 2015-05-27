@@ -14,13 +14,24 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="NoticeListForm">
+            <h:form id="NoticeListForm" prependId="true" enctype="multipart/form-data" >
                 <p:outputLabel value="Tytuł: " />
                 <p:inputText binding="#{title}"/>
                 <p:editor id="editor" widgetVar="editorWidget" value="#{noticeController.selected.message}" width="800" height="400" />
 
+                  <p:fileUpload id="txtCatImage"
+                              value="#{imagesNoticeController.selected.images}"
+                              mode="advanced"
+                              dragDropSupport="true"
+                              fileLimit="1"
+                              sizeLimit="300000"
+                              multiple="false"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                              fileUploadListener="#{imagesNoticeController.fileUploadListener}"/>
+                
                 <h:panelGrid columns="2" style="margin-top: 10px">
                     <p:commandButton value="Zapisz artykuł"  actionListener="#{noticeController.selected.setTitle(title.value)}"  update="display" oncomplete="PF('dlg').show()" icon="ui-icon-disk" >
+                        <f:actionListener binding="#{imagesNoticeController.insert()}" />
                         <f:actionListener binding="#{noticeController.create()}" />
                     </p:commandButton>
                     <p:commandButton value="Wyczyść" type="button" onclick="PF('editorWidget').clear();" icon="ui-icon-close" />

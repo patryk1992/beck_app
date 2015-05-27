@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.EditNoticeLabel_title}" for="title" />
                         <p:inputText id="title" value="#{noticeController.selected.title}" title="#{bundle.EditNoticeTitle_title}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{noticeController.update}" value="#{bundle.Save}" update="display,:NoticeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NoticeEditDialog');"/>
+                    <p:commandButton actionListener="#{noticeController.update}" value="#{bundle.Save}" onclick="NoticeEditDialog.hide()" update="display,:NoticeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NoticeEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="NoticeEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

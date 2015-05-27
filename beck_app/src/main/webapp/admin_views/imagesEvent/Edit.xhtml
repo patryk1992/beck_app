@@ -26,7 +26,7 @@
                         <p:outputLabel value="#{bundle.EditImagesEventLabel_images}" for="images" />
                         <p:inputTextarea rows="4" cols="30" id="images" value="#{imagesEventController.selected.images}" title="#{bundle.EditImagesEventTitle_images}" required="true" requiredMessage="#{bundle.EditImagesEventRequiredMessage_images}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{imagesEventController.update}" value="#{bundle.Save}" update="display,:ImagesEventListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ImagesEventEditDialog');"/>
+                    <p:commandButton actionListener="#{imagesEventController.update}" value="#{bundle.Save}" onclick="ImagesEventEditDialog.hide()" update="display,:ImagesEventListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ImagesEventEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ImagesEventEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

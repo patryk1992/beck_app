@@ -29,7 +29,7 @@
                                            itemValue="#{groupIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{userGroupsController.create}" value="#{bundle.Save}" update="display,:UserGroupsListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserGroupsCreateDialog');"/>
+                    <p:commandButton actionListener="#{userGroupsController.create}" value="#{bundle.Save}" onclick="UserGroupsCreateDialog.hide()" update="display,:UserGroupsListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserGroupsCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UserGroupsCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

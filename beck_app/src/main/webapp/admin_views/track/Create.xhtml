@@ -25,7 +25,7 @@
                                            itemValue="#{eventIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{trackController.create}" value="#{bundle.Save}" update="display,:TrackListForm:datalist,:growl" oncomplete="handleSubmit(args,'TrackCreateDialog');"/>
+                    <p:commandButton actionListener="#{trackController.create}" value="#{bundle.Save}" onclick="TrackCreateDialog.hide()" update="display,:TrackListForm:datalist,:growl" oncomplete="handleSubmit(args,'TrackCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TrackCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

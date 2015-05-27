@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.EditRoleLabel_rolename}" for="rolename" />
                         <p:inputText id="rolename" value="#{roleController.selected.rolename}" title="#{bundle.EditRoleTitle_rolename}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{roleController.update}" value="#{bundle.Save}" update="display,:RoleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RoleEditDialog');"/>
+                    <p:commandButton actionListener="#{roleController.update}" value="#{bundle.Save}" onclick="RoleEditDialog.hide()" update="display,:RoleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RoleEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="RoleEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateGroup1Label_groupName}" for="groupName" />
                         <p:inputText id="groupName" value="#{group1Controller.selected.groupName}" title="#{bundle.CreateGroup1Title_groupName}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{group1Controller.create}" value="#{bundle.Save}" update="display,:Group1ListForm:datalist,:growl" oncomplete="handleSubmit(args,'Group1CreateDialog');"/>
+                    <p:commandButton actionListener="#{group1Controller.create}" value="#{bundle.Save}" onclick="Group1CreateDialog.hide()" update="display,:Group1ListForm:datalist,:growl" oncomplete="handleSubmit(args,'Group1CreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="Group1CreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
