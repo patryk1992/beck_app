@@ -2,10 +2,12 @@ package com.beck.beck_app.controller;
 
 import com.beck.beck_app.facade.GroupEventsFacade;
 import com.beck.beck_app.model.GroupEvents;
+import com.beck.beck_app.model.UserGroups;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -24,7 +26,7 @@ import javax.faces.convert.FacesConverter;
 public class GroupEventsController implements Serializable {
 
     @EJB
-    private com.beck.beck_app.facade.GroupEventsFacade ejbFacade;
+    private com.beck.beck_app.facade.GroupEventsFacade ejbFacade; 
     private List<GroupEvents> items = null;
     private GroupEvents selected;
 
@@ -80,6 +82,22 @@ public class GroupEventsController implements Serializable {
         }
         return items;
     }
+    
+    
+        public List<GroupEvents> getListGroups(List<UserGroups> s) {
+        List<GroupEvents> res = new ArrayList<GroupEvents>();
+        List<GroupEvents> temp = new ArrayList<GroupEvents>();
+        GroupEvents t;
+       
+            for (int i = 0; i < s.size(); i++) {
+               UserGroups get = s.get(i); 
+               temp = ejbFacade.findByIdGroup(get.getGroupId());
+               res.addAll(temp);
+            }
+ 
+        return res;
+    }
+
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {

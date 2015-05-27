@@ -19,12 +19,13 @@
                         <h:outputText value="Treść"/>
                         <h:outputText value="#{noticeController.selected.message}" title="#{bundle.ViewNoticeTitle_message}"/>
 
-                    </p:panelGrid>
+                   
 
                     <h:outputText value="Zdjecia:"/>
                     <p:graphicImage value="#{imageControllerN.image}" >            
                         <f:param name="id_img" value="#{imagesNoticeController.selected.idimagesNotice}" />
                     </p:graphicImage>
+                     </p:panelGrid>
 
                     <p:commandButton value="#{bundle.Close}" onclick="NoticeViewDialog.hide()"/>
                 </h:panelGroup>

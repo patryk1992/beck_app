@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ImagesEvent.findAll", query = "SELECT i FROM ImagesEvent i"),
     @NamedQuery(name = "ImagesEvent.findByIdImages", query = "SELECT i FROM ImagesEvent i WHERE i.idImages = :idImages"),
+    @NamedQuery(name = "ImagesEvent.findEvent", query = "SELECT i FROM ImagesEvent i WHERE i.eventId = :eventId"),
     @NamedQuery(name = "ImagesEvent.findByImageDesc", query = "SELECT i FROM ImagesEvent i WHERE i.imageDesc = :imageDesc")})
 public class ImagesEvent implements Serializable {
     @Basic(optional = false)
