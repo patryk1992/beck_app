@@ -42,6 +42,7 @@ public class EventController implements Serializable {
     @EJB
     private com.beck.beck_app.facade.EventFacade ejbFacadeEvent;
     private List<Event> items = null;
+    private List<Event> friendsEvents = null;
     private Event selected;
    
     private DualListModel<Group1> groups;
@@ -170,7 +171,7 @@ public class EventController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EventCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -235,6 +236,27 @@ public class EventController implements Serializable {
 
     public List<Event> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    /**
+     * @return the friendsEvents
+     */
+    public List<Event> getFriendsEvents(List<GroupEvents> ls) {
+       List<Event> list = new ArrayList<Event>();
+       
+        for (int i = 0; i < ls.size(); i++) {
+           list.add(ls.get(i).getEventId());
+        }
+        
+        
+        return list;
+    }
+
+    /**
+     * @param friendsEvents the friendsEvents to set
+     */
+    public void setFriendsEvents(List<Event> friendsEvents) {
+        this.friendsEvents = friendsEvents;
     }
 
     @FacesConverter(forClass = Event.class)

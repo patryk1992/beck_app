@@ -38,4 +38,12 @@ public class GroupEventsFacade extends AbstractFacade<GroupEvents> {
   
      return cq.getResultList();
     }
+     
+     
+      public List<GroupEvents> findByIdGroup(Group1 idGroup) {
+     Query cq = getEntityManager().createNamedQuery("GroupEvents.findByGroupId"); 
+     cq.setParameter("groupId", idGroup);
+  
+     return cq.getResultList();
+    }
 }

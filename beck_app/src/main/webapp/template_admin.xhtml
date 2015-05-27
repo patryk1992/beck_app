@@ -27,6 +27,7 @@
 
                 <p:layoutUnit position="west" size="175" header="Menu" collapsible="true">
                      <h:form id="menuForm">
+                         <p:panelGrid columns="1">
                     <p:menu>                     
                             <p:menuitem value="Address" outcome="/admin_views/address/List.xhtml" />
                             <p:menuitem value="Communication" outcome="/admin_views/communication/List.xhtml" />
@@ -44,6 +45,7 @@
                             <p:menuitem value="NoticeImg" outcome="/admin_views/imagesNotice/List.xhtml" />
                             <p:menuitem value="Wyloguj" actionListener="#{userController.logout()}" />
                     </p:menu>
+                         </p:panelGrid>          
                      </h:form>
                 </p:layoutUnit>
                  <p:growl id="growl" life="3000" />

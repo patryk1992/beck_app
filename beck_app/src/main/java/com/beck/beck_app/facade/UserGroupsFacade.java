@@ -43,4 +43,13 @@ public class UserGroupsFacade extends AbstractFacade<UserGroups> {
   
      return cq.getResultList();
     }
+    
+    
+     public List<UserGroups> findByIdUserForFriends(User idUser) {
+     Query cq = getEntityManager().createNamedQuery("UserGroups.findByUserIdAndDiffStatus"); 
+     cq.setParameter("userId", idUser);
+  
+     return cq.getResultList();
+     
+    }
 }

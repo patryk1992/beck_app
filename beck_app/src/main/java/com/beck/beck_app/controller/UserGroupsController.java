@@ -145,6 +145,11 @@ public class UserGroupsController implements Serializable {
         }
         return items;
     }
+    
+        public List<UserGroups> getG(User s) {
+            List<UserGroups> res =  getFacade().findByIdUserForFriends(s);
+        return res;
+    }
    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
