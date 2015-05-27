@@ -6,9 +6,11 @@
 package com.beck.beck_app.facade;
 
 import com.beck.beck_app.model.Event;
+import com.beck.beck_app.model.Group1;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,5 +29,17 @@ public class EventFacade extends AbstractFacade<Event> {
     public EventFacade() {
         super(Event.class);
     }
-    
+    public Event findByEventName(String eventName) {
+     Query cq = getEntityManager().createNamedQuery("Event.findByEventName"); 
+     cq.setParameter("eventName", eventName);     
+     Event selectedGroup1 =  null;
+     try {
+        selectedGroup1 = (Event) cq.getSingleResult();
+      }
+     catch(Exception e)
+     {
+        e.printStackTrace();
+     }
+     return selectedGroup1;
+    }
 }

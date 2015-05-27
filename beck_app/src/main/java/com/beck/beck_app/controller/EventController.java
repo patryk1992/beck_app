@@ -70,7 +70,19 @@ public class EventController implements Serializable {
         }
       
     }
-    
+     public void setProps(String name)
+    {
+        Event u =null;
+        try {
+            u = getFacade().findByEventName(name);
+        }
+        catch(Exception e)
+        { 
+            Logger.getLogger(this.getClass().getName()).log(Level.WARNING, null, e);
+        }
+         if(u!=null) setSelected(u);
+        
+    }
   
     public EventController() {
     }

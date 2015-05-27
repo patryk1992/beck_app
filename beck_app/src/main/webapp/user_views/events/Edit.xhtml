@@ -15,13 +15,16 @@
                         <p:outputLabel value="#{bundle.EditEventLabel_eventName}" for="eventName" />
                         <p:inputText id="eventName" value="#{eventController.selected.eventName}" title="#{bundle.EditEventTitle_eventName}" />                       
                     </p:panelGrid>
-                     <p:pickList id="pickList" value="#{userGroupsController.users}" var="users" itemLabel="#{users.username}" itemValue="#{users}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
+                     <p:pickList id="pickList" value="#{eventController.groups}" var="groups" itemLabel="#{groups.groupName}" itemValue="#{groups}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
                     showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
                         <f:facet name="sourceCaption">Dostępni</f:facet>
                         <f:facet name="targetCaption">Dodani</f:facet>                       
-                      <f:converter converterId="com.beck.beck_app.UserConverter" />
+                      <f:converter converterId="com.beck.beck_app.Group1Converter" />
                      </p:pickList>
-                    <p:commandButton actionListener="#{eventController.update}" value="#{bundle.Save}" update="display,:EventListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EventEditDialog');"/>
+                    <p:commandButton actionListener="#{eventController.update}" value="#{bundle.Save}" update="display,:EventListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EventEditDialog');">
+                        <f:actionListener binding="#{eventController.setProps(eventController.selected.eventName)}" />    
+                        <f:actionListener binding="#{eventController.saveGroups(userController.selected,group1Controller.selected)}"/>
+                    </p:commandButton>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EventEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
