@@ -24,7 +24,7 @@
                         <f:facet name="targetCaption">Dodani</f:facet>                       
                       <f:converter converterId="com.beck.beck_app.UserConverter" />
                      </p:pickList>
-                    <p:commandButton actionListener="#{group1Controller.update}" value="#{bundle.Save}" update="display,:Group1ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Group1EditDialog');">
+                    <p:commandButton actionListener="#{group1Controller.update}" value="#{bundle.Save}" onclick="Group1EditDialog.hide()" update="display,:Group1ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Group1EditDialog');">
                         <f:actionListener binding="#{group1Controller.setProps(group1Controller.selected.groupName)}" />                       
                         <f:actionListener binding="#{userGroupsController.create2(userController.selected,group1Controller.selected)}"/>
                     </p:commandButton> 

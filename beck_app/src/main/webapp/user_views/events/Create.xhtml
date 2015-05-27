@@ -23,7 +23,7 @@
                         <f:facet name="targetCaption">Dodani</f:facet>                       
                       <f:converter converterId="com.beck.beck_app.Group1Converter" />
                      </p:pickList>
-                    <p:commandButton actionListener="#{eventController.create}" value="#{bundle.Save}" update="display,:EventListForm:datalist,:growl" oncomplete="handleSubmit(args,'EventCreateDialog');"       >              
+                    <p:commandButton actionListener="#{eventController.create}" onclick="EventCreateDialog.hide()" value="#{bundle.Save}" update="display,:EventListForm:datalist,:growl" oncomplete="handleSubmit(args,'EventCreateDialog');"       >              
                         <f:actionListener binding="#{eventController.setProps(eventController.selected.eventName)}" />    
                         <f:actionListener binding="#{eventController.saveGroups(userController.selected,group1Controller.selected)}"/>
                     </p:commandButton>

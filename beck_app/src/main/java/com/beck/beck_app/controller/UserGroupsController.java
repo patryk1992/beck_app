@@ -92,19 +92,36 @@ public class UserGroupsController implements Serializable {
         }
     }
     public void create2(User user,Group1 group1) {
-        
-        selected.setUserId(user);
-        selected.setGroupId(group1);
-        selected.setStatus("owner");
-        getFacade().create(selected);
+       
         //picklist
+        boolean isUserAdded=false;
         List<User> tmplit=users.getTarget();
-      //String s=  (new UserConverter()).getAsString(null, null, tmplit);
+        List <UserGroups> targetUserGroups=ejbFacade.findByIdGroup(group1);      
+        for(UserGroups usrGr:targetUserGroups){
+             User tmpUser=usrGr.getUserId();
+             tmplit.remove(tmpUser);
+             int   tmpu=tmpUser.getId();
+             int   tmpu2=user.getId();
+             if(tmpu2==tmpu2){
+                 isUserAdded=true;
+             }
+        }
+        if(!isUserAdded){
+            selected.setUserId(user);
+            selected.setGroupId(group1);
+            selected.setStatus("owner");
+            getFacade().create(selected);
+            
+        }
         for(User u : tmplit ){
-          UserGroups uG=new UserGroups();
-          uG.setUserId(u);
-          uG.setGroupId(group1);
-          getFacade().create(uG);          
+            int tmpname=u.getId();
+            int loggedname=user.getId();
+            if(tmpname!=loggedname){
+                UserGroups uG=new UserGroups();
+                uG.setUserId(u);
+                uG.setGroupId(group1);
+                getFacade().create(uG);          
+            }
         }
       
     }
@@ -208,13 +225,26 @@ public class UserGroupsController implements Serializable {
      public void setParametrsPickList(User user,Group1 group1) {
          List <UserGroups> targetUserGroups=ejbFacade.findByIdGroup(group1);
          List <User> targetUserListByGroupId= new ArrayList<User>();
+       
+         boolean isUserAdded=false;
          for(UserGroups usrGr:targetUserGroups){
              User tmpUser=usrGr.getUserId();
+            
+             int   tmpu=tmpUser.getId();
+             int   tmpu2=user.getId();
+             if(tmpu==tmpu2){
+                isUserAdded=true;
+             }             
              targetUserListByGroupId.add(tmpUser);
-         }
+             
+        }
+        if(!isUserAdded){
+             targetUserListByGroupId.add(user);
+        }
+         
         users.setTarget(targetUserListByGroupId);       
         List <User> sourceUserListByGroupId=ejbFacade2.findAll();
-        sourceUserListByGroupId.removeAll(targetUserListByGroupId);
+        sourceUserListByGroupId.removeAll(targetUserListByGroupId);        
         users.setSource(sourceUserListByGroupId);
        
     }

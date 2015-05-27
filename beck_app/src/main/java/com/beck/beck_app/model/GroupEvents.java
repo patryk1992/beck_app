@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "GroupEvents.findAll", query = "SELECT g FROM GroupEvents g"),
-    @NamedQuery(name = "GroupEvents.findById", query = "SELECT g FROM GroupEvents g WHERE g.id = :id")})
+    @NamedQuery(name = "GroupEvents.findById", query = "SELECT g FROM GroupEvents g WHERE g.id = :id"),
+    @NamedQuery(name = "GroupEvents.findByEventId", query = "SELECT g FROM GroupEvents g WHERE g.eventId = :eventId")})
 public class GroupEvents implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

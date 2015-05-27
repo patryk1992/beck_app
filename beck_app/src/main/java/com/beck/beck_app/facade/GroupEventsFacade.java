@@ -5,10 +5,15 @@
  */
 package com.beck.beck_app.facade;
 
+import com.beck.beck_app.model.Event;
+import com.beck.beck_app.model.Group1;
 import com.beck.beck_app.model.GroupEvents;
+import com.beck.beck_app.model.UserGroups;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,5 +32,10 @@ public class GroupEventsFacade extends AbstractFacade<GroupEvents> {
     public GroupEventsFacade() {
         super(GroupEvents.class);
     }
-    
+     public List<GroupEvents> findByIdEvent(Event idEvent) {
+     Query cq = getEntityManager().createNamedQuery("GroupEvents.findByEventId"); 
+     cq.setParameter("eventId", idEvent);
+  
+     return cq.getResultList();
+    }
 }

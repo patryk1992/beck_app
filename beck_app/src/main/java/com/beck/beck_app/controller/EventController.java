@@ -57,11 +57,15 @@ public class EventController implements Serializable {
       
     }
      public void saveGroups(User user,Group1 group1) {
-        
+       
         
         //picklist
         List<Group1> tmplit=groups.getTarget();        
-        
+        List <GroupEvents> targetGroupEvents=ejbFacadeGroupEvents.findByIdEvent(selected);       
+        for(GroupEvents grEvent:targetGroupEvents){
+             Group1 tmpGr=grEvent.getGroupId();
+             tmplit.remove(tmpGr);
+        }
         for(Group1 g : tmplit ){
           GroupEvents gE=new GroupEvents();
           gE.setEventId(selected);
@@ -83,7 +87,26 @@ public class EventController implements Serializable {
          if(u!=null) setSelected(u);
         
     }
-  
+    public void setParametrsPickList() {
+         List <GroupEvents> targetGroupEvents=ejbFacadeGroupEvents.findByIdEvent(selected);
+         List <Group1> targetGroupListByEventId= new ArrayList<Group1>();
+         for(GroupEvents grEvent:targetGroupEvents){
+             Group1 tmpGr=grEvent.getGroupId();
+             targetGroupListByEventId.add(tmpGr);
+         }
+        groups.setTarget(targetGroupListByEventId);       
+        List <Group1> sourceGroupList=ejbFacadeGroup1.findAll();
+        sourceGroupList.removeAll(targetGroupListByEventId);
+        groups.setSource(sourceGroupList);
+       
+    }
+    public void deleteEventWithConnections() {
+         List <GroupEvents> targetGroupEvents=ejbFacadeGroupEvents.findByIdEvent(selected);        
+         for(GroupEvents grEvent:targetGroupEvents){
+            ejbFacadeGroupEvents.remove(grEvent);
+         }
+        destroy();
+    }
     public EventController() {
     }
 
