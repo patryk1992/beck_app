@@ -82,11 +82,12 @@
             }
             function handlePointClick(event) {
                 if (currentMarker === null) {
-                    document.getElementById('EventCreateForm:lat').value = event.latLng.lat();
-                    document.getElementById('EventCreateForm:lng').value = event.latLng.lng();
+                    document.getElementById('EventCreateForm:lat').value = event.A;
+                    document.getElementById('EventCreateForm:lng').value = event.F;
 
                     currentMarker = new google.maps.Marker({
-                        position: new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+                        position: new google.maps.LatLng(event.A, event.F),
+                        map: map
                     });
                     markerAddComplete();
                 }

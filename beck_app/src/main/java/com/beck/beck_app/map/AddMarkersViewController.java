@@ -91,6 +91,7 @@ public class AddMarkersViewController implements Serializable {
         track.setEventId(event);
         track.setTrackName("Track"+event.getEventName());
         ejbFacadeTrack.create(track);
+        int i=0;
         for ( Marker m : markersList)
         {
         LatLng cords = m.getLatlng();
@@ -98,6 +99,8 @@ public class AddMarkersViewController implements Serializable {
         newPoint.setLatitude(cords.getLat());
         newPoint.setLongitude(cords.getLng());
         newPoint.setTrackId(track);
+        newPoint.setOrderNr(i);
+        i++;
         getEjbFacade().create(newPoint);
         }
     
