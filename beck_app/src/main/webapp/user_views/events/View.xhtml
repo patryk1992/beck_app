@@ -18,11 +18,12 @@
                         <h:outputText id="eventName" value="#{eventController.selected.eventName}" title="#{bundle.CreateEventTitle_eventName}" />
 
                         <p:outputLabel value="#{bundle.CreateEventLabel_eventDesc}" for="eventDesc" />
-                        <h:inputTextarea rows="8" cols="45" readonly="true" id="eventDesc" value="#{eventController.selected.eventDesc}" title="#{bundle.CreateEventTitle_eventDesc}" />
+                        <h:outputText id="eventDesc" value="#{eventController.selected.eventDesc}" title="Opis" />
+                      
                        
                         <p:outputLabel value="Zdjęcie:" />
                        <p:graphicImage value="#{imageControllerE.image}" >
-                           <f:param name="id_img" value="#{eventController.selected.id}" />
+                           <f:param name="id_img" value="#{eventController.selected.id.toString()}" />
                        </p:graphicImage>
                         
                     </p:panelGrid>
