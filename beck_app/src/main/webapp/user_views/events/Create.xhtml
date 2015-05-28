@@ -54,7 +54,7 @@
                     </p:commandButton>
                     <p:commandButton onclick="removeMarker();" value="Usuń"/>  
                     <p:commandButton value="#{bundle.Cancel}" onclick="EventCreateDialog.hide()"/>
-                    <p:commandButton  value="Dodaj zdjęcie" oncomplete="PF('dodanieImg').show()"/>
+                    <p:commandButton  value="Dodaj zdjęcie" onclick="PF('dodanieImg').show()"/>
                 </h:panelGroup>
             </h:form>
                <p:dialog widgetVar="dodanieImg" width="500px" >

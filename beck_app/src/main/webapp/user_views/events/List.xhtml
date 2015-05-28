@@ -40,6 +40,7 @@
                             </p:commandButton>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}"  update=":EventViewForm" oncomplete="PF('EventViewDialog').show()" disabled="#{empty eventController.selected}">
                             <f:actionListener binding="#{addMarkersViewController.returnListMarkers(eventController.selected)}"/> 
+                            <f:actionListener binding="#{imagesEventController.getForEvent(eventController.selected)}" />
                             </p:commandButton>                            
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EventEditForm" oncomplete="PF('EventEditDialog').show()" disabled="#{empty eventController.selected}">
                                 <f:actionListener binding="#{eventController.setParametrsPickList()}"/> 

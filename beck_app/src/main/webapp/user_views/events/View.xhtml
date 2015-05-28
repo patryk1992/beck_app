@@ -9,6 +9,7 @@
     <ui:composition>
 
         <p:dialog id="EventViewDlg" widgetVar="EventViewDialog" onShow="calcRoute2()"  modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventTitle}">
+              <p:scrollPanel style="height:600px">
             <h:form id="EventViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{eventController.selected != null}">                     
@@ -16,6 +17,14 @@
                         <p:outputLabel value="#{bundle.CreateEventLabel_eventName}" for="eventName" />
                         <h:outputText id="eventName" value="#{eventController.selected.eventName}" title="#{bundle.CreateEventTitle_eventName}" />
 
+                        <p:outputLabel value="#{bundle.CreateEventLabel_eventDesc}" for="eventDesc" />
+                        <h:inputTextarea rows="8" cols="45" readonly="true" id="eventDesc" value="#{eventController.selected.eventDesc}" title="#{bundle.CreateEventTitle_eventDesc}" />
+                       
+                        <p:outputLabel value="Zdjęcie:" />
+                       <p:graphicImage value="#{imageControllerE.image}" >
+                           <f:param name="id_img" value="#{eventController.selected.id}" />
+                       </p:graphicImage>
+                        
                     </p:panelGrid>
                     <p:pickList id="pickList" value="#{eventController.groups}" var="groups" itemLabel="#{groups.groupName}" itemValue="#{groups}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
                                 showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" disabled="true">
@@ -26,7 +35,7 @@
 
 
 
-                  <p:gmap center="41.381542, 2.122893" zoom="15"  style="width:100%;height:400px" model="#{addMarkersViewController.emptyModel}" onPointClick="handlePointClick(event);"  widgetVar="map" id="map"  type="ROADMAP"/>
+                  <p:gmap center="41.381542, 2.122893" zoom="15"  style="width:700px;height:400px" model="#{addMarkersViewController.emptyModel}" onPointClick="handlePointClick(event);"  widgetVar="map" id="map"  type="ROADMAP"/>
     
                   <p:dialog widgetVar="dlg" showEffect="fade"  >
         <h:panelGrid columns="2">
@@ -47,6 +56,7 @@
                     <p:commandButton value="#{bundle.Close}" onclick="EventCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
+              </p:scrollPanel>
         </p:dialog>
         
       

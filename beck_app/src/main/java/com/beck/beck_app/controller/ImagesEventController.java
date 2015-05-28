@@ -4,6 +4,7 @@ import com.beck.beck_app.model.ImagesEvent;
 import com.beck.beck_app.util.JsfUtil;
 import com.beck.beck_app.util.JsfUtil.PersistAction;
 import com.beck.beck_app.facade.ImagesEventFacade;
+import com.beck.beck_app.model.Event;
 import java.io.IOException;
 
 import java.io.Serializable;
@@ -96,6 +97,11 @@ public class ImagesEventController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+    }
+    
+    public void getForEvent(Event s) {
+
+       selected = getFacade().findByEvent(s);
     }
 
     public void update() {

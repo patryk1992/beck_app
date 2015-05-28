@@ -43,8 +43,10 @@
                        
                         <f:facet name="footer">
 
-                            <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":EventViewForm" oncomplete="PF('EventViewDialog').show()" disabled="#{empty eventController.selected}"/>
-         
+                            <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":EventViewForm" oncomplete="PF('EventViewDialog').show()" disabled="#{empty eventController.selected}">
+                                    <f:actionListener binding="#{imagesEventController.getForEvent(eventController.selected)}" />
+                            </p:commandButton>
+                                    
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
