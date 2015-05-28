@@ -8,9 +8,9 @@
 
     <ui:composition>
 
-        <p:dialog id="EventViewDlg" widgetVar="EventViewDialog" onShow="calcRoute2()"  modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventTitle}">
-              <p:scrollPanel style="height:800px">
-            <h:form id="EventViewForm">
+        <p:dialog id="EventViewDlg1" widgetVar="EventViewDialog1" onShow="calcRoute2()"  modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventTitle}">
+              <p:scrollPanel style="height:600px">
+            <h:form id="EventViewForm1">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{eventController.selected != null}">                     
 
@@ -20,7 +20,7 @@
                         <p:outputLabel value="#{bundle.CreateEventLabel_eventDesc}" for="eventDesc" />
                         <h:outputText id="eventDesc" value="#{eventController.selected.eventDesc}" title="Opis" />
                       
-                          <p:commandButton value="Pokaż zdjęcie" oncomplete="PF('zdj').show()" />
+                       
                    
                         
                     </p:panelGrid>
@@ -35,14 +35,12 @@
 
                   <p:gmap center="41.381542, 2.122893" zoom="15"  style="width:700px;height:400px" model="#{addMarkersViewController.emptyModel}" onPointClick="handlePointClick(event);"  widgetVar="map" id="map"  type="ROADMAP"/>
     
-                  <p:dialog widgetVar="zdj"  >  
+                  
+                    <p:outputLabel value="Zdjęcie:" />
                     <p:graphicImage value="#{imageControllerE.image}" >
                            <f:param name="id_img" value="#{imagesEventController.selected.idImages}" />
                      </p:graphicImage>
-                  </p:dialog>
-                  
-                  
-                  
+                    
                   <p:dialog widgetVar="dlg" showEffect="fade"  >
         <h:panelGrid columns="2">
             <h:outputLabel for="title" value="Title:" />

@@ -17,7 +17,7 @@
             <h:form id="EventListForm">
                 <p:panel header="#{bundle.ListEventTitle}">
                     <p:dataTable id="datalist" value="#{eventController.getFriendsEvents(groupEventsController.getListGroups(userGroupsController.getG(userController.selected)))}" var="item"
-                                 selectionMode="single" selection="#{eventController.selected}"
+                                 selectionMode="single" selection="#{test}"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
@@ -40,11 +40,15 @@
                             </f:facet>
                             <h:outputText value="#{item.eventDesc}"/>
                         </p:column>
+                        
+                        
+                        
                        
                         <f:facet name="footer">
 
-                            <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":EventViewForm" oncomplete="PF('EventViewDialog').show()" disabled="#{empty eventController.selected}">
-                                    <f:actionListener binding="#{imagesEventController.getForEvent(eventController.selected)}" />
+                            <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":EventViewForm1" oncomplete="PF('EventViewDialog1').show()" disabled="#{empty eventController.selected}">
+                                <f:actionListener binding="#{eventController.setProps(test.eventName)}" />    
+                                <f:actionListener binding="#{imagesEventController.getForEvent(eventController.selected)}" />
                             </p:commandButton>
                                     
                         </f:facet>
@@ -52,7 +56,7 @@
                 </p:panel>
             </h:form>
 
-            <ui:include src="View.xhtml"/>
+            <ui:include src="View_1.xhtml"/>
         </ui:define>
     </ui:composition>
 

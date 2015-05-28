@@ -20,7 +20,7 @@
                         <p:outputLabel value="#{bundle.CreateUserLabel_password}" for="password" />
                         <p:inputText id="password" value="#{userController.selected.password}" title="#{bundle.CreateUserTitle_password}" />
                         <p:outputLabel value="#{bundle.CreateUserLabel_username}" for="username" />
-                        <p:inputText id="username" value="#{userController.selected.username}" title="#{bundle.CreateUserTitle_username}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_username}"/>
+                        <p:inputText id="username" value="#{userController.selected.username}" title="#{bundle.CreateUserTitle_username}" />
                        
                         <p:outputLabel value="#{bundle.CreateAddressLabel_city}" for="city" />
                         <p:inputText id="city" binding="#{input_city}" value="#{addressController.selected.city}" title="#{bundle.CreateAddressTitle_city}" />
