@@ -153,7 +153,7 @@
                             calcRoute();
                         }
                         function calcRoute() {
-
+                                
                             var waypts = [];
                             for (var marker in listMarkers) {
                                 listMarkers[marker].setVisible(false);
@@ -189,6 +189,16 @@
 
             }
             function calcRoute2() {
+                 var mapOptions = {
+                                center: new google.maps.LatLng(41.381542, 2.122893),
+                                zoom: 15
+                            };
+                            map = new google.maps.Map(document.getElementById("EventViewForm:map"), mapOptions);
+                            directionsDisplay.setMap(map);
+                            google.maps.event.addListener(map, 'click', function (e) {
+                                handlePointClick(e.latLng, map);
+                            });
+
                 //remoteChangeCommand();
                 var valueFromSrver =document.getElementById('EventViewForm:hiddenButton').value;
                 var mess=valueFromSrver.replace("]","").replace("[","");
