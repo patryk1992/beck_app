@@ -187,23 +187,25 @@
 
 
             }
-            function calcRoute(listMarkers) {
-
+            function calcRoute2() {
+                //remoteChangeCommand();
+                var valueFromSrver =document.getElementById('EventViewForm:hiddenButton').value;
+                var mess=valueFromSrver.replace("]","").replace("[","");
+                var tab=mess.split(", ");
                 var waypts = [];
-                for (var marker in listMarkers) {
-                    listMarkers[marker].setVisible(false);
-                    var element = listMarkers[marker].position;
-                     if(marker &gt; 0 &amp;&amp; marker &lt; (listMarkers.length-1)){                
+                for (var marker in tab) {                  
+                    var element = tab[marker];
+                     if(marker &gt; 0 &amp;&amp; marker &lt; (tab.length-1) &amp;&amp; marker &lt; 4){                
                         waypts.push({
-                        location:""+element.A+","+element.F,
+                        location:element.replace(":",","),
                         stopover:true});
                     }
-                }
+                } 
 
 
                 request = {
-                    origin: "" + listMarkers[0].position.A + "," + listMarkers[0].position.F,
-                    destination: "" + listMarkers[listMarkers.length - 1].position.A + "," + listMarkers[listMarkers.length - 1].position.F,
+                    origin: tab[0].replace(":",","),
+                    destination: tab[tab.length - 1].replace(":",","),
                     waypoints: waypts,
                     travelMode: google.maps.TravelMode.WALKING
                 };

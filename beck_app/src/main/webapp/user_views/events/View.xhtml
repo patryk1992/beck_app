@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="EventViewDlg" widgetVar="EventViewDialog" onShow="calcRoute(addMarkersViewController.returnListMarkers(eventController.selected))"  modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventTitle}">
+        <p:dialog id="EventViewDlg" widgetVar="EventViewDialog" onShow="calcRoute2()"  modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEventTitle}">
             <h:form id="EventViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{eventController.selected != null}">                     
@@ -38,9 +38,11 @@
             </f:facet>
         </h:panelGrid> 
         <h:inputHidden id="lat" value="#{addMarkersViewController.lat}" />
-        <h:inputHidden id="lng" value="#{addMarkersViewController.lng}" />        
+        <h:inputHidden id="lng" value="#{addMarkersViewController.lng}" />
+        <h:inputHidden id="hiddenButton" value="#{addMarkersViewController.markersListString}"/> 
+
     </p:dialog >    
-        
+        <p:remoteCommand name="remoteChangeCommand" process="hiddenButton"/>
         <p:remoteCommand name="remoteCommandFunctionName"      actionListener="#{addMarkersViewController.addMarker}"/>                    
                     <p:commandButton value="#{bundle.Close}" onclick="EventCreateDialog.hide()"/>
                 </h:panelGroup>

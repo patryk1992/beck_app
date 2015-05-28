@@ -38,7 +38,9 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{eventController.prepareCreate}" update=":EventCreateForm" oncomplete="PF('EventCreateDialog').show()">
                               <f:actionListener binding="#{eventController.setParametrsPickList()}"/> 
                             </p:commandButton>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" onclick="calcRoute(addMarkersViewController.returnListMarkers(eventController.selected))" update=":EventViewForm" oncomplete="PF('EventViewDialog').show()" disabled="#{empty eventController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}"  update=":EventViewForm" oncomplete="PF('EventViewDialog').show()" disabled="#{empty eventController.selected}">
+                            <f:actionListener binding="#{addMarkersViewController.returnListMarkers(eventController.selected)}"/> 
+                            </p:commandButton>                            
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EventEditForm" oncomplete="PF('EventEditDialog').show()" disabled="#{empty eventController.selected}">
                                 <f:actionListener binding="#{eventController.setParametrsPickList()}"/> 
                             </p:commandButton>

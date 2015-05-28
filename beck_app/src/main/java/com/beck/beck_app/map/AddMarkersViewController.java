@@ -38,6 +38,9 @@ public class AddMarkersViewController implements Serializable {
     private double lng;
   
     private List<Marker> markersList;
+    private List<String> markersListString;
+
+   
     
     @EJB
     private com.beck.beck_app.facade.PointFacade ejbFacadePoint;
@@ -47,6 +50,7 @@ public class AddMarkersViewController implements Serializable {
     public void init() {
         emptyModel = new DefaultMapModel();
         markersList = new ArrayList<>();
+        markersListString = new ArrayList<>();
     }
       
     public MapModel getEmptyModel() {
@@ -112,18 +116,18 @@ public class AddMarkersViewController implements Serializable {
         String lng = coordinates.substring(i2 + 1, coordinates.length());
        return lat + "," + lng;
     }
-    public List<Marker> returnListMarkers(Event event) {
+    public void returnListMarkers(Event event) {
        List <Track> listTrack=ejbFacadeTrack.findByIdEvent(event);
        List <Point> listPoint=null;
-       List <Marker> listMarkers = new ArrayList <Marker>();
+//       List <Marker> listMarkers = new ArrayList <Marker>();
        if(listTrack.size()>0){
         listPoint=ejbFacadePoint.findByIdTrack(listTrack.get(0));
        }
         for ( Point m : listPoint){
-             Marker marker = new Marker(new LatLng(m.getLatitude(), m.getLongitude()), title);
-             listMarkers.add(marker);
+            String tmpMarker=""+m.getLatitude()+":"+m.getLongitude();
+             markersListString.add(tmpMarker);
         }
-       return listMarkers;
+       
     } 
     
     
@@ -153,5 +157,12 @@ public class AddMarkersViewController implements Serializable {
      */
     public void setEjbFacade(com.beck.beck_app.facade.PointFacade ejbFacade) {
         this.ejbFacadePoint = ejbFacade;
+    }
+     public List<String> getMarkersListString() {
+        return markersListString;
+    }
+
+    public void setMarkersListString(List<String> markersListString) {
+        this.markersListString = markersListString;
     }
 }
