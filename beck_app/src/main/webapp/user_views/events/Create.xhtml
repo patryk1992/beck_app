@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
 
-
+    
     <ui:composition>
 
         <p:dialog id="EventCreateDlg" widgetVar="EventCreateDialog" modal="true" resizable="false" appendTo="@(body)" onShow="init()" header="#{bundle.CreateEventTitle}">
@@ -15,13 +15,12 @@
             <h:form id="EventCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{eventController.selected != null}">                     
-
                         <p:outputLabel value="#{bundle.CreateEventLabel_eventName}" for="eventName" />
                         <p:inputText id="eventName" value="#{eventController.selected.eventName}" title="#{bundle.CreateEventTitle_eventName}" />  
                         <p:outputLabel value="Opis" for="editor" />
                         <p:inputTextarea id="editor" widgetVar="editorWidget" value="#{eventController.selected.eventDesc}" rows="8" cols="45"/>
+
                     </p:panelGrid>
-                    
                     <p:pickList id="pickList" value="#{eventController.groups}" var="groups" itemLabel="#{groups.groupName}" itemValue="#{groups}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"
                                 showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
                         <f:facet name="sourceCaption">Dostępni</f:facet>
@@ -29,33 +28,35 @@
                         <f:converter converterId="com.beck.beck_app.Group1Converter" />
                     </p:pickList>
 
-                    <p:gmap center="41.381542, 2.122893" zoom="15"  style="width:700px;height:400px" model="#{addMarkersViewController.emptyModel}" onPointClick="handlePointClick(event);"  widgetVar="map" id="map"  type="ROADMAP"/>
 
-                    <p:dialog widgetVar="dlg" showEffect="fade"  >
-                        <h:panelGrid columns="2">
-                            <h:outputLabel for="title" value="Title:" />
-                            <p:inputText id="title" value="#{addMarkersViewController.title}" /> 
-                            <f:facet name="footer">
-                                <p:commandButton value="Add" actionListener="#{addMarkersViewController.addMarker}"  oncomplete="markerAddComplete()" />
-                                <p:commandButton value="Cancel" onclick="return cancel()" />
-                            </f:facet>
-                        </h:panelGrid> 
-                        <h:inputHidden id="lat" value="#{addMarkersViewController.lat}" />
-                        <h:inputHidden id="lng" value="#{addMarkersViewController.lng}" />        
-                    </p:dialog >   
-                    
-                    <p:remoteCommand name="remoteCommandFunctionName"      actionListener="#{addMarkersViewController.addMarker}"/>
-                    <p:commandButton onclick="removeMarker();" value="Remove"/>  
-                    <p:commandButton actionListener="#{eventController.create}"  value="#{bundle.Save}" update="display,:EventListForm:datalist,:growl" oncomplete="handleSubmit(args,'EventCreateDialog');"       >              
-                        <f:actionListener binding="#{eventController.setProps(eventController.selected.eventName)}" />    
+
+                  <p:gmap center="41.381542, 2.122893" zoom="15"  style="width:700px;height:400px" model="#{addMarkersViewController.emptyModel}" onPointClick="handlePointClick(event);"  widgetVar="map" id="map"  type="ROADMAP"/>
+    
+                  <p:dialog widgetVar="dlg" showEffect="fade"  >
+        <h:panelGrid columns="2">
+            <h:outputLabel for="title" value="Title:" />
+            <p:inputText id="title" value="#{addMarkersViewController.title}" /> 
+            <f:facet name="footer">
+                <p:commandButton value="Add" actionListener="#{addMarkersViewController.addMarker}"  oncomplete="markerAddComplete()" />
+                <p:commandButton value="Cancel" onclick="return cancel()" />
+            </f:facet>
+        </h:panelGrid> 
+        <h:inputHidden id="lat" value="#{addMarkersViewController.lat}" />
+        <h:inputHidden id="lng" value="#{addMarkersViewController.lng}" />        
+    </p:dialog >    
+        <p:remoteCommand name="remoteCommandFunctionName"      actionListener="#{addMarkersViewController.addMarker}"/>
+       
+   
+       <p:commandButton actionListener="#{eventController.create}" value="Zapisz trasę" update="display,:EventListForm:datalist,:growl" oncomplete="handleSubmit(args,'EventCreateDialog');"       >              
+                        <f:actionListener binding="#{eventController.setProps(eventController.selected.eventName)}" />     
                         <f:actionListener binding="#{eventController.saveGroups(userController.selected,group1Controller.selected)}"/>
-                        <f:actionListener binding="#{addMarkersViewController.saveMap(eventController.selected)}"/>                 
+                        <f:actionListener binding="#{addMarkersViewController.saveMap(eventController.selected)}"/>
                     </p:commandButton>
-                     <p:commandButton value="#{bundle.Cancel}" onclick="EventCreateDialog.hide()"/>
+                    <p:commandButton onclick="removeMarker();" value="Usuń"/>  
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EventCreateDialog.hide()"/>
                     <p:commandButton  value="Dodaj zdjęcie" oncomplete="PF('dodanieImg').show()"/>
                 </h:panelGroup>
             </h:form>
-               
                <p:dialog widgetVar="dodanieImg" width="500px" >
                 <h:form id="EventFormImg" prependId="true" enctype="multipart/form-data"  >
                 
@@ -81,131 +82,129 @@
                 </h:panelGrid>
             </h:form> 
                </p:dialog>
-              
+               
            </p:scrollPanel>
         </p:dialog>
-
+        
         <script src="http://maps.google.com/maps/api/js?sensor=false" 
         type="text/javascript"></script>
         <script type="text/javascript">
-                        var currentMarker = null;
-                        var listMarkers = [];
-                        var directionsService = new google.maps.DirectionsService();
-                        var directionsDisplay = new google.maps.DirectionsRenderer();
-                        var request;
-                        function init() {
-                            var mapOptions = {
-                                center: new google.maps.LatLng(41.381542, 2.122893),
-                                zoom: 15
-                            };
-                            map = new google.maps.Map(document.getElementById("EventCreateForm:map"), mapOptions);
-                            directionsDisplay.setMap(map);
-                            google.maps.event.addListener(map, 'click', function (e) {
-                                handlePointClick(e.latLng, map);
-                            });
-
-                        }
-                        function handlePointClick(event) {
-                            if (currentMarker === null) {
-                                document.getElementById('EventCreateForm:lat').value = event.A;
-                                document.getElementById('EventCreateForm:lng').value = event.F;
-
-                                currentMarker = new google.maps.Marker({
-                                    position: new google.maps.LatLng(event.A, event.F),
-                                    map: map
-                                });
-                                markerAddComplete();
-                            }
-                        }
-                        function handlePointClick2(position, map) {
-                            if (currentMarker === null) {
-
-                                currentMarker = new google.maps.Marker({
-                                    position: position,
-                                    map: map
-                                });
-                                markerAddComplete();
-
-                            }
-                        }
-
-                        function markerAddComplete() {
-                            var title = document.getElementById('title');
-                            listMarkers.push(currentMarker);
-
-                            currentMarker = null;
-                            if (listMarkers.length > 1) {
-                                calcRoute();
-                            }
-                            remoteCommandFunctionName();
-                        }
-
-                        function cancel() {
-                            PF('dlg').hide();
-                            currentMarker.setMap(null);
-                            currentMarker = null;
-
-                            return false;
-                        }
-                        function removeMarker() {
-                            listMarkers.pop();
-                            calcRoute();
-                        }
-                        function calcRoute() {
-
-                            var waypts = [];
-                            for (var marker in listMarkers) {
-                                listMarkers[marker].setVisible(false);
-                                var element = listMarkers[marker].position;
-                                if (marker &gt; 0 &amp;&amp; marker &lt; (listMarkers.length - 1)){
-                                    waypts.push({
-                                        location: "" + element.A + "," + element.F,
-                                        stopover: true});
-                                }
-                            }
-
-
-                            request = {
-                                origin: "" + listMarkers[0].position.A + "," + listMarkers[0].position.F,
-                                destination: "" + listMarkers[listMarkers.length - 1].position.A + "," + listMarkers[listMarkers.length - 1].position.F,
-                                waypoints: waypts,
-                                travelMode: google.maps.TravelMode.WALKING
-                            };
-
-                            directionsService.route(request, function (response, status)
-                            {
-                                if (status === google.maps.DirectionsStatus.OK) {
-                                    directionsDisplay.setDirections(response);
-                                    //                        alert('ok');
-
-                                }
-                                else {
-                                    alert('failed');
-                                }
-                            }
-                            );
-
+            var currentMarker = null;
+            var listMarkers = [];
+            var directionsService = new google.maps.DirectionsService();
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+            var request;
+            function init() {
+                var mapOptions = {
+                    center: new google.maps.LatLng(41.381542, 2.122893),
+                    zoom: 15
+                };
+                map = new google.maps.Map(document.getElementById("EventCreateForm:map"), mapOptions);
+                directionsDisplay.setMap(map);
+                google.maps.event.addListener(map, 'click', function (e) {
+                    handlePointClick(e.latLng, map);
+                });
 
             }
-            function calcRoute2() {
-                //remoteChangeCommand();
-                var valueFromSrver =document.getElementById('EventViewForm:hiddenButton').value;
-                var mess=valueFromSrver.replace("]","").replace("[","");
-                var tab=mess.split(", ");
+            function handlePointClick(event) {
+                if (currentMarker === null) {
+                    document.getElementById('EventCreateForm:lat').value = event.A;
+                    document.getElementById('EventCreateForm:lng').value = event.F;
+
+                    currentMarker = new google.maps.Marker({
+                        position: new google.maps.LatLng(event.A, event.F),
+                        map: map
+                    });
+                    markerAddComplete();
+                }
+            }
+            function handlePointClick2(position, map) {
+                if (currentMarker === null) {
+
+                    currentMarker = new google.maps.Marker({
+                        position: position,
+                        map: map
+                    });
+                    markerAddComplete();
+
+                }
+            }
+
+            function markerAddComplete() {
+                var title = document.getElementById('title');
+                listMarkers.push(currentMarker);
+
+                currentMarker = null;
+                if (listMarkers.length > 1) {
+                    calcRoute();
+                }
+                remoteCommandFunctionName();
+            }
+
+            function cancel() {
+                PF('dlg').hide();
+                currentMarker.setMap(null);
+                currentMarker = null;
+
+                return false;
+            }
+            function removeMarker() {
+                listMarkers.pop();
+                calcRoute();
+            }
+            function calcRoute() {
+
                 var waypts = [];
-                for (var marker in tab) {                  
-                    var element = tab[marker];
-                     if(marker &gt; 0 &amp;&amp; marker &lt; (tab.length-1) &amp;&amp; marker &lt; 4){                
+                for (var marker in listMarkers) {
+                    listMarkers[marker].setVisible(false);
+                    var element = listMarkers[marker].position;
+                     if(marker &gt; 0 &amp;&amp; marker &lt; (listMarkers.length-1)){                
                         waypts.push({
-                        location:element.replace(":",","),
+                        location:""+element.A+","+element.F,
                         stopover:true});
                     }
-                } 
+                }
 
 
                 request = {
-                    origin: tab[0].replace(":",","),
-                    destination: tab[tab.length - 1].replace(":",","),
+                    origin: "" + listMarkers[0].position.A + "," + listMarkers[0].position.F,
+                    destination: "" + listMarkers[listMarkers.length - 1].position.A + "," + listMarkers[listMarkers.length - 1].position.F,
+                    waypoints: waypts,
+                    travelMode: google.maps.TravelMode.WALKING
+                };
+
+                directionsService.route(request, function (response, status)
+                {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+    //                        alert('ok');
+
+                    }
+                    else {
+                        alert('failed');
+                    }
+                }
+                );
+
+
+            }
+            function calcRoute(listMarkers) {
+
+                var waypts = [];
+                for (var marker in listMarkers) {
+                    listMarkers[marker].setVisible(false);
+                    var element = listMarkers[marker].position;
+                     if(marker &gt; 0 &amp;&amp; marker &lt; (listMarkers.length-1)){                
+                        waypts.push({
+                        location:""+element.A+","+element.F,
+                        stopover:true});
+                    }
+                }
+
+
+                request = {
+                    origin: "" + listMarkers[0].position.A + "," + listMarkers[0].position.F,
+                    destination: "" + listMarkers[listMarkers.length - 1].position.A + "," + listMarkers[listMarkers.length - 1].position.F,
                     waypoints: waypts,
                     travelMode: google.maps.TravelMode.WALKING
                 };

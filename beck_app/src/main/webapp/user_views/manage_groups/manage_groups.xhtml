@@ -15,12 +15,12 @@ and open the template in the editor.
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListGroup1Title}"></h:outputText>
+            <h:outputText value="Zarządzaj grupami"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
             <h:form id="Group1ListForm">
-                <p:panel header="#{bundle.ListGroup1Title}">
+                <p:panel header="Zarządzaj grupami">
                      
                     <p:dataTable id="datalist" value="#{userGroupsController.getGroupsCratedByUser(userController.selected)}" var="item"
                                  selectionMode="single" selection="#{group1Controller.selected}"
