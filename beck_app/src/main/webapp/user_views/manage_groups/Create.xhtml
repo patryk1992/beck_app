@@ -8,14 +8,14 @@
 
     <ui:composition>
 
-        <p:dialog id="Group1CreateDlg" widgetVar="Group1CreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateGroup1Title}">
+        <p:dialog id="Group1CreateDlg" widgetVar="Group1CreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Dodaj nową grupę">
             <h:form id="Group1CreateForm">
                 <p:growl id="msg" showDetail="true" escape="false" />
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{group1Controller.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateGroup1Label_groupName}" for="groupName" />
-                        <p:inputText id="groupName" value="#{group1Controller.selected.groupName}" title="#{bundle.CreateGroup1Title_groupName}" required="true" />
-                        <p:outputLabel value="#{bundle.CreateGroup1Label_groupDesc}" for="groupDesc" />
+                        <p:outputLabel value="Nazwa grupy" for="groupName" />
+                        <p:inputText id="groupName" value="#{group1Controller.selected.groupName}" title="#{bundle.CreateGroup1Title_groupName}" />
+                        <p:outputLabel value="Opis grupy" for="groupDesc" />
                         <p:inputText id="groupDesc" value="#{group1Controller.selected.groupDesc}" title="#{bundle.CreateGroup1Title_groupDesc}" />                      
                     </p:panelGrid>
                     <p:pickList id="pickList" value="#{userGroupsController.users}" var="users" itemLabel="#{users.username}" itemValue="#{users}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"

@@ -25,7 +25,7 @@
                                            itemValue="#{userIdToItem}" itemLabel="#{userIdToItem.username}" />
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{communicationController.send(userController.selected)}" value="#{bundle.Save}" update="display,:tabViews:CommunicationListFormDo:datalist3,:growl" oncomplete="handleSubmit(args,'CommunicationCreateDialog1');">
+                    <p:commandButton actionListener="#{communicationController.send(userController.selected)}" value="Wyślij" update="display,:tabViews:CommunicationListFormDo:datalist3,:growl" oncomplete="handleSubmit(args,'CommunicationCreateDialog1');">
                          
                     </p:commandButton>  
                     <p:commandButton value="#{bundle.Cancel}" onclick="CommunicationCreateDialog1.hide()"/>

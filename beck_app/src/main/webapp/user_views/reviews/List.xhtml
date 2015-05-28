@@ -10,12 +10,12 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListNoticeTitle}"></h:outputText>
+            <h:outputText value="Recenzje i artykuły"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
             <h:form id="NoticeListForm">
-                <p:panel header="#{bundle.ListNoticeTitle}">
+                <p:panel header="Recenzje i artykuły">
                     <p:dataTable id="datalist" value="#{noticeController.items}" var="item"
                                  selectionMode="single" selection="#{noticeController.selected}"
                                  paginator="true"
