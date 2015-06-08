@@ -20,8 +20,8 @@
                         <p:outputLabel value="#{bundle.CreateEventLabel_eventDesc}" for="eventDesc" />
                         <h:outputText id="eventDesc" value="#{eventController.selected.eventDesc}" title="Opis" />
                       
-                          <p:commandButton value="Pokaż zdjęcie" oncomplete="PF('zdj').show()" />
-                   
+                        <p:button value="Pokaż zdjęcie" href="" onclick="PF('zdj').show()"  />
+                    
                         
                     </p:panelGrid>
                     <p:pickList id="pickList" value="#{eventController.groups}" var="groups" itemLabel="#{groups.groupName}" itemValue="#{groups}" effect="bounce" showSourceControls="true" showTargetControls="true" showCheckbox="true"

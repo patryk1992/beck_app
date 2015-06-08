@@ -46,9 +46,10 @@
                        
                         <f:facet name="footer">
 
-                            <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":EventViewForm1" oncomplete="PF('EventViewDialog1').show()" disabled="#{empty eventController.selected}">
+                            <p:commandButton id="viewButton" icon="ui-icon-search" value="#{bundle.View}" update=":EventViewForm1">
                                 <f:actionListener binding="#{eventController.setProps(test.eventName)}" />    
-                                <f:actionListener binding="#{imagesEventController.getForEvent(eventController.selected)}" />
+                                
+                                <f:actionListener binding="PF('EventViewDialog1').show()" />
                             </p:commandButton>
                                     
                         </f:facet>

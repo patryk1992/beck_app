@@ -85,7 +85,7 @@ public class AddMarkersViewController implements Serializable {
         Marker marker = new Marker(new LatLng(lat, lng), title);
         emptyModel.addOverlay(marker);
         markersList.add(marker);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Added", "Lat:" + lat + ", Lng:" + lng));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Punkt dodany", "Lat:" + lat + ", Lng:" + lng));
         
     }
      
